@@ -202,6 +202,32 @@
       box-shadow: 0 4px 20px rgba(255,255,255,0.2);
     }
 
+    /* Mobile Header */
+    @media (max-width: 640px) {
+      .header {
+        padding: 8px 12px;
+        padding-top: calc(8px + var(--safe-top));
+      }
+      .header-inner {
+        padding: 8px 12px;
+        border-radius: 12px;
+      }
+      .logo {
+        font-size: 15px;
+      }
+      .header-nav {
+        gap: 4px;
+      }
+      .nav-link {
+        display: none;
+      }
+      .nav-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 8px;
+      }
+    }
+
     /* ═══════════════════════════════════════════
        HERO - Cinematic Entrance
     ═══════════════════════════════════════════ */
@@ -397,6 +423,75 @@
       opacity: 0.5;
     }
 
+    /* Mobile Hanja & Hero */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 100px 16px 60px;
+        min-height: auto;
+      }
+      .hero-badge {
+        font-size: 11px;
+        padding: 5px 5px 5px 12px;
+        gap: 6px;
+        margin-bottom: 24px;
+      }
+      .hero-badge-tag {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+      .hero-title {
+        font-size: 42px;
+        margin-bottom: 8px;
+      }
+      .hanja-display {
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .hanja-char {
+        width: 72px;
+        height: 72px;
+        border-radius: 16px;
+      }
+      .hanja-main {
+        font-size: 40px;
+      }
+      .hanja-cursor {
+        right: 8px;
+        bottom: 8px;
+        width: 2px;
+        height: 16px;
+      }
+      .hanja-meaning {
+        padding: 4px 10px;
+        min-width: 60px;
+        font-size: 11px;
+      }
+      .hanja-hangul {
+        font-size: 13px;
+      }
+      .hero-tagline {
+        font-size: 15px;
+        margin-bottom: 32px;
+        padding: 0 8px;
+      }
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+      }
+      .hero-scroll {
+        bottom: 20px;
+      }
+      .scroll-line {
+        height: 24px;
+      }
+    }
+
     .hero-tagline {
       max-width: 500px;
       font-size: 18px;
@@ -534,6 +629,35 @@
       font-style: italic;
     }
 
+    @media (max-width: 640px) {
+      .manifesto {
+        padding: 80px 16px;
+      }
+      .manifesto-quote {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+      .manifesto-quote-en {
+        font-size: 14px;
+      }
+      .section-label {
+        font-size: 10px;
+        padding: 5px 12px;
+      }
+      .section-title {
+        font-size: 24px;
+      }
+      .section-desc {
+        font-size: 14px;
+      }
+      .bento {
+        padding: 60px 16px 80px;
+      }
+      .bento-header {
+        margin-bottom: 40px;
+      }
+    }
+
     /* ═══════════════════════════════════════════
        BENTO GRID - Features
     ═══════════════════════════════════════════ */
@@ -617,6 +741,16 @@
 
     @media (max-width: 768px) {
       .bento-half, .bento-third { grid-column: span 12; }
+      .bento-card { padding: 24px; }
+      .bento-hero { min-height: auto; }
+      .bento-hero-visual {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .layer-pill {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
     }
 
     .bento-icon {
@@ -789,8 +923,37 @@
     }
 
     @media (max-width: 640px) {
-      .flow-stage { flex-direction: column; gap: 16px; }
-      .flow-num { width: auto; flex-direction: row; gap: 12px; }
+      .flow {
+        padding: 80px 16px;
+      }
+      .flow-header {
+        margin-bottom: 40px;
+      }
+      .flow-stage {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+        border-radius: 16px;
+      }
+      .flow-stage:hover {
+        transform: none;
+      }
+      .flow-num {
+        width: auto;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: flex-start;
+      }
+      .flow-num-value {
+        font-size: 32px;
+      }
+      .flow-name {
+        font-size: 18px;
+        flex-wrap: wrap;
+      }
+      .flow-desc {
+        font-size: 14px;
+      }
     }
 
     /* ═══════════════════════════════════════════
@@ -887,6 +1050,47 @@
       background-position: center;
     }
 
+    @media (max-width: 640px) {
+      .packages {
+        padding: 80px 16px;
+      }
+      .packages-grid {
+        gap: 16px;
+      }
+      .package-card {
+        padding: 24px 20px;
+        border-radius: 16px;
+      }
+      .package-card:hover {
+        transform: none;
+      }
+      .package-badge {
+        top: 16px;
+        right: 16px;
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .package-icon {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+      .package-name {
+        font-size: 20px;
+      }
+      .package-target {
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      .package-feature {
+        font-size: 13px;
+        gap: 10px;
+      }
+      .package-feature::before {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
     /* ═══════════════════════════════════════════
        PARTNERSHIP - Trust Section
     ═══════════════════════════════════════════ */
@@ -973,6 +1177,34 @@
       font-style: italic;
     }
 
+    @media (max-width: 640px) {
+      .partnership {
+        padding: 80px 16px;
+      }
+      .partnership-roles {
+        gap: 24px;
+        margin: 40px 0;
+      }
+      .partner-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+      }
+      .partner-name {
+        font-size: 17px;
+      }
+      .partner-role {
+        font-size: 12px;
+      }
+      .partnership-connector {
+        font-size: 24px;
+      }
+      .partnership-quote {
+        font-size: 16px;
+        padding: 0 8px;
+      }
+    }
+
     /* ═══════════════════════════════════════════
        FOOTER - Minimal
     ═══════════════════════════════════════════ */
@@ -1044,6 +1276,41 @@
       margin-top: 16px;
     }
 
+    @media (max-width: 640px) {
+      .footer {
+        padding: 60px 16px calc(80px + var(--safe-bottom));
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      .footer-brand {
+        align-items: center;
+      }
+      .footer-logo {
+        font-size: 18px;
+      }
+      .footer-tagline {
+        font-size: 12px;
+      }
+      .footer-links {
+        gap: 16px;
+      }
+      .footer-link {
+        font-size: 13px;
+      }
+      .footer-copy {
+        margin-top: 24px;
+        padding-top: 20px;
+        font-size: 11px;
+      }
+      .footer-tier {
+        font-size: 10px;
+        padding: 5px 12px;
+      }
+    }
+
     /* ═══════════════════════════════════════════
        FLOATING CTA
     ═══════════════════════════════════════════ */
@@ -1082,6 +1349,27 @@
       border-color: var(--accent);
       box-shadow: 0 8px 32px rgba(59,130,246,0.3);
       transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .floating-cta {
+        bottom: 16px;
+        bottom: calc(16px + var(--safe-bottom));
+        left: 16px;
+        right: 16px;
+        transform: none;
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .floating-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+        font-size: 14px;
+        border-radius: 14px;
+      }
     }
 
     .floating-btn-icon {
