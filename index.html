@@ -1472,23 +1472,25 @@
     .floating-btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 14px 28px;
-      background: rgba(3,7,18,0.9);
+      background: linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(245,158,11,0.15) 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(245,158,11,0.4);
       border-radius: 100px;
       font-size: 14px;
       font-weight: 600;
-      color: var(--text);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      color: #fbbf24;
+      box-shadow: 0 8px 32px rgba(245,158,11,0.2);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
     }
 
     .floating-btn:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+      border-color: rgba(245,158,11,0.7);
+      box-shadow: 0 8px 40px rgba(245,158,11,0.35);
       transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(239,68,68,0.25) 0%, rgba(245,158,11,0.25) 100%);
     }
 
     @media (max-width: 640px) {
@@ -1513,13 +1515,33 @@
     }
 
     .floating-btn-icon {
-      width: 24px; height: 24px;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #ef4444, #f59e0b);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 14px;
+    }
+
+    .floating-btn-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+    }
+
+    .floating-btn-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .floating-btn-sub {
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(251,191,36,0.7);
+      letter-spacing: 0.02em;
     }
 
     /* ═══════════════════════════════════════════
@@ -1782,17 +1804,19 @@
     .password-box {
       width: 100%;
       max-width: 320px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid rgba(245,158,11,0.3);
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(245,158,11,0.1);
     }
 
     .password-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       margin-bottom: 8px;
+      color: #fbbf24;
     }
 
     .password-desc {
@@ -1803,25 +1827,27 @@
 
     .password-input {
       width: 100%;
-      padding: 14px 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
+      padding: 16px;
+      background: rgba(3,7,18,0.8);
+      border: 1px solid rgba(245,158,11,0.3);
       border-radius: 12px;
-      color: var(--text);
-      font-size: 18px;
+      color: #fbbf24;
+      font-size: 24px;
+      font-weight: 700;
       text-align: center;
       letter-spacing: 0.3em;
       margin-bottom: 16px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     .password-input:focus {
-      border-color: var(--accent);
+      border-color: #f59e0b;
+      box-shadow: 0 0 20px rgba(245,158,11,0.2);
     }
 
     .password-input.error {
-      border-color: var(--rose);
+      border-color: #ef4444;
       animation: shake 0.3s ease;
     }
 
@@ -1834,18 +1860,20 @@
     .password-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
       border: none;
       border-radius: 12px;
       color: white;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
+      letter-spacing: 0.05em;
     }
 
     .password-submit:hover {
-      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+      box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+      transform: translateY(-1px);
     }
 
     .password-cancel {
@@ -2214,12 +2242,15 @@
     </div>
   </footer>
 
-  <!-- Floating CTA -->
+  <!-- Floating CTA - Secret Office -->
   <div class="floating-cta">
-    <a href="console/" class="floating-btn">
-      <span class="floating-btn-icon">→</span>
-      Console 열기
-    </a>
+    <button class="floating-btn" onclick="openPasswordModal()">
+      <span class="floating-btn-icon">🔑</span>
+      <span class="floating-btn-text">
+        <span class="floating-btn-title">Secret Office</span>
+        <span class="floating-btn-sub">Express Entry</span>
+      </span>
+    </button>
   </div>
 
   <!-- Business Card Modal -->
@@ -2270,13 +2301,13 @@
     </article>
   </div>
 
-  <!-- Password Modal -->
+  <!-- Password Modal - Secret Office -->
   <div class="password-modal" id="passwordModal" onclick="closePasswordModalOutside(event)">
     <div class="password-box">
-      <h3 class="password-title">Console Access</h3>
-      <p class="password-desc">비밀번호를 입력하세요</p>
+      <h3 class="password-title">🔐 Secret Office</h3>
+      <p class="password-desc">작업자 전용 입장</p>
       <input type="password" class="password-input" id="passwordInput" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
-      <button class="password-submit" onclick="checkPassword()">입장</button>
+      <button class="password-submit" onclick="checkPassword()">Express Entry</button>
       <button class="password-cancel" onclick="closePasswordModal()">취소</button>
     </div>
   </div>
