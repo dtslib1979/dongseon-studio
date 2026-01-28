@@ -4,244 +4,703 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Console | DONGSEON Studio</title>
-  <meta name="theme-color" content="#0F172A">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#000000">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2563EB;
-      --accent: #F59E0B;
-      --bg: #0F172A;
-      --bg-elevated: #1E293B;
-      --bg-card: #334155;
-      --text: #F8FAFC;
-      --text-secondary: #94A3B8;
-      --text-muted: #64748B;
-      --border: rgba(248, 250, 252, 0.1);
-      --success: #10B981;
-      --warning: #F59E0B;
-      --error: #EF4444;
+      --matrix-green: #00ff41;
+      --matrix-dark: #003b00;
+      --matrix-glow: rgba(0,255,65,0.5);
+      --cyber-blue: #00d4ff;
+      --warning-amber: #ffaa00;
+      --danger-red: #ff3333;
+      --bg-black: #000000;
+      --bg-panel: rgba(0,20,0,0.8);
+      --bg-card: rgba(0,40,0,0.6);
+      --border-matrix: rgba(0,255,65,0.3);
+      --text-primary: #00ff41;
+      --text-secondary: rgba(0,255,65,0.7);
+      --text-muted: rgba(0,255,65,0.4);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
     body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'JetBrains Mono', 'Noto Sans KR', monospace;
+      background: var(--bg-black);
+      color: var(--text-primary);
       min-height: 100vh;
       line-height: 1.5;
+      position: relative;
     }
-    .header {
-      position: sticky;
+
+    /* Matrix Rain Background */
+    .matrix-rain {
+      position: fixed;
       top: 0;
-      background: rgba(15,23,42,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
+
+    .rain-column {
+      position: absolute;
+      top: -100%;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--matrix-green);
+      text-shadow: 0 0 10px var(--matrix-green);
+      animation: rain-fall linear infinite;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @keyframes rain-fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(200vh); }
+    }
+
+    /* Scan Line Effect */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      background: linear-gradient(
+        transparent 0%,
+        rgba(0,255,65,0.03) 50%,
+        transparent 100%
+      );
+      background-size: 100% 4px;
+      animation: scanline-move 8s linear infinite;
+    }
+
+    @keyframes scanline-move {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100vh; }
+    }
+
+    /* CRT Flicker */
+    .crt-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+    }
+
+    /* Grid Background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+      border-bottom: 1px solid var(--border-matrix);
+      padding: 12px 20px;
       padding-top: calc(12px + var(--safe-top));
       z-index: 100;
+      backdrop-filter: blur(10px);
     }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+      animation: header-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes header-glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
     .header-inner {
-      max-width: 600px;
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .header-title {
-      font-size: 18px;
-      font-weight: 700;
-    }
-    .header-badge {
-      background: var(--success);
-      color: var(--bg);
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px 16px calc(100px + var(--safe-bottom));
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .stat-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-    }
-    .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .stat-value.primary { color: var(--primary); }
-    .stat-value.success { color: var(--success); }
-    .stat-value.warning { color: var(--warning); }
-    .stat-value.accent { color: var(--accent); }
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .section-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
     }
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .menu-item {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-    .menu-item:active {
-      transform: scale(0.98);
-      border-color: var(--primary);
-    }
-    .menu-icon {
+
+    .logo-mark {
       width: 40px;
       height: 40px;
-      border-radius: 10px;
+      border: 2px solid var(--matrix-green);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--matrix-green);
+      text-shadow: 0 0 10px var(--matrix-glow);
+      animation: logo-pulse 2s ease-in-out infinite;
     }
-    .menu-icon.l1 { background: rgba(16,185,129,0.15); }
-    .menu-icon.l2 { background: rgba(59,130,246,0.15); }
-    .menu-icon.l3 { background: rgba(139,92,246,0.15); }
-    .menu-icon.l4 { background: rgba(245,158,11,0.15); }
-    .menu-icon.l5 { background: rgba(239,68,68,0.15); }
-    .menu-info { flex: 1; }
-    .menu-name {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 2px;
+
+    @keyframes logo-pulse {
+      0%, 100% { box-shadow: 0 0 10px var(--matrix-glow), inset 0 0 10px rgba(0,255,65,0.1); }
+      50% { box-shadow: 0 0 20px var(--matrix-glow), inset 0 0 20px rgba(0,255,65,0.2); }
     }
-    .menu-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .menu-arrow {
-      color: var(--text-muted);
+
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
       font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 24px;
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    .quick-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      text-align: center;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    .quick-btn:active {
-      transform: scale(0.96);
-    }
-    .status-indicator {
+
+    .status-item {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+      font-size: 11px;
+      letter-spacing: 0.05em;
     }
+
     .status-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 10px var(--success);
+      background: var(--matrix-green);
+      box-shadow: 0 0 10px var(--matrix-green);
+      animation: status-blink 1s ease-in-out infinite;
     }
-    .status-text {
-      font-size: 13px;
+
+    @keyframes status-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .status-dot.warning { background: var(--warning-amber); box-shadow: 0 0 10px var(--warning-amber); }
+    .status-dot.danger { background: var(--danger-red); box-shadow: 0 0 10px var(--danger-red); }
+
+    .time-display {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cyber-blue);
+      text-shadow: 0 0 10px rgba(0,212,255,0.5);
+    }
+
+    /* Main Content */
+    .main {
+      position: relative;
+      z-index: 10;
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(100px + var(--safe-bottom));
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Command Center Title */
+    .command-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .command-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .command-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--matrix-green) 0%, var(--cyber-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 20px var(--matrix-glow));
+    }
+
+    .command-subtitle {
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+
+    /* Stats Dashboard */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-matrix);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, var(--matrix-glow) 0%, transparent 70%);
+      opacity: 0.3;
+    }
+
+    .stat-icon {
+      font-size: 20px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 5px var(--matrix-glow));
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--matrix-green);
+      text-shadow: 0 0 20px var(--matrix-glow);
+      margin-bottom: 4px;
+    }
+
+    .stat-value.blue { color: var(--cyber-blue); text-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    .stat-value.amber { color: var(--warning-amber); text-shadow: 0 0 20px rgba(255,170,0,0.5); }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .stat-change {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(0,255,65,0.15);
+      color: var(--matrix-green);
+    }
+
+    /* Operations Panel */
+    .panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-matrix);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-matrix);
+      background: rgba(0,255,65,0.03);
+    }
+
+    .panel-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--matrix-green);
+      box-shadow: 0 0 10px var(--matrix-green);
+    }
+
+    .panel-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(0,212,255,0.15);
+      color: var(--cyber-blue);
+      letter-spacing: 0.05em;
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    /* Layer Architecture */
+    .layer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .layer-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-matrix);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .layer-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--matrix-green);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .layer-item:hover::before,
+    .layer-item.active::before {
+      transform: scaleY(1);
+    }
+
+    .layer-item:hover,
+    .layer-item.active {
+      border-color: var(--matrix-green);
+      background: rgba(0,255,65,0.05);
+      box-shadow: 0 0 30px rgba(0,255,65,0.1);
+    }
+
+    .layer-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-matrix);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--text-secondary);
     }
 
-    /* Admin Button */
-    .admin-btn {
-      width: 100%;
-      background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(245,158,11,0.1) 100%);
-      border: 1px solid rgba(239,68,68,0.3);
+    .layer-item:hover .layer-num,
+    .layer-item.active .layer-num {
+      border-color: var(--matrix-green);
+      color: var(--matrix-green);
+      box-shadow: 0 0 10px var(--matrix-glow);
+    }
+
+    .layer-info {
+      flex: 1;
+    }
+
+    .layer-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .layer-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .layer-status {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(0,255,65,0.1);
+      color: var(--matrix-green);
+      letter-spacing: 0.05em;
+    }
+
+    .layer-arrow {
+      font-size: 16px;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .layer-item:hover .layer-arrow {
+      color: var(--matrix-green);
+      transform: translateX(4px);
+    }
+
+    /* Quick Actions Grid */
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-matrix);
       border-radius: 12px;
-      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      border-color: var(--matrix-green);
+      background: rgba(0,255,65,0.08);
+      box-shadow: 0 0 30px rgba(0,255,65,0.15);
+      transform: translateY(-2px);
+    }
+
+    .action-icon {
+      font-size: 24px;
+      filter: drop-shadow(0 0 5px var(--matrix-glow));
+    }
+
+    /* Terminal Log */
+    .terminal {
+      background: rgba(0,0,0,0.8);
+      border: 1px solid var(--border-matrix);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .terminal-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      color: var(--text);
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(0,255,65,0.05);
+      border-bottom: 1px solid var(--border-matrix);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27ca40; }
+
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .terminal-body {
+      padding: 16px;
+      font-size: 12px;
+      line-height: 1.8;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 8px;
+    }
+
+    .terminal-prompt {
+      color: var(--cyber-blue);
+      font-weight: 600;
+    }
+
+    .terminal-text {
+      color: var(--text-secondary);
+    }
+
+    .terminal-success { color: var(--matrix-green); }
+    .terminal-warning { color: var(--warning-amber); }
+    .terminal-error { color: var(--danger-red); }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--matrix-green);
+      animation: cursor-blink 1s step-end infinite;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Admin Button */
+    .admin-section {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-matrix);
+    }
+
+    .admin-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(255,51,51,0.1) 0%, rgba(255,170,0,0.1) 100%);
+      border: 1px solid rgba(255,51,51,0.3);
+      border-radius: 12px;
+      color: var(--danger-red);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
     }
+
     .admin-btn:hover {
-      border-color: rgba(239,68,68,0.5);
-      box-shadow: 0 4px 20px rgba(239,68,68,0.15);
+      border-color: var(--danger-red);
+      box-shadow: 0 0 30px rgba(255,51,51,0.2);
     }
+
     .admin-icon {
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       border-radius: 10px;
-      background: rgba(239,68,68,0.15);
+      background: rgba(255,51,51,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 24px;
     }
-    .admin-text {
+
+    .admin-info {
       flex: 1;
       text-align: left;
     }
+
     .admin-title {
-      display: block;
-      font-size: 15px;
-      font-weight: 600;
-      color: #ef4444;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
     }
+
     .admin-desc {
-      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .admin-arrow {
+      font-size: 20px;
+    }
+
+    /* Back to Studio */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 12px 20px;
       font-size: 12px;
       color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border-matrix);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--matrix-green);
+      border-color: var(--matrix-green);
     }
 
     /* Admin Modal */
@@ -249,197 +708,374 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15,23,42,0.95);
+      background: rgba(0,0,0,0.95);
       backdrop-filter: blur(20px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
-    .admin-modal.show {
-      display: flex;
-    }
+
+    .admin-modal.show { display: flex; }
+
     .admin-box {
-      background: var(--bg-elevated);
-      border: 1px solid rgba(239,68,68,0.3);
+      background: linear-gradient(145deg, rgba(0,30,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
+      border: 1px solid rgba(255,51,51,0.3);
       border-radius: 20px;
-      padding: 32px 24px;
+      padding: 40px 32px;
       width: 100%;
-      max-width: 320px;
+      max-width: 360px;
       text-align: center;
+      box-shadow: 0 0 60px rgba(255,51,51,0.1);
     }
+
+    .admin-modal-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 20px rgba(255,51,51,0.5));
+    }
+
     .admin-modal-title {
+      font-family: 'Orbitron', sans-serif;
       font-size: 20px;
       font-weight: 700;
-      color: #ef4444;
+      color: var(--danger-red);
+      letter-spacing: 0.1em;
       margin-bottom: 8px;
     }
+
     .admin-modal-desc {
-      font-size: 14px;
+      font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
+
     .admin-input {
       width: 100%;
-      padding: 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
+      padding: 18px;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid var(--border-matrix);
       border-radius: 12px;
-      color: var(--text);
-      font-size: 24px;
+      color: var(--matrix-green);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
       font-weight: 700;
       text-align: center;
-      letter-spacing: 0.3em;
-      margin-bottom: 16px;
+      letter-spacing: 0.4em;
+      margin-bottom: 20px;
     }
+
     .admin-input:focus {
       outline: none;
-      border-color: #ef4444;
+      border-color: var(--danger-red);
+      box-shadow: 0 0 20px rgba(255,51,51,0.3);
     }
+
     .admin-submit {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
+      padding: 16px;
+      background: linear-gradient(135deg, #ff3333 0%, #ff6600 100%);
       border: none;
       border-radius: 12px;
       color: white;
-      font-size: 15px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
       font-weight: 700;
+      letter-spacing: 0.15em;
       cursor: pointer;
-      margin-bottom: 12px;
+      transition: all 0.3s ease;
     }
+
+    .admin-submit:hover {
+      box-shadow: 0 0 30px rgba(255,51,51,0.4);
+      transform: translateY(-2px);
+    }
+
     .admin-cancel {
-      width: 100%;
-      padding: 12px;
+      margin-top: 16px;
+      padding: 12px 24px;
       background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 1px solid var(--border-matrix);
+      border-radius: 8px;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .admin-cancel:hover {
+      border-color: var(--text-muted);
+      color: var(--text-secondary);
     }
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 640px) {
+      .header-status { display: none; }
+      .command-title { font-size: 20px; }
+      .stats-grid { gap: 10px; }
+      .stat-card { padding: 16px; }
+      .stat-value { font-size: 24px; }
+      .panel-body { padding: 16px; }
+      .layer-item { padding: 14px; }
+      .actions-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+  <!-- Matrix Rain Effect -->
+  <div class="matrix-rain" id="matrixRain"></div>
+
+  <!-- Grid Background -->
+  <div class="grid-bg"></div>
+
+  <!-- CRT Overlay -->
+  <div class="crt-overlay"></div>
+
+  <!-- Scanline -->
+  <div class="scanline"></div>
+
+  <!-- Header -->
   <header class="header">
     <div class="header-inner">
-      <div class="header-title">Console</div>
-      <span class="header-badge">ONLINE</span>
+      <div class="header-left">
+        <div class="logo-mark">DS</div>
+        <div class="header-title">Command Console</div>
+      </div>
+      <div class="header-status">
+        <div class="status-item">
+          <div class="status-dot"></div>
+          <span>SYSTEMS ONLINE</span>
+        </div>
+        <div class="time-display" id="timeDisplay">00:00:00</div>
+      </div>
     </div>
   </header>
 
-  <div class="container">
-    <!-- Stats -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value primary" id="totalNodes">0</div>
-        <div class="stat-label">Total Nodes</div>
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <!-- Command Header -->
+      <div class="command-header">
+        <div class="command-label">DONGSEON STUDIO</div>
+        <h1 class="command-title">Operation Center</h1>
+        <p class="command-subtitle">Digital Studio Protocol v2.0 • Secure Connection Established</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-value success" id="activeNodes">0</div>
-        <div class="stat-label">Active</div>
+
+      <!-- Stats Dashboard -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📡</div>
+          <div class="stat-value" id="totalNodes">0</div>
+          <div class="stat-label">Total Nodes</div>
+          <div class="stat-change">+2 NEW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-value blue" id="activeNodes">0</div>
+          <div class="stat-label">Active Ops</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔄</div>
+          <div class="stat-value amber" id="inProgress">0</div>
+          <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💎</div>
+          <div class="stat-value" id="revenue">0</div>
+          <div class="stat-label">Revenue (KRW)</div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-value warning" id="inProgress">0</div>
-        <div class="stat-label">In Progress</div>
+
+      <!-- Quick Actions -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Quick Operations</div>
+          <div class="panel-badge">4 AVAILABLE</div>
+        </div>
+        <div class="panel-body">
+          <div class="actions-grid">
+            <button class="action-btn" onclick="createNode()">
+              <span class="action-icon">➕</span>
+              <span>NEW NODE</span>
+            </button>
+            <a href="../delivery/packages/" class="action-btn">
+              <span class="action-icon">📦</span>
+              <span>PACKAGES</span>
+            </a>
+            <a href="../engines/llm/" class="action-btn">
+              <span class="action-icon">🤖</span>
+              <span>LLM ENGINE</span>
+            </a>
+            <a href="../" class="action-btn">
+              <span class="action-icon">🏠</span>
+              <span>STUDIO HOME</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-value accent" id="revenue">0</div>
-        <div class="stat-label">Revenue (KRW)</div>
+
+      <!-- 5-Layer Architecture -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">5-Layer Architecture</div>
+          <div class="panel-badge">SYSTEM MAP</div>
+        </div>
+        <div class="panel-body">
+          <div class="layer-list">
+            <a href="../delivery/" class="layer-item">
+              <div class="layer-num">L1</div>
+              <div class="layer-info">
+                <div class="layer-name">Delivery</div>
+                <div class="layer-desc">납품 및 배포 관리</div>
+              </div>
+              <div class="layer-status">READY</div>
+              <span class="layer-arrow">→</span>
+            </a>
+            <a href="../interfaces/" class="layer-item">
+              <div class="layer-num">L2</div>
+              <div class="layer-info">
+                <div class="layer-name">Interfaces</div>
+                <div class="layer-desc">동선 설계 및 UI</div>
+              </div>
+              <div class="layer-status">READY</div>
+              <span class="layer-arrow">→</span>
+            </a>
+            <a href="../engines/" class="layer-item">
+              <div class="layer-num">L3</div>
+              <div class="layer-info">
+                <div class="layer-name">Engines</div>
+                <div class="layer-desc">LLM, 자동화, 미디어</div>
+              </div>
+              <div class="layer-status">ACTIVE</div>
+              <span class="layer-arrow">→</span>
+            </a>
+            <a href="./" class="layer-item active">
+              <div class="layer-num">L4</div>
+              <div class="layer-info">
+                <div class="layer-name">Console</div>
+                <div class="layer-desc">현재 위치 • Command Center</div>
+              </div>
+              <div class="layer-status">ONLINE</div>
+              <span class="layer-arrow">→</span>
+            </a>
+            <a href="../archive/" class="layer-item">
+              <div class="layer-num">L5</div>
+              <div class="layer-info">
+                <div class="layer-name">Archive</div>
+                <div class="layer-desc">지식 및 데이터 축적</div>
+              </div>
+              <div class="layer-status">READY</div>
+              <span class="layer-arrow">→</span>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Terminal Log -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">System Terminal</div>
+          <div class="panel-badge">LIVE</div>
+        </div>
+        <div class="panel-body" style="padding: 0;">
+          <div class="terminal">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">dongseon@studio ~ %</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text">Initializing DONGSEON Protocol...</span>
+              </div>
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text terminal-success">✓ System boot complete</span>
+              </div>
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text terminal-success">✓ All layers operational</span>
+              </div>
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-text">Ready for operations<span class="terminal-cursor"></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Access -->
+      <div class="admin-section">
+        <button class="admin-btn" onclick="openAdminModal()">
+          <div class="admin-icon">🔐</div>
+          <div class="admin-info">
+            <div class="admin-title">ADMIN ACCESS</div>
+            <div class="admin-desc">Restricted Area • Authorization Required</div>
+          </div>
+          <span class="admin-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Back Link -->
+      <a href="../" class="back-link">
+        ← Return to Studio
+      </a>
     </div>
+  </main>
 
-    <!-- Quick Actions -->
-    <div class="section-title">Quick Actions</div>
-    <div class="quick-actions">
-      <a href="#" class="quick-btn" onclick="createNode()">+ New Node</a>
-      <a href="../delivery/packages/" class="quick-btn">Packages</a>
-      <a href="../engines/llm/" class="quick-btn">LLM Engine</a>
-      <a href="../" class="quick-btn">Studio Home</a>
-    </div>
-
-    <!-- 5 Layers -->
-    <div class="section-title">5-Layer Architecture</div>
-    <div class="menu-list">
-      <a href="../delivery/" class="menu-item">
-        <div class="menu-icon l1">🚀</div>
-        <div class="menu-info">
-          <div class="menu-name">L1: Delivery</div>
-          <div class="menu-desc">납품 및 배포 관리</div>
-        </div>
-        <span class="menu-arrow">→</span>
-      </a>
-      <a href="../interfaces/" class="menu-item">
-        <div class="menu-icon l2">🎨</div>
-        <div class="menu-info">
-          <div class="menu-name">L2: Interfaces</div>
-          <div class="menu-desc">동선 설계 및 UI</div>
-        </div>
-        <span class="menu-arrow">→</span>
-      </a>
-      <a href="../engines/" class="menu-item">
-        <div class="menu-icon l3">⚡</div>
-        <div class="menu-info">
-          <div class="menu-name">L3: Engines</div>
-          <div class="menu-desc">LLM, 자동화, 미디어</div>
-        </div>
-        <span class="menu-arrow">→</span>
-      </a>
-      <a href="./" class="menu-item" style="border-color: var(--accent);">
-        <div class="menu-icon l4">📊</div>
-        <div class="menu-info">
-          <div class="menu-name">L4: Console</div>
-          <div class="menu-desc">현재 위치</div>
-        </div>
-        <span class="menu-arrow">→</span>
-      </a>
-      <a href="../archive/" class="menu-item">
-        <div class="menu-icon l5">📁</div>
-        <div class="menu-info">
-          <div class="menu-name">L5: Archive</div>
-          <div class="menu-desc">지식 및 데이터 축적</div>
-        </div>
-        <span class="menu-arrow">→</span>
-      </a>
-    </div>
-
-    <!-- Status -->
-    <div class="section-title">System Status</div>
-    <div class="status-indicator">
-      <div class="status-dot"></div>
-      <div class="status-text">All systems operational • Last sync: just now</div>
-    </div>
-
-    <!-- Admin Mode -->
-    <div class="section-title" style="margin-top: 24px;">Restricted Access</div>
-    <button class="admin-btn" onclick="openAdminModal()">
-      <span class="admin-icon">🔐</span>
-      <span class="admin-text">
-        <span class="admin-title">관리자 모드</span>
-        <span class="admin-desc">비밀번호 필요</span>
-      </span>
-      <span class="menu-arrow">→</span>
-    </button>
-  </div>
-
-  <!-- Admin Password Modal -->
+  <!-- Admin Modal -->
   <div class="admin-modal" id="adminModal" onclick="closeAdminModalOutside(event)">
     <div class="admin-box">
-      <h3 class="admin-modal-title">관리자 모드</h3>
-      <p class="admin-modal-desc">비밀번호를 입력하세요</p>
+      <div class="admin-modal-icon">🔐</div>
+      <h3 class="admin-modal-title">ADMIN ACCESS</h3>
+      <p class="admin-modal-desc">Enter authorization code</p>
       <input type="password" class="admin-input" id="adminPassword" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
-      <button class="admin-submit" onclick="checkAdminPassword()">입장</button>
-      <button class="admin-cancel" onclick="closeAdminModal()">취소</button>
+      <button class="admin-submit" onclick="checkAdminPassword()">AUTHORIZE</button>
+      <button class="admin-cancel" onclick="closeAdminModal()">CANCEL</button>
     </div>
   </div>
 
   <script>
+    // Matrix Rain Effect
+    function createMatrixRain() {
+      const container = document.getElementById('matrixRain');
+      const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const columns = Math.floor(window.innerWidth / 20);
+
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'rain-column';
+        column.style.left = (i * 20) + 'px';
+        column.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        column.style.animationDelay = (Math.random() * 5) + 's';
+
+        let text = '';
+        const length = Math.floor(Math.random() * 20) + 10;
+        for (let j = 0; j < length; j++) {
+          text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+        }
+        column.innerHTML = text;
+        container.appendChild(column);
+      }
+    }
+
+    // Time Display
+    function updateTime() {
+      const now = new Date();
+      const time = now.toTimeString().split(' ')[0];
+      document.getElementById('timeDisplay').textContent = time;
+    }
+
+    // Load Stats
     async function loadStats() {
       try {
         const res = await fetch('../nodes/registry.json');
@@ -482,11 +1118,10 @@
     function checkAdminPassword() {
       if (adminInput.value === ADMIN_PASSWORD) {
         closeAdminModal();
-        // 관리자 모드 진입 - 추후 admin 페이지 생성 시 이동
         alert('관리자 모드 진입 성공!\n(관리자 페이지 추후 구현)');
       } else {
         adminInput.value = '';
-        adminInput.style.borderColor = '#ef4444';
+        adminInput.style.borderColor = '#ff3333';
         adminInput.style.animation = 'shake 0.3s';
         setTimeout(() => {
           adminInput.style.borderColor = '';
@@ -499,6 +1134,10 @@
       if (e.key === 'Enter') checkAdminPassword();
     });
 
+    // Initialize
+    createMatrixRain();
+    updateTime();
+    setInterval(updateTime, 1000);
     loadStats();
   </script>
 </body>
