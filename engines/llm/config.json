@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "id": "dongseon-llm-engine",
+  "version": "1.0.0",
+  "name": "DONGSEON LLM Engine",
+  "description": "AI/LLM 연동 엔진 설정",
+
+  "models": {
+    "primary": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "maxTokens": 4096,
+      "temperature": 0.7,
+      "useCases": ["analysis", "content", "code", "support"]
+    },
+    "fallback": {
+      "provider": "openai",
+      "model": "gpt-4-turbo",
+      "maxTokens": 4096,
+      "temperature": 0.7
+    },
+    "local": {
+      "provider": "ollama",
+      "model": "llama3:8b",
+      "endpoint": "http://localhost:11434",
+      "useCases": ["draft", "summary", "quick"]
+    },
+    "embedding": {
+      "provider": "openai",
+      "model": "text-embedding-3-small",
+      "dimensions": 1536
+    }
+  },
+
+  "agents": {
+    "analyst": {
+      "name": "Business Analyst",
+      "description": "업종 분석 및 동선 설계 에이전트",
+      "promptPath": "prompts/analyst.md",
+      "model": "primary",
+      "capabilities": ["업종분석", "경쟁분석", "동선설계", "인사이트도출"]
+    },
+    "designer": {
+      "name": "Flow Designer",
+      "description": "UX/UI 동선 설계 에이전트",
+      "promptPath": "prompts/designer.md",
+      "model": "primary",
+      "capabilities": ["UI설계", "동선맵", "컴포넌트추천", "레이아웃"]
+    },
+    "writer": {
+      "name": "Content Writer",
+      "description": "콘텐츠 작성 에이전트",
+      "promptPath": "prompts/writer.md",
+      "model": "primary",
+      "capabilities": ["카피라이팅", "블로그", "SNS", "이메일"]
+    },
+    "support": {
+      "name": "Customer Support",
+      "description": "고객 응대 에이전트",
+      "promptPath": "prompts/support.md",
+      "model": "fallback",
+      "capabilities": ["FAQ", "문의응대", "예약안내", "제품설명"]
+    },
+    "coder": {
+      "name": "Code Generator",
+      "description": "코드 생성 에이전트",
+      "promptPath": "prompts/coder.md",
+      "model": "primary",
+      "capabilities": ["HTML", "CSS", "JS", "컴포넌트생성"]
+    }
+  },
+
+  "prompts": {
+    "basePath": "engines/llm/prompts/",
+    "templates": [
+      "analyst.md",
+      "designer.md",
+      "writer.md",
+      "support.md",
+      "coder.md",
+      "system.md"
+    ]
+  },
+
+  "chains": {
+    "fullService": {
+      "name": "Full Service Chain",
+      "description": "분석 → 설계 → 콘텐츠 → 코드 전체 파이프라인",
+      "steps": [
+        { "agent": "analyst", "output": "analysis" },
+        { "agent": "designer", "input": "analysis", "output": "design" },
+        { "agent": "writer", "input": "design", "output": "content" },
+        { "agent": "coder", "input": ["design", "content"], "output": "code" }
+      ]
+    },
+    "quickAnalysis": {
+      "name": "Quick Analysis",
+      "description": "빠른 업종 분석",
+      "steps": [
+        { "agent": "analyst", "output": "analysis" }
+      ]
+    }
+  },
+
+  "rateLimit": {
+    "requestsPerMinute": 60,
+    "tokensPerMinute": 100000,
+    "retryAttempts": 3,
+    "retryDelay": 1000
+  },
+
+  "logging": {
+    "enabled": true,
+    "path": "archive/logs/llm/",
+    "format": "jsonl",
+    "retention": "30d"
+  },
+
+  "cache": {
+    "enabled": true,
+    "ttl": 3600,
+    "maxSize": "100MB"
+  }
+}

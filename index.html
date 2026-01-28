@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>DONGSEON | 비즈니스의 장면을 그리는 디지털 스튜디오</title>
+  <meta name="description" content="동선 - 페이지를 만들지 않는다. 사람을 움직이게 되는 선을 그린다. Business, Drawn.">
+  <meta name="theme-color" content="#0F172A">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DONGSEON Studio">
+  <meta property="og:url" content="https://dtslib1979.github.io/dongseon-studio/">
+  <meta property="og:title" content="DONGSEON | 동선">
+  <meta property="og:description" content="비즈니스의 장면을 그리는 디지털 스튜디오">
+  <meta property="og:image" content="https://dtslib1979.github.io/dongseon-studio/assets/og/og-image.png">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DONGSEON | 동선">
+  <meta name="twitter:description" content="비즈니스의 장면을 그리는 디지털 스튜디오">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Colors */
+      --primary: #2563EB;
+      --primary-light: #3B82F6;
+      --primary-dark: #1D4ED8;
+      --accent: #F59E0B;
+      --accent-light: #FBBF24;
+
+      --bg: #0F172A;
+      --bg-elevated: #1E293B;
+      --bg-card: #334155;
+      --bg-glass: rgba(15, 23, 42, 0.85);
+
+      --text: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --text-dim: #475569;
+
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+
+      --border: rgba(248, 250, 252, 0.1);
+      --border-accent: rgba(37, 99, 235, 0.3);
+
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+      --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+      --gradient-dark: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+      --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.15) 0%, transparent 60%);
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 60px rgba(37,99,235,0.2);
+
+      /* Spacing */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 40px;
+      --space-2xl: 64px;
+
+      /* Typography */
+      --text-xs: 11px;
+      --text-sm: 13px;
+      --text-base: 15px;
+      --text-lg: 17px;
+      --text-xl: 21px;
+      --text-2xl: 28px;
+      --text-3xl: 36px;
+      --text-4xl: 48px;
+
+      /* Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      /* Timing */
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 150ms;
+      --duration-normal: 300ms;
+      --duration-slow: 500ms;
+
+      /* Safe Areas */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+      font-size: var(--text-base);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 100vh;
+      background: var(--gradient-glow);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: calc(var(--safe-top) + var(--space-md)) var(--space-md) calc(var(--safe-bottom) + 100px);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      padding-top: calc(var(--space-sm) + var(--safe-top));
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .header-logo {
+      font-size: var(--text-lg);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 100px 0 var(--space-2xl);
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .hero-title {
+      font-size: var(--text-4xl);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero-title-en {
+      display: block;
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-top: var(--space-xs);
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: var(--gradient-primary);
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: white;
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ===== MANIFESTO ===== */
+    .manifesto {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+    }
+
+    .manifesto-title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--primary-light);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+
+    .manifesto-quote {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: var(--space-md);
+    }
+
+    .manifesto-sub {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ===== SECTION ===== */
+    .section {
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .section-title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-accent), transparent);
+    }
+
+    /* ===== LAYERS ===== */
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .layer {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      transition: all var(--duration-normal) var(--ease);
+    }
+
+    .layer:active {
+      transform: scale(0.98);
+      border-color: var(--primary);
+    }
+
+    .layer-num {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .layer-num.l1 { background: #10B981; }
+    .layer-num.l2 { background: #3B82F6; }
+    .layer-num.l3 { background: #8B5CF6; }
+    .layer-num.l4 { background: #F59E0B; }
+    .layer-num.l5 { background: #EF4444; }
+
+    .layer-info { flex: 1; }
+
+    .layer-name {
+      font-size: var(--text-base);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .layer-name span {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .layer-purpose {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+
+    /* ===== PACKAGES ===== */
+    .packages {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .package {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      transition: all var(--duration-normal) var(--ease);
+    }
+
+    .package:active {
+      transform: scale(0.98);
+      border-color: var(--accent);
+    }
+
+    .package-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-sm);
+    }
+
+    .package-name {
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+
+    .package-badge {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 700;
+    }
+
+    .package-target {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .package-includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .package-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+    }
+
+    /* ===== PARTNERSHIP ===== */
+    .partnership {
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      text-align: center;
+    }
+
+    .partnership-title {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      margin-bottom: var(--space-md);
+    }
+
+    .partnership-roles {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-lg);
+    }
+
+    .role {
+      text-align: center;
+    }
+
+    .role-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xl);
+      font-weight: 900;
+      color: white;
+      margin: 0 auto var(--space-sm);
+    }
+
+    .role-name {
+      font-size: var(--text-base);
+      font-weight: 700;
+    }
+
+    .role-title {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    .partnership-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      border-top: 1px solid var(--border);
+      margin-top: var(--space-xl);
+    }
+
+    .footer-logo {
+      font-size: var(--text-2xl);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .footer-tagline {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-link {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      transition: color var(--duration-fast);
+    }
+
+    .footer-link:hover {
+      color: var(--primary-light);
+    }
+
+    .footer-copy {
+      font-size: var(--text-xs);
+      color: var(--text-dim);
+    }
+
+    .footer-tier {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin-top: var(--space-md);
+    }
+
+    /* ===== FLOATING CTA ===== */
+    .floating-cta {
+      position: fixed;
+      bottom: var(--space-md);
+      bottom: calc(var(--space-md) + var(--safe-bottom));
+      left: var(--space-md);
+      right: var(--space-md);
+      z-index: 900;
+      max-width: 448px;
+      margin: 0 auto;
+    }
+
+    .cta-btn {
+      width: 100%;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      font-size: var(--text-base);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      box-shadow: var(--shadow-glow);
+      transition: all var(--duration-normal) var(--ease);
+    }
+
+    .cta-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-logo">DONGSEON</div>
+      <span class="header-badge">Tier 2 Studio</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-eyebrow">Digital Studio Protocol HQ</span>
+      <h1 class="hero-title">
+        동선
+        <span class="hero-title-en">DONGSEON</span>
+      </h1>
+      <p class="hero-subtitle">비즈니스의 장면을 그리는 디지털 스튜디오</p>
+      <span class="hero-tagline">Business, Drawn</span>
+    </section>
+
+    <!-- Manifesto -->
+    <section class="manifesto">
+      <div class="manifesto-title">Manifesto</div>
+      <p class="manifesto-quote">
+        페이지를 만들지 않는다.<br>
+        사람을 움직이게 되는 선을 그린다.
+      </p>
+      <p class="manifesto-sub">
+        We don't make pages. We draw lines that move people.
+      </p>
+    </section>
+
+    <!-- 5-Layer Architecture -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">5-Layer Architecture</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="layers">
+        <div class="layer">
+          <div class="layer-num l1">L1</div>
+          <div class="layer-info">
+            <div class="layer-name">Delivery <span>납품</span></div>
+            <div class="layer-purpose">고객에게 납품한다</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num l2">L2</div>
+          <div class="layer-info">
+            <div class="layer-name">Interfaces <span>인터페이스</span></div>
+            <div class="layer-purpose">동선을 설계한다</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num l3">L3</div>
+          <div class="layer-info">
+            <div class="layer-name">Engines <span>엔진</span></div>
+            <div class="layer-purpose">AI와 자동화를 구동한다</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num l4">L4</div>
+          <div class="layer-info">
+            <div class="layer-name">Console <span>관제</span></div>
+            <div class="layer-purpose">시스템을 관측한다</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num l5">L5</div>
+          <div class="layer-info">
+            <div class="layer-name">Archive <span>아카이브</span></div>
+            <div class="layer-purpose">지식을 축적한다</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">Packages</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="packages">
+        <div class="package">
+          <div class="package-header">
+            <div class="package-name">소상공인 패키지</div>
+            <span class="package-badge">v1.0</span>
+          </div>
+          <div class="package-target">동네 가게, 식당, 카페, 미용실</div>
+          <div class="package-includes">
+            <span class="package-tag">브랜드 서사</span>
+            <span class="package-tag">동선 설계</span>
+            <span class="package-tag">웹 장면</span>
+            <span class="package-tag">AI 응대</span>
+          </div>
+        </div>
+        <div class="package">
+          <div class="package-header">
+            <div class="package-name">부동산 패키지</div>
+            <span class="package-badge">v1.0</span>
+          </div>
+          <div class="package-target">공인중개사, 부동산 사무소</div>
+          <div class="package-includes">
+            <span class="package-tag">매물 동선</span>
+            <span class="package-tag">문의 자동화</span>
+            <span class="package-tag">블로그 연동</span>
+            <span class="package-tag">디지털 명함</span>
+          </div>
+        </div>
+        <div class="package">
+          <div class="package-header">
+            <div class="package-name">1인사업자 패키지</div>
+            <span class="package-badge">v1.0</span>
+          </div>
+          <div class="package-target">프리랜서, 1인 크리에이터, 컨설턴트</div>
+          <div class="package-includes">
+            <span class="package-tag">개인 브랜딩</span>
+            <span class="package-tag">자동화</span>
+            <span class="package-tag">콘텐츠 파이프라인</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partnership -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">Partnership</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="partnership">
+        <h2 class="partnership-title">친구 + 상생</h2>
+        <div class="partnership-roles">
+          <div class="role">
+            <div class="role-avatar">박</div>
+            <div class="role-name">박씨</div>
+            <div class="role-title">설계자</div>
+          </div>
+          <div class="role">
+            <div class="role-avatar" style="background: var(--gradient-accent);">동</div>
+            <div class="role-name">동선</div>
+            <div class="role-title">운영자</div>
+          </div>
+        </div>
+        <p class="partnership-desc">
+          구조는 박씨가 만들고, 현실은 동선이 굴린다.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-logo">DONGSEON</div>
+      <div class="footer-tagline">비즈니스의 장면을 그리는 디지털 스튜디오</div>
+      <div class="footer-links">
+        <a href="console/" class="footer-link">Console</a>
+        <a href="specs/" class="footer-link">Specs</a>
+        <a href="https://github.com/dtslib1979/dongseon-studio" class="footer-link">GitHub</a>
+      </div>
+      <p class="footer-copy">DTSLIB Group &copy; 2026</p>
+      <span class="footer-tier">Tier 2 · Digital Studio Protocol HQ</span>
+    </footer>
+  </div>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <a href="console/" class="cta-btn">
+      Console 열기
+    </a>
+  </div>
+
+  <script>
+    // Service Worker (향후)
+    if ('serviceWorker' in navigator) {
+      // navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

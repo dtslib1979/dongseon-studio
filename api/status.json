@@ -1,0 +1,37 @@
+{
+  "status": "operational",
+  "studio": "DONGSEON",
+  "version": "1.0.0",
+  "timestamp": "2026-01-29T00:00:00Z",
+  "services": {
+    "website": {
+      "status": "operational",
+      "url": "https://dtslib1979.github.io/dongseon-studio/"
+    },
+    "console": {
+      "status": "operational",
+      "url": "https://dtslib1979.github.io/dongseon-studio/console/"
+    },
+    "llmEngine": {
+      "status": "ready",
+      "note": "Configuration complete, awaiting first deployment"
+    },
+    "automationEngine": {
+      "status": "ready",
+      "note": "Scripts prepared"
+    },
+    "ontologyEngine": {
+      "status": "ready",
+      "note": "Schemas defined"
+    }
+  },
+  "stats": {
+    "totalNodes": 0,
+    "activeNodes": 0,
+    "packagesAvailable": 3
+  },
+  "contact": {
+    "github": "https://github.com/dtslib1979/dongseon-studio",
+    "hq": "dtslib-papyrus"
+  }
+}

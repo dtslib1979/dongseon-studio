@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "id": "dongseon-studio",
+  "version": "1.0.0",
+
+  "identity": {
+    "name": "DONGSEON",
+    "nameKo": "동선",
+    "tagline": "Business, Drawn",
+    "subtitle": "비즈니스의 장면을 그리는 디지털 스튜디오",
+    "type": "digital-studio-os",
+    "domain": "dongseon.kr",
+    "github": "dtslib1979.github.io/dongseon-studio",
+    "language": "ko-KR",
+    "established": "2026-01-29",
+    "NOT": ["웹에이전시", "외주", "하청", "홈페이지제작", "마케팅대행"]
+  },
+
+  "philosophy": {
+    "core": "페이지를 만들지 않는다. 사람을 움직이게 되는 선을 그린다.",
+    "coreEn": "We don't make pages. We draw lines that move people.",
+    "medium": "Digital",
+    "output": "Business Scene",
+    "method": "Flow Protocol",
+    "humanRole": "운영자 (동선)",
+    "designerRole": "설계자 (박씨)",
+    "systemRole": "동선을 설계하는 도구",
+    "result": "설득 없이 움직이게 되는 구조",
+    "manifesto": [
+      "우리는 홈페이지를 만들지 않는다. 장면을 연출한다.",
+      "기능이 아니라 동선이다. 사람이 어디서 멈추고, 어디서 믿고, 어디서 행동하는가.",
+      "코드는 붓이다. 레이아웃은 구도다. UX는 시선 이동이다.",
+      "웹은 명함이 아니다. 웹은 장사의 신경계다.",
+      "구조는 공유하지 않는다. 증식한다."
+    ]
+  },
+
+  "hierarchy": {
+    "tier": 2,
+    "type": "Studio Protocol HQ",
+    "parent": "dtslib-papyrus",
+    "domain": "Digital (비물성)",
+    "sibling": "espiritu-tango (물성)",
+    "children": []
+  },
+
+  "architecture": {
+    "name": "5-Layer Digital Studio OS",
+    "version": "1.0",
+    "layers": [
+      {
+        "level": 1,
+        "id": "delivery",
+        "name": "Delivery",
+        "nameKo": "납품",
+        "purpose": "고객에게 납품한다",
+        "verb": "Deploy",
+        "color": "#10B981",
+        "icon": "rocket",
+        "outputs": ["웹사이트", "PWA", "패키지", "문서"]
+      },
+      {
+        "level": 2,
+        "id": "interfaces",
+        "name": "Interfaces",
+        "nameKo": "인터페이스",
+        "purpose": "동선을 설계한다",
+        "verb": "Design",
+        "color": "#3B82F6",
+        "icon": "layout",
+        "outputs": ["UI컴포넌트", "템플릿", "동선맵", "디자인시스템"]
+      },
+      {
+        "level": 3,
+        "id": "engines",
+        "name": "Engines",
+        "nameKo": "엔진",
+        "purpose": "AI와 자동화를 구동한다",
+        "verb": "Power",
+        "color": "#8B5CF6",
+        "icon": "cpu",
+        "outputs": ["LLM응답", "자동화스크립트", "미디어생성", "지식구조"]
+      },
+      {
+        "level": 4,
+        "id": "console",
+        "name": "Console",
+        "nameKo": "관제",
+        "purpose": "시스템을 관측한다",
+        "verb": "Monitor",
+        "color": "#F59E0B",
+        "icon": "activity",
+        "outputs": ["대시보드", "리포트", "알림", "정산"]
+      },
+      {
+        "level": 5,
+        "id": "archive",
+        "name": "Archive",
+        "nameKo": "아카이브",
+        "purpose": "지식을 축적한다",
+        "verb": "Accumulate",
+        "color": "#EF4444",
+        "icon": "database",
+        "outputs": ["히스토리", "데이터셋", "온톨로지", "인사이트"]
+      }
+    ]
+  },
+
+  "packages": {
+    "version": "1.0",
+    "catalog": [
+      {
+        "id": "small-business",
+        "name": "소상공인 패키지",
+        "nameEn": "Small Business Package",
+        "version": "1.0",
+        "price": "협의",
+        "target": "동네 가게, 식당, 카페, 미용실 등",
+        "includes": [
+          "브랜드 서사 설계",
+          "행동 동선 3단계 설계",
+          "웹 장면 연출 (5페이지)",
+          "AI 문의 응대 연동",
+          "운영 매뉴얼"
+        ],
+        "deliverables": ["PWA", "QR코드", "운영가이드"],
+        "timeline": "2주"
+      },
+      {
+        "id": "real-estate",
+        "name": "부동산 패키지",
+        "nameEn": "Real Estate Package",
+        "version": "1.0",
+        "price": "협의",
+        "target": "공인중개사, 부동산 사무소",
+        "includes": [
+          "매물 동선 설계",
+          "문의 자동화 시스템",
+          "블로그 자동 연동",
+          "AI 응대 봇",
+          "디지털 명함"
+        ],
+        "deliverables": ["PWA", "명함페이지", "AI봇"],
+        "timeline": "2주",
+        "reference": "namoneygoal"
+      },
+      {
+        "id": "solo-entrepreneur",
+        "name": "1인사업자 패키지",
+        "nameEn": "Solo Entrepreneur Package",
+        "version": "1.0",
+        "price": "협의",
+        "target": "프리랜서, 1인 크리에이터, 컨설턴트",
+        "includes": [
+          "개인 브랜딩 설계",
+          "자동화 시스템 구축",
+          "콘텐츠 파이프라인",
+          "예약/문의 자동화",
+          "포트폴리오 페이지"
+        ],
+        "deliverables": ["PWA", "자동화설정", "콘텐츠템플릿"],
+        "timeline": "3주"
+      }
+    ]
+  },
+
+  "engines": {
+    "llm": {
+      "primary": "claude",
+      "models": {
+        "claude": "claude-sonnet-4-20250514",
+        "gpt": "gpt-4-turbo",
+        "local": "ollama/llama3"
+      },
+      "useCases": ["고객응대", "콘텐츠생성", "분석", "코드생성"],
+      "promptsPath": "engines/llm/prompts/"
+    },
+    "automation": {
+      "browser": {
+        "tool": "playwright",
+        "useCases": ["스크린샷", "폼자동화", "모니터링", "테스트"]
+      },
+      "mobile": {
+        "tool": "tasker",
+        "useCases": ["알림", "백업", "동기화"]
+      },
+      "ci": {
+        "tool": "github-actions",
+        "useCases": ["배포", "테스트", "lighthouse"]
+      }
+    },
+    "media": {
+      "image": {
+        "source": "parksy-image",
+        "capabilities": ["썸네일생성", "배경제작", "리사이징"]
+      },
+      "audio": {
+        "source": "parksy-audio",
+        "capabilities": ["BGM", "효과음", "TTS"]
+      }
+    },
+    "ontology": {
+      "format": "json-ld",
+      "schemas": ["business", "customer", "flow", "project"],
+      "storage": "engines/ontology/",
+      "future": ["vector-db", "embeddings", "rag"]
+    }
+  },
+
+  "flowProtocol": {
+    "version": "1.0",
+    "name": "Flow Protocol",
+    "principle": "사람의 다음 행동을 설계한다",
+    "stages": [
+      {
+        "id": "land",
+        "name": "착지",
+        "timeframe": "0-3초",
+        "goal": "첫인상을 잡는다",
+        "question": "이게 뭐지?",
+        "design": "Hero + 한줄 메시지"
+      },
+      {
+        "id": "explore",
+        "name": "탐색",
+        "timeframe": "3-30초",
+        "goal": "관심을 유지한다",
+        "question": "나한테 필요한가?",
+        "design": "스크롤 동선 + 증거"
+      },
+      {
+        "id": "act",
+        "name": "행동",
+        "timeframe": "30초+",
+        "goal": "전환을 유도한다",
+        "question": "어떻게 하지?",
+        "design": "CTA + 쉬운 다음 단계"
+      },
+      {
+        "id": "return",
+        "name": "재방문",
+        "timeframe": "이후",
+        "goal": "기억에 남긴다",
+        "question": "다시 올 이유?",
+        "design": "북마크 가치 + 업데이트"
+      }
+    ],
+    "metrics": {
+      "bounce": "착지 실패율",
+      "scroll": "탐색 깊이",
+      "conversion": "행동 전환율",
+      "retention": "재방문율"
+    }
+  },
+
+  "theme": {
+    "name": "Dongseon Blue",
+    "colors": {
+      "primary": "#2563EB",
+      "primaryLight": "#3B82F6",
+      "primaryDark": "#1D4ED8",
+      "accent": "#F59E0B",
+      "accentLight": "#FBBF24",
+      "bg": "#0F172A",
+      "bgElevated": "#1E293B",
+      "bgCard": "#334155",
+      "text": "#F8FAFC",
+      "textSecondary": "#94A3B8",
+      "textMuted": "#64748B",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#3B82F6"
+    },
+    "gradients": {
+      "primary": "linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)",
+      "accent": "linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)",
+      "dark": "linear-gradient(180deg, #0F172A 0%, #1E293B 100%)"
+    },
+    "shadows": {
+      "sm": "0 2px 8px rgba(0,0,0,0.3)",
+      "md": "0 8px 24px rgba(0,0,0,0.4)",
+      "lg": "0 16px 48px rgba(0,0,0,0.5)",
+      "glow": "0 0 40px rgba(37,99,235,0.3)"
+    },
+    "radius": {
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "24px",
+      "full": "9999px"
+    },
+    "timing": {
+      "fast": "150ms",
+      "normal": "300ms",
+      "slow": "500ms",
+      "ease": "cubic-bezier(0.16, 1, 0.3, 1)"
+    }
+  },
+
+  "partnership": {
+    "type": "친구 + 상생",
+    "roles": {
+      "designer": {
+        "name": "박씨",
+        "responsibilities": ["세계관설계", "구조설계", "언어설계", "패키지설계", "IP생성"]
+      },
+      "operator": {
+        "name": "동선",
+        "responsibilities": ["현장운영", "세일즈", "납품", "유지보수", "고객관리"]
+      }
+    },
+    "revenue": {
+      "model": "건별 용역비 분배",
+      "designerShare": "30-70%",
+      "operatorShare": "70-30%",
+      "ipOwnership": "박씨 귀속"
+    },
+    "assets": {
+      "physical": ["사무실", "서버PC"],
+      "digital": ["도메인", "레포지토리", "코드베이스"],
+      "intellectual": ["패키지설계", "프로토콜", "브랜드"]
+    }
+  },
+
+  "nodes": {
+    "system": "Node System v1.0",
+    "description": "고객사/프로젝트를 노드로 관리",
+    "registry": "nodes/registry.json",
+    "templatePath": "nodes/_template/",
+    "structure": {
+      "configFile": "node.json",
+      "requiredFields": ["id", "name", "type", "status", "package"]
+    }
+  },
+
+  "roadmap": {
+    "phase1": {
+      "name": "Foundation",
+      "timeline": "2026 Q1",
+      "goals": ["레포구축", "정관완성", "쇼케이스", "패키지템플릿1개"]
+    },
+    "phase2": {
+      "name": "First Client",
+      "timeline": "2026 Q1-Q2",
+      "goals": ["첫고객납품", "LLM연동", "자동화기본"]
+    },
+    "phase3": {
+      "name": "Scale",
+      "timeline": "2026 Q2-Q3",
+      "goals": ["패키지3종완성", "온톨로지구축", "관제시스템"]
+    },
+    "phase4": {
+      "name": "Platform",
+      "timeline": "2026 Q3-Q4",
+      "goals": ["노드시스템확장", "파인튜닝", "자체LLM"]
+    }
+  },
+
+  "compatibility": {
+    "mobileFirst": true,
+    "maxWidth": "480px",
+    "pwa": true,
+    "offline": "partial",
+    "seo": true,
+    "a11y": true,
+    "i18n": ["ko", "en"]
+  },
+
+  "meta": {
+    "createdAt": "2026-01-29",
+    "updatedAt": "2026-01-29",
+    "createdBy": "Claude Opus 4.5",
+    "maintainedBy": ["박씨", "동선"],
+    "license": "Proprietary",
+    "repository": "github.com/dtslib1979/dongseon-studio"
+  }
+}

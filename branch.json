@@ -1,0 +1,61 @@
+{
+  "id": "dongseon-studio",
+  "name": "DONGSEON",
+  "nameKo": "동선",
+  "tagline": "Business, Drawn",
+  "hq": "dtslib1979/dtslib-papyrus",
+  "version": "1.0",
+  "status": "active",
+  "visibility": "public",
+  "tier": 2,
+  "type": "studio-protocol-hq",
+  "domain": "digital",
+  "language": "ko-KR",
+
+  "theme": {
+    "primary": "#2563EB",
+    "accent": "#F59E0B",
+    "bg": "#0F172A",
+    "text": "#F8FAFC"
+  },
+
+  "nodes": [],
+
+  "subscriptions": [
+    {
+      "feedId": "hq-notices",
+      "publisher": "hq",
+      "autoSync": true,
+      "target": null
+    },
+    {
+      "feedId": "hq-sdk",
+      "publisher": "hq",
+      "autoSync": true,
+      "target": "assets/js"
+    }
+  ],
+
+  "features": [
+    "digital-studio-os",
+    "flow-protocol",
+    "5-layer-architecture",
+    "llm-engine",
+    "automation-engine",
+    "ontology-engine",
+    "package-system",
+    "node-system"
+  ],
+
+  "sibling": {
+    "id": "espiritu-tango",
+    "domain": "physical",
+    "relationship": "물성/비물성 이분법"
+  },
+
+  "partnership": {
+    "designer": "박씨",
+    "operator": "동선",
+    "model": "친구 + 상생"
+  }
+}

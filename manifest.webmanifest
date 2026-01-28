@@ -1,0 +1,39 @@
+{
+  "name": "DONGSEON Studio",
+  "short_name": "DONGSEON",
+  "description": "비즈니스의 장면을 그리는 디지털 스튜디오",
+  "start_url": "/dongseon-studio/",
+  "scope": "/dongseon-studio/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "orientation": "portrait",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Console",
+      "url": "/dongseon-studio/console/",
+      "description": "관제 대시보드"
+    },
+    {
+      "name": "Packages",
+      "url": "/dongseon-studio/delivery/packages/",
+      "description": "패키지 목록"
+    }
+  ]
+}
