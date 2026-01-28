@@ -285,6 +285,118 @@
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
+    /* ═══════════════════════════════════════════
+       HANJA TYPEWRITER - 동선 의미 타이핑
+    ═══════════════════════════════════════════ */
+    .hanja-display {
+      display: flex;
+      justify-content: center;
+      gap: clamp(24px, 6vw, 60px);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.15s both;
+    }
+
+    .hanja-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hanja-char {
+      position: relative;
+      width: clamp(80px, 20vw, 140px);
+      height: clamp(80px, 20vw, 140px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .hanja-char::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .hanja-char:hover::before { opacity: 1; }
+
+    .hanja-main {
+      font-size: clamp(48px, 12vw, 80px);
+      font-weight: 300;
+      color: var(--text);
+      transition: all 0.15s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hanja-main.typing {
+      animation: typeFlicker 0.1s ease-out;
+    }
+
+    @keyframes typeFlicker {
+      0% { opacity: 0.3; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .hanja-cursor {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 3px;
+      height: 24px;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: cursorBlink 1s step-end infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .hanja-meaning {
+      font-size: clamp(11px, 2.5vw, 14px);
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: all 0.2s;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .hanja-meaning.typing {
+      color: var(--accent);
+      border-color: rgba(59,130,246,0.3);
+    }
+
+    .hanja-hangul {
+      font-size: clamp(14px, 3vw, 18px);
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+    }
+
+    /* Separator between 동 and 선 */
+    .hanja-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
     .hero-tagline {
       max-width: 500px;
       font-size: 18px;
@@ -1034,7 +1146,27 @@
     <h1 class="hero-title">
       <span class="hero-title-gradient">DONGSEON</span>
     </h1>
-    <p class="hero-subtitle-ko">동선 스튜디오</p>
+
+    <!-- Hanja Typewriter Display -->
+    <div class="hanja-display">
+      <div class="hanja-group">
+        <div class="hanja-char">
+          <span class="hanja-main" id="dongChar">動</span>
+          <span class="hanja-cursor"></span>
+        </div>
+        <span class="hanja-meaning" id="dongMeaning">움직임</span>
+        <span class="hanja-hangul">동</span>
+      </div>
+
+      <div class="hanja-group">
+        <div class="hanja-char">
+          <span class="hanja-main" id="seonChar">線</span>
+          <span class="hanja-cursor"></span>
+        </div>
+        <span class="hanja-meaning" id="seonMeaning">선</span>
+        <span class="hanja-hangul">선</span>
+      </div>
+    </div>
 
     <p class="hero-tagline">
       페이지를 만들지 않습니다.<br>
@@ -1302,7 +1434,82 @@
   </div>
 
   <script>
-    // Intersection Observer for reveal animations
+    // ═══════════════════════════════════════════
+    // HANJA TYPEWRITER - 동선 의미 순환
+    // ═══════════════════════════════════════════
+    const dongVariants = [
+      { char: '動', meaning: '움직임' },
+      { char: '東', meaning: '동쪽' },
+      { char: '同', meaning: '함께' },
+      { char: '棟', meaning: '건물' },
+      { char: '董', meaning: '감독' },
+      { char: '瞳', meaning: '눈동자' },
+      { char: '憧', meaning: '동경' },
+      { char: '洞', meaning: '통찰' },
+      { char: '動', meaning: '움직임' }
+    ];
+
+    const seonVariants = [
+      { char: '線', meaning: '선' },
+      { char: '禪', meaning: '선(禪)' },
+      { char: '善', meaning: '선함' },
+      { char: '先', meaning: '먼저' },
+      { char: '選', meaning: '선택' },
+      { char: '船', meaning: '배' },
+      { char: '宣', meaning: '선언' },
+      { char: '仙', meaning: '신선' },
+      { char: '腺', meaning: '샘' },
+      { char: '詵', meaning: '시' },
+      { char: '羨', meaning: '부러움' },
+      { char: '僊', meaning: '신선' },
+      { char: '線', meaning: '선' }
+    ];
+
+    let dongIndex = 0;
+    let seonIndex = 0;
+
+    function typeChar(element, meaningEl, char, meaning) {
+      element.classList.add('typing');
+      meaningEl.classList.add('typing');
+      element.textContent = char;
+      meaningEl.textContent = meaning;
+
+      setTimeout(() => {
+        element.classList.remove('typing');
+        meaningEl.classList.remove('typing');
+      }, 150);
+    }
+
+    function cycleDong() {
+      const charEl = document.getElementById('dongChar');
+      const meaningEl = document.getElementById('dongMeaning');
+      if (!charEl || !meaningEl) return;
+
+      typeChar(charEl, meaningEl, dongVariants[dongIndex].char, dongVariants[dongIndex].meaning);
+      dongIndex = (dongIndex + 1) % dongVariants.length;
+    }
+
+    function cycleSeon() {
+      const charEl = document.getElementById('seonChar');
+      const meaningEl = document.getElementById('seonMeaning');
+      if (!charEl || !meaningEl) return;
+
+      typeChar(charEl, meaningEl, seonVariants[seonIndex].char, seonVariants[seonIndex].meaning);
+      seonIndex = (seonIndex + 1) % seonVariants.length;
+    }
+
+    // Start cycling with offset timing for natural feel
+    setTimeout(() => {
+      setInterval(cycleDong, 2000);
+    }, 1500);
+
+    setTimeout(() => {
+      setInterval(cycleSeon, 2000);
+    }, 2500);
+
+    // ═══════════════════════════════════════════
+    // INTERSECTION OBSERVER - Reveal Animations
+    // ═══════════════════════════════════════════
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
