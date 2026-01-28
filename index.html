@@ -269,6 +269,33 @@
       box-shadow: 0 4px 20px rgba(255,255,255,0.2);
     }
 
+    /* Email Button */
+    .nav-email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.2) 100%);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 10px;
+      color: #3b82f6;
+      transition: all 0.3s ease;
+    }
+
+    .nav-email:hover {
+      background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(139,92,246,0.3) 100%);
+      border-color: rgba(59,130,246,0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+      color: #60a5fa;
+    }
+
+    .email-icon {
+      width: 20px;
+      height: 20px;
+    }
+
     /* Mobile Header */
     @media (max-width: 640px) {
       .header {
@@ -307,6 +334,15 @@
         padding: 6px 12px;
         font-size: 12px;
         border-radius: 8px;
+      }
+      .nav-email {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+      .email-icon {
+        width: 18px;
+        height: 18px;
       }
     }
 
@@ -1874,7 +1910,12 @@
       <nav class="header-nav">
         <a href="#flow" class="nav-link">Protocol</a>
         <a href="#packages" class="nav-link">Packages</a>
-        <a href="mailto:contact@dongseon.com" class="nav-btn nav-email" title="Email">✉</a>
+        <a href="mailto:contact@dongseon.com" class="nav-email" title="Email">
+          <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M22 6L12 13L2 6"/>
+          </svg>
+        </a>
       </nav>
     </div>
   </header>
