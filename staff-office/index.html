@@ -611,7 +611,8 @@
   </div>
 
   <script>
-    const BASE_URL = 'https://raw.githubusercontent.com/dtslib1979';
+    // jsDelivr CDN - faster, no 5min cache like raw.githubusercontent
+    const BASE_URL = 'https://cdn.jsdelivr.net/gh/dtslib1979';
     const DEFAULT_REPO = 'dongseon-studio';
     const BRANCH = 'main';
 
@@ -643,9 +644,8 @@
         viewer.innerHTML = '<div class="loading">Loading</div>';
 
         try {
-          // Cache busting to avoid GitHub raw cache (5 min)
-          const cacheBuster = Date.now();
-          const url = `${BASE_URL}/${repo}/${BRANCH}/${actualFile}?t=${cacheBuster}`;
+          // jsDelivr format: /gh/user/repo@branch/file
+          const url = `${BASE_URL}/${repo}@${BRANCH}/${actualFile}`;
           const response = await fetch(url, { cache: 'no-store' });
 
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
