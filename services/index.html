@@ -5,111 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>3-Lane Studio | DONGSEON</title>
   <meta name="description" content="동선 스튜디오 3-Lane 비즈니스 모델. 납품 + 실험 + 용역이 서로 먹여살리는 구조.">
-  <meta name="theme-color" content="#030712">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #030712;
-      --surface: rgba(255,255,255,0.03);
-      --border: rgba(255,255,255,0.08);
-      --text: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --lane1: #10b981;
-      --lane1-glow: rgba(16,185,129,0.4);
-      --lane2: #3b82f6;
-      --lane2-glow: rgba(59,130,246,0.4);
-      --lane3: #f59e0b;
-      --lane3-glow: rgba(245,158,11,0.4);
-      --purple: #8b5cf6;
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-tertiary: #1a1a24;
+      --bg-card: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.06);
+      --border-active: rgba(255,255,255,0.12);
+
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-tertiary: #71717a;
+      --text-muted: #52525b;
+
+      --lane-1: #22c55e;
+      --lane-1-rgb: 34, 197, 94;
+      --lane-2: #3b82f6;
+      --lane-2-rgb: 59, 130, 246;
+      --lane-3: #f59e0b;
+      --lane-3-rgb: 245, 158, 11;
+      --accent: #a855f7;
+      --accent-rgb: 168, 85, 247;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
 
     body {
-      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Background Effects */
-    .bg-grid {
+    /* ══════════════════════════════════════════════════════════
+       CANVAS BACKGROUND - Particle System
+    ══════════════════════════════════════════════════════════ */
+    #particleCanvas {
       position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
-      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .bg-glow {
+    /* Gradient Orbs */
+    .orb {
       position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.5;
+      z-index: 0;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .orb-1 {
       width: 600px;
       height: 600px;
-      border-radius: 50%;
-      filter: blur(150px);
-      opacity: 0.3;
-      z-index: -1;
-      animation: float 20s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(var(--lane-1-rgb), 0.3) 0%, transparent 70%);
+      top: -200px;
+      left: -200px;
     }
 
-    .glow-1 { background: var(--lane1); top: -200px; left: -200px; }
-    .glow-2 { background: var(--lane2); top: 40%; right: -200px; animation-delay: -7s; }
-    .glow-3 { background: var(--lane3); bottom: -200px; left: 30%; animation-delay: -14s; }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -30px) scale(1.1); }
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(var(--lane-2-rgb), 0.25) 0%, transparent 70%);
+      top: 50%;
+      right: -150px;
     }
 
-    /* Header */
+    .orb-3 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(var(--lane-3-rgb), 0.25) 0%, transparent 70%);
+      bottom: 10%;
+      left: 20%;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════════════════════ */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      padding: 16px 24px;
+      z-index: 1000;
+      padding: 20px 24px;
     }
 
     .header-inner {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(3,7,18,0.8);
-      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 12px 20px;
+      padding: 14px 24px;
     }
 
     .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--text-primary);
       text-decoration: none;
+      letter-spacing: -0.02em;
     }
 
-    .back-link {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
       font-size: 14px;
+      font-weight: 500;
       color: var(--text-secondary);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .back-link:hover { color: var(--text); }
+    .nav-link:hover { color: var(--text-primary); }
 
-    /* Hero */
+    .nav-cta {
+      padding: 10px 20px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s var(--ease-out-expo);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,255,255,0.15);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 16px; }
+      .nav-link { display: none; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HERO SECTION
+    ══════════════════════════════════════════════════════════ */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -117,115 +189,285 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 140px 24px 100px;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-badge {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      padding: 8px 16px 8px 10px;
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-rgb), 0.2);
       border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--purple);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
       margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     .hero-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(36px, 8vw, 72px);
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, var(--lane1) 0%, var(--lane2) 50%, var(--lane3) 100%);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(48px, 12vw, 140px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 32px;
+      opacity: 0;
+    }
+
+    .hero-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-title-word {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--lane-1) 0%, var(--lane-2) 50%, var(--lane-3) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .hero-subtitle {
-      font-size: clamp(18px, 4vw, 24px);
-      font-weight: 500;
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 400;
       color: var(--text-secondary);
       max-width: 600px;
       margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    .hero-quote {
-      font-size: 16px;
+    .hero-subtitle strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s var(--ease-out-expo);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--lane-1) 0%, var(--lane-2) 100%);
+      color: white;
+      box-shadow: 0 4px 20px rgba(var(--lane-2-rgb), 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(var(--lane-2-rgb), 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-active);
+      background: var(--bg-tertiary);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+    }
+
+    .scroll-indicator span {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       color: var(--text-muted);
-      font-style: italic;
-      padding: 20px 32px;
-      border-left: 3px solid var(--purple);
-      background: var(--surface);
-      border-radius: 0 12px 12px 0;
-      max-width: 500px;
+      text-transform: uppercase;
     }
 
-    /* 3-Lane Visualization */
-    .lanes-section {
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--text-muted) 0%, transparent 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--text-primary);
+      animation: scroll-down 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-down {
+      0% { top: -50%; }
+      100% { top: 150%; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PHILOSOPHY SECTION
+    ══════════════════════════════════════════════════════════ */
+    .philosophy {
+      padding: 120px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .philosophy-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .philosophy-quote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      color: var(--text-primary);
+      position: relative;
+    }
+
+    .philosophy-quote::before {
+      content: '"';
+      position: absolute;
+      top: -40px;
+      left: -20px;
+      font-size: 120px;
+      color: var(--accent);
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .philosophy-quote span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--lane-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .philosophy-author {
+      margin-top: 32px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       3-LANE CARDS
+    ══════════════════════════════════════════════════════════ */
+    .lanes {
       padding: 80px 24px 120px;
+      position: relative;
+      z-index: 1;
     }
 
     .section-header {
-      text-align: center;
       max-width: 600px;
       margin: 0 auto 80px;
+      text-align: center;
     }
 
     .section-label {
-      display: inline-block;
-      padding: 6px 14px;
-      background: var(--surface);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--lane2);
-      letter-spacing: 0.1em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .section-title {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
     }
 
     .section-desc {
-      font-size: 17px;
+      font-size: 18px;
       color: var(--text-secondary);
+      line-height: 1.7;
     }
 
-    /* Lane Cards */
     .lanes-grid {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
-    @media (max-width: 900px) {
-      .lanes-grid { grid-template-columns: 1fr; }
+    @media (max-width: 1024px) {
+      .lanes-grid { grid-template-columns: 1fr; max-width: 500px; }
     }
 
     .lane-card {
-      background: var(--surface);
+      position: relative;
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 40px 32px;
-      position: relative;
+      padding: 40px;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
-      color: var(--text);
-      display: block;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.5s var(--ease-out-expo);
     }
 
     .lane-card::before {
@@ -234,52 +476,85 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.4s;
     }
 
-    .lane-card.lane-1::before { background: linear-gradient(90deg, var(--lane1), var(--lane1-glow)); }
-    .lane-card.lane-2::before { background: linear-gradient(90deg, var(--lane2), var(--lane2-glow)); }
-    .lane-card.lane-3::before { background: linear-gradient(90deg, var(--lane3), var(--lane3-glow)); }
+    .lane-card:hover::before { opacity: 1; }
+
+    .lane-card.lane-1::before { background: linear-gradient(90deg, var(--lane-1), rgba(var(--lane-1-rgb), 0.3)); }
+    .lane-card.lane-2::before { background: linear-gradient(90deg, var(--lane-2), rgba(var(--lane-2-rgb), 0.3)); }
+    .lane-card.lane-3::before { background: linear-gradient(90deg, var(--lane-3), rgba(var(--lane-3-rgb), 0.3)); }
 
     .lane-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(255,255,255,0.15);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      border-color: var(--border-active);
     }
 
-    .lane-card.lane-1:hover { box-shadow: 0 24px 60px var(--lane1-glow); }
-    .lane-card.lane-2:hover { box-shadow: 0 24px 60px var(--lane2-glow); }
-    .lane-card.lane-3:hover { box-shadow: 0 24px 60px var(--lane3-glow); }
+    .lane-card.lane-1:hover { box-shadow: 0 20px 60px rgba(var(--lane-1-rgb), 0.15); }
+    .lane-card.lane-2:hover { box-shadow: 0 20px 60px rgba(var(--lane-2-rgb), 0.15); }
+    .lane-card.lane-3:hover { box-shadow: 0 20px 60px rgba(var(--lane-3-rgb), 0.15); }
 
-    .lane-num {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 48px;
-      font-weight: 900;
-      margin-bottom: 16px;
-      opacity: 0.2;
+    .lane-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 32px;
     }
 
-    .lane-card.lane-1 .lane-num { color: var(--lane1); }
-    .lane-card.lane-2 .lane-num { color: var(--lane2); }
-    .lane-card.lane-3 .lane-num { color: var(--lane3); }
+    .lane-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      position: relative;
+    }
+
+    .lane-1 .lane-icon { background: rgba(var(--lane-1-rgb), 0.1); }
+    .lane-2 .lane-icon { background: rgba(var(--lane-2-rgb), 0.1); }
+    .lane-3 .lane-icon { background: rgba(var(--lane-3-rgb), 0.1); }
+
+    .lane-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1;
+      opacity: 0.08;
+    }
+
+    .lane-1 .lane-number { color: var(--lane-1); }
+    .lane-2 .lane-number { color: var(--lane-2); }
+    .lane-3 .lane-number { color: var(--lane-3); }
+
+    .lane-content { flex: 1; }
 
     .lane-title {
-      font-size: 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
       font-weight: 700;
+      letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
 
     .lane-subtitle {
       font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
+      font-weight: 500;
+      margin-bottom: 20px;
     }
+
+    .lane-1 .lane-subtitle { color: var(--lane-1); }
+    .lane-2 .lane-subtitle { color: var(--lane-2); }
+    .lane-3 .lane-subtitle { color: var(--lane-3); }
 
     .lane-desc {
       font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .lane-features {
@@ -292,26 +567,25 @@
     .lane-feature {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-size: 14px;
       color: var(--text-secondary);
     }
 
-    .lane-feature::before {
-      content: '✓';
+    .lane-feature-icon {
       width: 20px;
       height: 20px;
-      border-radius: 50%;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 10px;
+      flex-shrink: 0;
     }
 
-    .lane-card.lane-1 .lane-feature::before { background: rgba(16,185,129,0.2); color: var(--lane1); }
-    .lane-card.lane-2 .lane-feature::before { background: rgba(59,130,246,0.2); color: var(--lane2); }
-    .lane-card.lane-3 .lane-feature::before { background: rgba(245,158,11,0.2); color: var(--lane3); }
+    .lane-1 .lane-feature-icon { background: rgba(var(--lane-1-rgb), 0.15); color: var(--lane-1); }
+    .lane-2 .lane-feature-icon { background: rgba(var(--lane-2-rgb), 0.15); color: var(--lane-2); }
+    .lane-3 .lane-feature-icon { background: rgba(var(--lane-3-rgb), 0.15); color: var(--lane-3); }
 
     .lane-cta {
       display: inline-flex;
@@ -319,169 +593,122 @@
       gap: 8px;
       font-size: 14px;
       font-weight: 600;
+      margin-top: auto;
+      transition: gap 0.3s var(--ease-out-expo);
     }
 
-    .lane-card.lane-1 .lane-cta { color: var(--lane1); }
-    .lane-card.lane-2 .lane-cta { color: var(--lane2); }
-    .lane-card.lane-3 .lane-cta { color: var(--lane3); }
+    .lane-card:hover .lane-cta { gap: 12px; }
 
-    /* Synergy Diagram */
-    .synergy-section {
-      padding: 80px 24px 120px;
-      background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.03) 50%, transparent 100%);
+    .lane-1 .lane-cta { color: var(--lane-1); }
+    .lane-2 .lane-cta { color: var(--lane-2); }
+    .lane-3 .lane-cta { color: var(--lane-3); }
+
+    /* ══════════════════════════════════════════════════════════
+       SYNERGY DIAGRAM - SVG Animation
+    ══════════════════════════════════════════════════════════ */
+    .synergy {
+      padding: 120px 24px;
+      background: var(--bg-secondary);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .synergy-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .synergy-visual {
-      max-width: 800px;
-      margin: 0 auto;
       position: relative;
-    }
-
-    .synergy-diagram {
       width: 100%;
-      aspect-ratio: 1;
-      position: relative;
+      max-width: 700px;
+      margin: 80px auto 0;
     }
 
-    .synergy-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background: var(--surface);
-      border: 2px solid var(--purple);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--purple);
-      text-align: center;
-      z-index: 10;
-      box-shadow: 0 0 60px rgba(139,92,246,0.3);
+    .synergy-svg {
+      width: 100%;
+      height: auto;
     }
 
     .synergy-node {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 16px;
-      transition: all 0.3s ease;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-out-expo);
     }
 
     .synergy-node:hover {
       transform: scale(1.05);
     }
 
-    .synergy-node.node-1 {
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-color: var(--lane1);
-    }
-
-    .synergy-node.node-2 {
-      bottom: 15%;
-      left: 10%;
-      border-color: var(--lane2);
-    }
-
-    .synergy-node.node-3 {
-      bottom: 15%;
-      right: 10%;
-      border-color: var(--lane3);
-    }
-
-    .synergy-node .node-icon {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .synergy-node .node-label {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .synergy-node.node-1 .node-label { color: var(--lane1); }
-    .synergy-node.node-2 .node-label { color: var(--lane2); }
-    .synergy-node.node-3 .node-label { color: var(--lane3); }
-
-    /* Animated Arrows */
-    .synergy-arrows {
-      position: absolute;
-      inset: 0;
-      z-index: 5;
-    }
-
-    .synergy-arrows svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .arrow-path {
+    .synergy-path {
       fill: none;
       stroke-width: 2;
       stroke-dasharray: 8 4;
-      animation: dash 20s linear infinite;
+      opacity: 0.6;
     }
 
-    .arrow-1 { stroke: var(--lane1); }
-    .arrow-2 { stroke: var(--lane2); }
-    .arrow-3 { stroke: var(--lane3); }
+    .synergy-path-1 { stroke: var(--lane-1); }
+    .synergy-path-2 { stroke: var(--lane-2); }
+    .synergy-path-3 { stroke: var(--lane-3); }
 
-    @keyframes dash {
-      to { stroke-dashoffset: -100; }
+    .synergy-particle {
+      fill: currentColor;
+      filter: drop-shadow(0 0 4px currentColor);
     }
 
     .synergy-labels {
-      max-width: 600px;
-      margin: 60px auto 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 32px;
+      margin-top: 60px;
       text-align: center;
     }
 
+    @media (max-width: 640px) {
+      .synergy-labels { grid-template-columns: 1fr; gap: 24px; }
+    }
+
     .synergy-label {
-      font-size: 13px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .synergy-label-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .synergy-label.label-1 .synergy-label-title { color: var(--lane-1); }
+    .synergy-label.label-2 .synergy-label-title { color: var(--lane-2); }
+    .synergy-label.label-3 .synergy-label-title { color: var(--lane-3); }
+
+    .synergy-label-desc {
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    .synergy-label strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .synergy-label.label-1 strong { color: var(--lane1); }
-    .synergy-label.label-2 strong { color: var(--lane2); }
-    .synergy-label.label-3 strong { color: var(--lane3); }
-
-    /* Meta Layer Section */
-    .meta-section {
-      padding: 80px 24px 120px;
+    /* ══════════════════════════════════════════════════════════
+       META LAYER SECTION
+    ══════════════════════════════════════════════════════════ */
+    .meta {
+      padding: 120px 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .meta-card {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      background: linear-gradient(145deg, rgba(139,92,246,0.1) 0%, rgba(59,130,246,0.05) 100%);
-      border: 1px solid rgba(139,92,246,0.3);
-      border-radius: 24px;
-      padding: 60px 48px;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.08) 0%, rgba(var(--lane-2-rgb), 0.04) 100%);
+      border: 1px solid rgba(var(--accent-rgb), 0.2);
+      border-radius: 32px;
+      padding: 80px 60px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -493,76 +720,129 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--lane1), var(--lane2), var(--lane3), var(--purple));
+      height: 2px;
+      background: linear-gradient(90deg, var(--lane-1), var(--lane-2), var(--lane-3), var(--accent));
     }
 
-    .meta-icon {
-      font-size: 48px;
-      margin-bottom: 24px;
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(var(--accent-rgb), 0.15);
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 32px;
     }
 
     .meta-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(24px, 5vw, 36px);
-      font-weight: 800;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--purple) 0%, var(--lane2) 100%);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--lane-2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .meta-subtitle {
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-
     .meta-quote {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text);
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 400;
+      color: var(--text-primary);
       line-height: 1.8;
       max-width: 700px;
-      margin: 0 auto 32px;
+      margin: 0 auto 40px;
     }
 
     .meta-quote strong {
-      color: var(--purple);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .meta-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .meta-level {
+      padding: 16px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .meta-level.active {
+      background: rgba(var(--accent-rgb), 0.15);
+      border-color: rgba(var(--accent-rgb), 0.3);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .meta-arrow {
+      color: var(--text-muted);
+      font-size: 20px;
     }
 
     .meta-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--purple) 0%, var(--lane2) 100%);
-      border-radius: 12px;
-      font-size: 14px;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--lane-2) 100%);
+      border-radius: 14px;
+      font-size: 16px;
       font-weight: 600;
       color: white;
       text-decoration: none;
-      transition: all 0.3s;
+      transition: all 0.4s var(--ease-out-expo);
     }
 
     .meta-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(139,92,246,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(var(--accent-rgb), 0.4);
     }
 
-    /* Footer */
+    @media (max-width: 640px) {
+      .meta-card { padding: 48px 24px; border-radius: 24px; }
+      .meta-diagram { gap: 12px; }
+      .meta-level { padding: 12px 16px; font-size: 12px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
     .footer {
       padding: 60px 24px;
-      text-align: center;
       border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .footer-logo {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 20px;
       font-weight: 700;
-      margin-bottom: 16px;
+      color: var(--text-primary);
     }
 
     .footer-copy {
@@ -570,203 +850,501 @@
       color: var(--text-muted);
     }
 
-    /* Responsive */
     @media (max-width: 640px) {
-      .hero { padding: 100px 16px 60px; }
-      .hero-quote { padding: 16px 20px; font-size: 14px; }
-      .lanes-section, .synergy-section, .meta-section { padding: 60px 16px 80px; }
-      .lane-card { padding: 32px 24px; }
-      .synergy-labels { grid-template-columns: 1fr; gap: 16px; }
-      .meta-card { padding: 40px 24px; }
-      .synergy-node { width: 100px; height: 100px; font-size: 10px; }
-      .synergy-node .node-icon { font-size: 20px; }
-      .synergy-center { width: 80px; height: 80px; font-size: 11px; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       REVEAL ANIMATIONS
+    ══════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
     }
   </style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
-  <div class="bg-glow glow-3"></div>
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Gradient Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 
   <!-- Header -->
   <header class="header">
     <div class="header-inner">
       <a href="../" class="logo">DONGSEON</a>
-      <a href="../" class="back-link">← Back to Studio</a>
+      <nav class="nav-links">
+        <a href="#lanes" class="nav-link">3-Lane Model</a>
+        <a href="#synergy" class="nav-link">Synergy</a>
+        <a href="../staff-office/" class="nav-cta">Staff Office</a>
+      </nav>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-badge">
-      <span>META LAYER</span>
-      Business Model
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      META LAYER BUSINESS MODEL
     </div>
 
-    <h1 class="hero-title">3-LANE STUDIO</h1>
+    <h1 class="hero-title">
+      <span class="hero-title-line">
+        <span class="hero-title-word">3-LANE</span>
+      </span>
+      <span class="hero-title-line">
+        <span class="hero-title-word">STUDIO</span>
+      </span>
+    </h1>
 
     <p class="hero-subtitle">
       납품 + 실험 + 용역<br>
       <strong>3개가 서로 먹여살리는 구조</strong>
     </p>
 
-    <blockquote class="hero-quote">
-      "플레이어를 넘어서, 판을 설계하는 자리로"
-    </blockquote>
+    <div class="hero-cta-group">
+      <a href="#lanes" class="btn btn-primary">
+        자세히 보기
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+      <a href="../staff-office/" class="btn btn-secondary">철학 문서</a>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <div class="philosophy-inner reveal">
+      <p class="philosophy-quote">
+        플레이어를 넘어서,<br>
+        <span>판을 설계하는 자리로</span>
+      </p>
+      <p class="philosophy-author">— Meta Layer Whitepaper</p>
+    </div>
   </section>
 
   <!-- 3-Lane Cards -->
-  <section class="lanes-section">
-    <div class="section-header">
-      <span class="section-label">Business Model</span>
+  <section class="lanes" id="lanes">
+    <div class="section-header reveal">
+      <span class="section-label">// BUSINESS_MODEL</span>
       <h2 class="section-title">3-Lane Architecture</h2>
       <p class="section-desc">
         각 Lane이 독립적으로 수익을 만들면서 서로를 강화합니다.
+        하나가 실패해도 다른 둘이 받쳐줍니다.
       </p>
     </div>
 
     <div class="lanes-grid">
-      <!-- Lane 1: 납품 -->
-      <a href="lane-1.html" class="lane-card lane-1">
-        <div class="lane-num">01</div>
-        <h3 class="lane-title">스튜디오 납품</h3>
-        <p class="lane-subtitle">진짜 가치, 장기 브랜드</p>
-        <p class="lane-desc">
-          실제 고객에게 웹사이트와 AI 시스템을 납품합니다.
-          이게 본업이고, 신뢰의 근거입니다.
-        </p>
-        <div class="lane-features">
-          <div class="lane-feature">웹사이트 제작</div>
-          <div class="lane-feature">AI 연동 (문의/예약/안내)</div>
-          <div class="lane-feature">업종별 패키지</div>
+      <!-- Lane 1 -->
+      <a href="lane-1.html" class="lane-card lane-1 reveal">
+        <div class="lane-header">
+          <div class="lane-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/>
+            </svg>
+          </div>
+          <span class="lane-number">01</span>
         </div>
-        <span class="lane-cta">자세히 보기 →</span>
+        <div class="lane-content">
+          <h3 class="lane-title">스튜디오 납품</h3>
+          <p class="lane-subtitle">진짜 가치 · 장기 브랜드</p>
+          <p class="lane-desc">
+            실제 고객에게 웹사이트와 AI 시스템을 납품합니다.
+            이게 본업이고, 신뢰의 근거입니다.
+          </p>
+          <div class="lane-features">
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              웹사이트 제작
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              AI 연동 (문의/예약/안내)
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              업종별 패키지
+            </div>
+          </div>
+          <span class="lane-cta">자세히 보기 →</span>
+        </div>
       </a>
 
-      <!-- Lane 2: 실험 -->
-      <a href="lane-2.html" class="lane-card lane-2">
-        <div class="lane-num">02</div>
-        <h3 class="lane-title">채널 실험</h3>
-        <p class="lane-subtitle">학습, 데이터 축적</p>
-        <p class="lane-desc">
-          쇼츠, 자동화, 크롤링을 직접 테스트합니다.
-          실패도 데이터, 성공하면 상품.
-        </p>
-        <div class="lane-features">
-          <div class="lane-feature">YouTube 쇼츠 자동화</div>
-          <div class="lane-feature">바이럴 실험</div>
-          <div class="lane-feature">워크플로우 검증</div>
+      <!-- Lane 2 -->
+      <a href="lane-2.html" class="lane-card lane-2 reveal">
+        <div class="lane-header">
+          <div class="lane-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0-6h18m-18 0v6m18-6v6"/>
+            </svg>
+          </div>
+          <span class="lane-number">02</span>
         </div>
-        <span class="lane-cta">자세히 보기 →</span>
+        <div class="lane-content">
+          <h3 class="lane-title">채널 실험</h3>
+          <p class="lane-subtitle">학습 · 데이터 축적</p>
+          <p class="lane-desc">
+            쇼츠, 자동화, 크롤링을 직접 테스트합니다.
+            실패해도 데이터, 성공하면 상품.
+          </p>
+          <div class="lane-features">
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              YouTube 쇼츠 자동화
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              바이럴 실험
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              워크플로우 검증
+            </div>
+          </div>
+          <span class="lane-cta">자세히 보기 →</span>
+        </div>
       </a>
 
-      <!-- Lane 3: 용역 -->
-      <a href="lane-3.html" class="lane-card lane-3">
-        <div class="lane-num">03</div>
-        <h3 class="lane-title">바이럴 용역</h3>
-        <p class="lane-subtitle">현금, 즉시 수익</p>
-        <p class="lane-desc">
-          "우리가 하는 거 그대로 해드립니다"
-          실험에서 검증된 걸 서비스로 판매합니다.
-        </p>
-        <div class="lane-features">
-          <div class="lane-feature">쇼츠 제작 대행</div>
-          <div class="lane-feature">바이럴 마케팅</div>
-          <div class="lane-feature">자동화 세팅</div>
+      <!-- Lane 3 -->
+      <a href="lane-3.html" class="lane-card lane-3 reveal">
+        <div class="lane-header">
+          <div class="lane-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <span class="lane-number">03</span>
         </div>
-        <span class="lane-cta">자세히 보기 →</span>
+        <div class="lane-content">
+          <h3 class="lane-title">바이럴 용역</h3>
+          <p class="lane-subtitle">현금 · 즉시 수익</p>
+          <p class="lane-desc">
+            "우리가 하는 거 그대로 해드립니다"
+            실험에서 검증된 걸 서비스로 판매합니다.
+          </p>
+          <div class="lane-features">
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              쇼츠 제작 대행
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              바이럴 마케팅
+            </div>
+            <div class="lane-feature">
+              <span class="lane-feature-icon">✓</span>
+              자동화 세팅
+            </div>
+          </div>
+          <span class="lane-cta">자세히 보기 →</span>
+        </div>
       </a>
     </div>
   </section>
 
   <!-- Synergy Diagram -->
-  <section class="synergy-section">
-    <div class="section-header">
-      <span class="section-label">Synergy</span>
-      <h2 class="section-title">서로 먹여살리는 구조</h2>
-      <p class="section-desc">
-        3개 Lane이 순환하며 각각을 강화합니다.
-      </p>
-    </div>
-
-    <div class="synergy-visual">
-      <div class="synergy-diagram">
-        <!-- Center -->
-        <div class="synergy-center">
-          DONGSEON<br>STUDIO
-        </div>
-
-        <!-- Nodes -->
-        <div class="synergy-node node-1">
-          <span class="node-icon">🏢</span>
-          <span class="node-label">Lane 1<br>납품</span>
-        </div>
-
-        <div class="synergy-node node-2">
-          <span class="node-icon">🧪</span>
-          <span class="node-label">Lane 2<br>실험</span>
-        </div>
-
-        <div class="synergy-node node-3">
-          <span class="node-icon">🚀</span>
-          <span class="node-label">Lane 3<br>용역</span>
-        </div>
-
-        <!-- Animated Arrows -->
-        <div class="synergy-arrows">
-          <svg viewBox="0 0 400 400">
-            <!-- Lane 2 → Lane 3 -->
-            <path class="arrow-path arrow-2" d="M 100 300 Q 200 350 300 300" />
-            <!-- Lane 3 → Lane 1 -->
-            <path class="arrow-path arrow-3" d="M 300 280 Q 350 150 200 80" />
-            <!-- Lane 1 → Lane 2 -->
-            <path class="arrow-path arrow-1" d="M 180 100 Q 50 150 100 280" />
-          </svg>
-        </div>
+  <section class="synergy" id="synergy">
+    <div class="synergy-inner">
+      <div class="section-header reveal">
+        <span class="section-label">// SYNERGY_FLOW</span>
+        <h2 class="section-title">서로 먹여살리는 구조</h2>
+        <p class="section-desc">
+          3개 Lane이 순환하며 각각을 강화합니다.
+        </p>
       </div>
 
-      <div class="synergy-labels">
+      <div class="synergy-visual reveal">
+        <svg class="synergy-svg" viewBox="0 0 500 400" fill="none">
+          <!-- Connection Paths -->
+          <path class="synergy-path synergy-path-1" d="M 250 80 Q 350 150 350 200 Q 350 280 280 320" id="path1"/>
+          <path class="synergy-path synergy-path-2" d="M 220 320 Q 150 280 150 200 Q 150 150 250 80" id="path2"/>
+          <path class="synergy-path synergy-path-3" d="M 150 260 Q 200 340 300 340 Q 380 340 350 260" id="path3"/>
+
+          <!-- Animated Particles -->
+          <circle class="synergy-particle" r="4" fill="var(--lane-1)">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#path1"/>
+            </animateMotion>
+          </circle>
+          <circle class="synergy-particle" r="4" fill="var(--lane-2)">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#path2"/>
+            </animateMotion>
+          </circle>
+          <circle class="synergy-particle" r="4" fill="var(--lane-3)">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#path3"/>
+            </animateMotion>
+          </circle>
+
+          <!-- Center Node -->
+          <circle cx="250" cy="200" r="50" fill="var(--bg-tertiary)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="250" y="195" text-anchor="middle" fill="var(--text-primary)" font-family="Space Grotesk" font-size="12" font-weight="600">DONGSEON</text>
+          <text x="250" y="212" text-anchor="middle" fill="var(--text-tertiary)" font-family="Space Grotesk" font-size="10">STUDIO</text>
+
+          <!-- Lane 1 Node (Top) -->
+          <g class="synergy-node" transform="translate(250, 50)">
+            <rect x="-50" y="-25" width="100" height="50" rx="12" fill="var(--bg-tertiary)" stroke="var(--lane-1)" stroke-width="2"/>
+            <text x="0" y="-5" text-anchor="middle" fill="var(--lane-1)" font-family="JetBrains Mono" font-size="10" font-weight="600">LANE 01</text>
+            <text x="0" y="12" text-anchor="middle" fill="var(--text-secondary)" font-family="Inter" font-size="11">납품</text>
+          </g>
+
+          <!-- Lane 2 Node (Bottom Left) -->
+          <g class="synergy-node" transform="translate(120, 320)">
+            <rect x="-50" y="-25" width="100" height="50" rx="12" fill="var(--bg-tertiary)" stroke="var(--lane-2)" stroke-width="2"/>
+            <text x="0" y="-5" text-anchor="middle" fill="var(--lane-2)" font-family="JetBrains Mono" font-size="10" font-weight="600">LANE 02</text>
+            <text x="0" y="12" text-anchor="middle" fill="var(--text-secondary)" font-family="Inter" font-size="11">실험</text>
+          </g>
+
+          <!-- Lane 3 Node (Bottom Right) -->
+          <g class="synergy-node" transform="translate(380, 320)">
+            <rect x="-50" y="-25" width="100" height="50" rx="12" fill="var(--bg-tertiary)" stroke="var(--lane-3)" stroke-width="2"/>
+            <text x="0" y="-5" text-anchor="middle" fill="var(--lane-3)" font-family="JetBrains Mono" font-size="10" font-weight="600">LANE 03</text>
+            <text x="0" y="12" text-anchor="middle" fill="var(--text-secondary)" font-family="Inter" font-size="11">용역</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="synergy-labels reveal">
         <div class="synergy-label label-2">
-          <strong>Lane 2 → Lane 3</strong>
-          실험에서 삽질한 거<br>→ 용역으로 팔기
+          <div class="synergy-label-title">LANE 2 → LANE 3</div>
+          <p class="synergy-label-desc">실험에서 삽질한 거<br>→ 용역으로 상품화</p>
         </div>
         <div class="synergy-label label-3">
-          <strong>Lane 3 → Lane 1</strong>
-          용역에서 번 돈<br>→ 납품 투자
+          <div class="synergy-label-title">LANE 3 → LANE 1</div>
+          <p class="synergy-label-desc">용역에서 번 돈<br>→ 납품 사업 투자</p>
         </div>
         <div class="synergy-label label-1">
-          <strong>Lane 1 → Lane 2</strong>
-          납품 사례<br>→ 콘텐츠 소재
+          <div class="synergy-label-title">LANE 1 → LANE 2</div>
+          <p class="synergy-label-desc">납품 사례<br>→ 콘텐츠 소재</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Meta Layer -->
-  <section class="meta-section">
-    <div class="meta-card">
-      <div class="meta-icon">🎯</div>
-      <h2 class="meta-title">META LAYER</h2>
-      <p class="meta-subtitle">플레이어를 넘어서, 판을 설계하는 자리</p>
-
+  <section class="meta">
+    <div class="meta-card reveal">
+      <span class="meta-badge">META LAYER</span>
+      <h2 class="meta-title">플레이어를 넘어서</h2>
       <p class="meta-quote">
         우리는 <strong>"AI로 돈 벌고 싶은 사람들"</strong>을 상대로<br>
         그 판을 직접 굴리면서,<br>
         동시에 그 판을 설계해서 파는 위치로 올라간다.
       </p>
 
+      <div class="meta-diagram">
+        <div class="meta-level">플레이어</div>
+        <span class="meta-arrow">→</span>
+        <div class="meta-level">운영자</div>
+        <span class="meta-arrow">→</span>
+        <div class="meta-level active">판 설계자</div>
+      </div>
+
       <a href="../staff-office/" class="meta-cta">
-        📋 철학 문서 보기 →
+        철학 문서 보기
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-logo">DONGSEON</div>
-    <p class="footer-copy">3-Lane Digital Studio | DTSLIB Group © 2026</p>
+    <div class="footer-inner">
+      <div class="footer-logo">DONGSEON</div>
+      <p class="footer-copy">3-Lane Digital Studio · DTSLIB Group © 2026</p>
+    </div>
   </footer>
+
+  <!-- GSAP Animations -->
+  <script>
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Animations
+    const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+    heroTl
+      .to('.hero-eyebrow', { opacity: 1, y: 0, duration: 1 }, 0.3)
+      .to('.hero-title', { opacity: 1, duration: 0.1 }, 0.5)
+      .from('.hero-title-word', {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.1
+      }, 0.5)
+      .to('.hero-subtitle', { opacity: 1, y: 0, duration: 1 }, 0.9)
+      .to('.hero-cta-group', { opacity: 1, y: 0, duration: 1 }, 1.1)
+      .to('.scroll-indicator', { opacity: 1, duration: 1 }, 1.5);
+
+    // Orb floating animation
+    gsap.to('.orb-1', {
+      x: 50, y: -30,
+      duration: 8,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    gsap.to('.orb-2', {
+      x: -40, y: 40,
+      duration: 10,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    gsap.to('.orb-3', {
+      x: 30, y: -50,
+      duration: 12,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // Scroll-triggered reveals
+    gsap.utils.toArray('.reveal').forEach(elem => {
+      gsap.to(elem, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: elem,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+
+    // Lane cards stagger
+    gsap.utils.toArray('.lane-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.lanes-grid',
+          start: 'top 80%'
+        }
+      });
+    });
+
+    // Particle Canvas
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const particleCount = 50;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      // Draw connections
+      particles.forEach((p1, i) => {
+        particles.slice(i + 1).forEach(p2 => {
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - distance / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: { y: target, offsetY: 80 },
+            ease: 'power3.inOut'
+          });
+        }
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </body>
 </html>
