@@ -643,19 +643,22 @@
         viewer.innerHTML = '<div class="loading">Loading</div>';
 
         try {
-          const url = `${BASE_URL}/${repo}/${BRANCH}/${actualFile}`;
-          const response = await fetch(url);
+          // Cache busting to avoid GitHub raw cache (5 min)
+          const cacheBuster = Date.now();
+          const url = `${BASE_URL}/${repo}/${BRANCH}/${actualFile}?t=${cacheBuster}`;
+          const response = await fetch(url, { cache: 'no-store' });
 
-          if (!response.ok) throw new Error('Failed to fetch');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
           const markdown = await response.text();
           const html = marked.parse(markdown);
           viewer.innerHTML = `<div class="markdown-body">${html}</div>`;
         } catch (error) {
+          console.error('Fetch error:', error);
           viewer.innerHTML = `
             <div class="welcome-message">
               <h2>❌ 로드 실패</h2>
-              <p>문서를 불러올 수 없습니다</p>
+              <p>문서를 불러올 수 없습니다: ${error.message}</p>
               <p style="margin-top:12px;font-size:11px;color:var(--text-muted);">
                 <a href="https://github.com/dtslib1979/${repo}/blob/${BRANCH}/${actualFile}" target="_blank" style="color:var(--cyber-blue);">
                   GitHub에서 직접 열기 →
