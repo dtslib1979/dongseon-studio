@@ -42,11 +42,6 @@
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    html, body {
-      min-height: 100%;
-      background: var(--bg);
-    }
-
     html {
       scroll-behavior: smooth;
       scrollbar-width: thin;
@@ -54,11 +49,12 @@
     }
 
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 
     body {
       font-family: 'Noto Sans KR', 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
