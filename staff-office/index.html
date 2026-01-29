@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Staff Office | DONGSEON Studio</title>
+  <title>스태프 오피스 | 동선 스튜디오</title>
   <meta name="theme-color" content="#000000">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -41,7 +41,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 2000;
+      z-index: 9999;
       background: linear-gradient(transparent 0%, rgba(0,255,65,0.02) 50%, transparent 100%);
       background-size: 100% 4px;
     }
@@ -68,9 +68,11 @@
       }
       .sidebar {
         width: 100%;
-        max-height: 50vh;
+        min-height: 100vh;
         border-right: none;
-        border-bottom: 1px solid var(--border-matrix);
+      }
+      .content-area {
+        display: none;
       }
     }
 
@@ -119,18 +121,45 @@
       50% { opacity: 0.4; }
     }
 
-    /* Category */
+    /* Category - Accordion */
     .category {
-      margin-bottom: 24px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border-matrix);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
     .category-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
-      padding-bottom: 6px;
+      padding: 12px;
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .category-header:hover {
+      background: rgba(0,60,0,0.8);
+    }
+
+    .category-header:active {
+      background: rgba(0,80,0,0.8);
+    }
+
+    .category.open .category-header {
       border-bottom: 1px solid var(--border-matrix);
+    }
+
+    .category-arrow {
+      font-size: 10px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+    }
+
+    .category.open .category-arrow {
+      transform: rotate(90deg);
     }
 
     .category-icon {
@@ -143,21 +172,35 @@
       font-weight: 600;
       color: var(--cyber-blue);
       letter-spacing: 1px;
+      flex: 1;
     }
 
     .category-count {
       font-size: 10px;
       color: var(--text-muted);
-      margin-left: auto;
+      background: var(--matrix-dark);
+      padding: 2px 6px;
+      border-radius: 10px;
     }
 
     /* Document Links */
     .doc-list {
       list-style: none;
+      display: none;
+      padding: 8px;
+      background: var(--bg-panel);
+    }
+
+    .category.open .doc-list {
+      display: block;
     }
 
     .doc-item {
       margin-bottom: 4px;
+    }
+
+    .doc-item:last-child {
+      margin-bottom: 0;
     }
 
     .doc-link {
@@ -212,7 +255,7 @@
       color: var(--cyber-blue);
     }
 
-    /* Content Viewer */
+    /* Content Viewer (Desktop) */
     .content-area {
       flex: 1;
       display: flex;
@@ -276,6 +319,80 @@
       0%, 20% { content: '.'; }
       40% { content: '..'; }
       60%, 100% { content: '...'; }
+    }
+
+    /* Modal (Mobile Full Screen) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-black);
+      z-index: 1000;
+      flex-direction: column;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-matrix);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-matrix);
+      border-radius: 4px;
+      background: var(--bg-card);
+      color: var(--matrix-green);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--matrix-dark);
+      border-color: var(--matrix-green);
+    }
+
+    .modal-title-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      color: var(--cyber-blue);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-path {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .modal-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Markdown Styles */
@@ -396,7 +513,9 @@
       display: block;
       text-align: center;
       padding: 12px;
-      border-top: 1px solid var(--border-matrix);
+      margin-top: 12px;
+      border: 1px solid var(--border-matrix);
+      border-radius: 4px;
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 11px;
@@ -406,29 +525,43 @@
     .back-link:hover {
       color: var(--matrix-green);
       background: var(--bg-card);
+      border-color: var(--matrix-green);
     }
   </style>
 </head>
 <body>
   <div class="scanline"></div>
 
+  <!-- Mobile Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-header">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-title-wrap">
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-path" id="modal-path"></div>
+      </div>
+    </div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+
   <div class="main-container">
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="logo">DONGSEON STUDIO</div>
-        <h1>STAFF OFFICE</h1>
+        <div class="logo">동선 스튜디오</div>
+        <h1>스태프 오피스</h1>
         <div class="status">
           <span class="status-dot"></span>
-          <span>SYSTEM ACTIVE</span>
+          <span>시스템 활성</span>
         </div>
       </div>
 
-      <!-- 정관 / Constitution -->
+      <!-- 정관 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">📜</span>
-          <span class="category-title">CONSTITUTION</span>
+          <span class="category-title">정관</span>
           <span class="category-count">2</span>
         </div>
         <ul class="doc-list">
@@ -448,11 +581,12 @@
         </ul>
       </section>
 
-      <!-- 회의록 / Meetings -->
+      <!-- 회의록 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">📋</span>
-          <span class="category-title">MEETINGS</span>
+          <span class="category-title">회의록</span>
           <span class="category-count">2</span>
         </div>
         <ul class="doc-list">
@@ -473,11 +607,12 @@
         </ul>
       </section>
 
-      <!-- 백서 / Whitepaper -->
+      <!-- 백서 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">📄</span>
-          <span class="category-title">WHITEPAPER</span>
+          <span class="category-title">백서</span>
           <span class="category-count">2</span>
         </div>
         <ul class="doc-list">
@@ -497,11 +632,12 @@
         </ul>
       </section>
 
-      <!-- 방법론 / Methodology -->
+      <!-- 방법론 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">⚙️</span>
-          <span class="category-title">METHODOLOGY</span>
+          <span class="category-title">방법론</span>
           <span class="category-count">1</span>
         </div>
         <ul class="doc-list">
@@ -514,11 +650,12 @@
         </ul>
       </section>
 
-      <!-- 시스템 / System -->
+      <!-- 시스템 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">🤖</span>
-          <span class="category-title">SYSTEM</span>
+          <span class="category-title">시스템</span>
           <span class="category-count">1</span>
         </div>
         <ul class="doc-list">
@@ -531,11 +668,12 @@
         </ul>
       </section>
 
-      <!-- 전략 / Strategy -->
+      <!-- 전략 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">🎯</span>
-          <span class="category-title">STRATEGY</span>
+          <span class="category-title">전략</span>
           <span class="category-count">3</span>
         </div>
         <ul class="doc-list">
@@ -563,11 +701,12 @@
         </ul>
       </section>
 
-      <!-- 성과 / Performance -->
+      <!-- 성과 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">⚡</span>
-          <span class="category-title">PERFORMANCE</span>
+          <span class="category-title">성과</span>
           <span class="category-count">1</span>
         </div>
         <ul class="doc-list">
@@ -581,11 +720,12 @@
         </ul>
       </section>
 
-      <!-- 아키텍처 리포트 / Architecture Reports -->
+      <!-- 아키텍처 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">🏗️</span>
-          <span class="category-title">ARCHITECTURE</span>
+          <span class="category-title">아키텍처</span>
           <span class="category-count">1</span>
         </div>
         <ul class="doc-list">
@@ -599,11 +739,12 @@
         </ul>
       </section>
 
-      <!-- 조직도 / Organization -->
+      <!-- 조직도 -->
       <section class="category">
         <div class="category-header">
+          <span class="category-arrow">▶</span>
           <span class="category-icon">🏢</span>
-          <span class="category-title">ORGANIZATION</span>
+          <span class="category-title">조직도</span>
           <span class="category-count">1</span>
         </div>
         <ul class="doc-list">
@@ -616,10 +757,10 @@
         </ul>
       </section>
 
-      <a href="../" class="back-link">← BACK TO MAIN</a>
+      <a href="../" class="back-link">← 메인으로 돌아가기</a>
     </aside>
 
-    <!-- Content Area -->
+    <!-- Content Area (Desktop Only) -->
     <main class="content-area">
       <div class="content-header" id="content-header" style="display:none;">
         <div class="content-title" id="content-title"></div>
@@ -628,68 +769,105 @@
       <div class="content-viewer" id="content-viewer">
         <div class="welcome-message">
           <h2>📂 문서를 선택하세요</h2>
-          <p>왼쪽 목록에서 열람할 문서를 클릭하세요</p>
+          <p>카테고리를 눌러 펼친 후 문서를 클릭하세요</p>
         </div>
       </div>
     </main>
   </div>
 
   <script>
-    // jsDelivr CDN - faster, no 5min cache like raw.githubusercontent
     const BASE_URL = 'https://cdn.jsdelivr.net/gh/dtslib1979';
     const DEFAULT_REPO = 'dongseon-studio';
     const BRANCH = 'main';
 
+    // Desktop elements
     const viewer = document.getElementById('content-viewer');
     const header = document.getElementById('content-header');
     const titleEl = document.getElementById('content-title');
     const pathEl = document.getElementById('content-path');
 
-    // Get all doc links
+    // Modal elements
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalPath = document.getElementById('modal-path');
+    const modalContent = document.getElementById('modal-content');
+    const modalClose = document.getElementById('modal-close');
+
+    // Check if mobile
+    const isMobile = () => window.innerWidth <= 768;
+
+    // Close modal
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    // Accordion toggle
+    document.querySelectorAll('.category-header').forEach(h => {
+      h.addEventListener('click', () => {
+        h.parentElement.classList.toggle('open');
+      });
+    });
+
+    // Load document content
+    async function loadDocument(file, title, repo) {
+      const actualFile = file.startsWith('HQ:') ? file.replace('HQ:', '') : file;
+      const encodedFile = actualFile.split('/').map(encodeURIComponent).join('/');
+      const url = `${BASE_URL}/${repo}@${BRANCH}/${encodedFile}`;
+
+      try {
+        const response = await fetch(url, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const markdown = await response.text();
+        return marked.parse(markdown);
+      } catch (error) {
+        return `
+          <div class="welcome-message">
+            <h2>❌ 로드 실패</h2>
+            <p>문서를 불러올 수 없습니다: ${error.message}</p>
+            <p style="margin-top:12px;font-size:11px;color:var(--text-muted);">
+              <a href="https://github.com/dtslib1979/${repo}/blob/${BRANCH}/${actualFile}" target="_blank" style="color:var(--cyber-blue);">
+                GitHub에서 직접 보기 →
+              </a>
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // Document click handler
     document.querySelectorAll('.doc-link').forEach(link => {
-      link.addEventListener('click', async () => {
-        // Remove active class from all
-        document.querySelectorAll('.doc-link').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+      link.addEventListener('click', async (e) => {
+        e.stopPropagation();
 
         const file = link.dataset.file;
         const title = link.dataset.title;
         const repo = link.dataset.repo || DEFAULT_REPO;
-
-        // Handle HQ files
         const actualFile = file.startsWith('HQ:') ? file.replace('HQ:', '') : file;
 
-        // Show header
-        header.style.display = 'block';
-        titleEl.textContent = title;
-        pathEl.textContent = `${repo}/${actualFile}`;
+        // Remove active class from all
+        document.querySelectorAll('.doc-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
 
-        // Show loading
-        viewer.innerHTML = '<div class="loading">Loading</div>';
+        if (isMobile()) {
+          // Mobile: Open modal
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          modalTitle.textContent = title;
+          modalPath.textContent = `${repo}/${actualFile}`;
+          modalContent.innerHTML = '<div class="loading">로딩 중</div>';
 
-        try {
-          // jsDelivr format: /gh/user/repo@branch/file
-          const url = `${BASE_URL}/${repo}@${BRANCH}/${actualFile}`;
-          const response = await fetch(url, { cache: 'no-store' });
+          const html = await loadDocument(file, title, repo);
+          modalContent.innerHTML = `<div class="markdown-body">${html}</div>`;
+        } else {
+          // Desktop: Show in content area
+          header.style.display = 'block';
+          titleEl.textContent = title;
+          pathEl.textContent = `${repo}/${actualFile}`;
+          viewer.innerHTML = '<div class="loading">로딩 중</div>';
 
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-          const markdown = await response.text();
-          const html = marked.parse(markdown);
+          const html = await loadDocument(file, title, repo);
           viewer.innerHTML = `<div class="markdown-body">${html}</div>`;
-        } catch (error) {
-          console.error('Fetch error:', error);
-          viewer.innerHTML = `
-            <div class="welcome-message">
-              <h2>❌ 로드 실패</h2>
-              <p>문서를 불러올 수 없습니다: ${error.message}</p>
-              <p style="margin-top:12px;font-size:11px;color:var(--text-muted);">
-                <a href="https://github.com/dtslib1979/${repo}/blob/${BRANCH}/${actualFile}" target="_blank" style="color:var(--cyber-blue);">
-                  GitHub에서 직접 열기 →
-                </a>
-              </p>
-            </div>
-          `;
         }
       });
     });
