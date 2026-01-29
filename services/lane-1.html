@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lane 1: Studio Delivery | DONGSEON</title>
+  <title>Lane 1: 스튜디오 납품 | DONGSEON</title>
   <meta name="description" content="실제 고객에게 웹사이트와 AI 시스템을 납품합니다. 이게 본업이고, 신뢰의 근거입니다.">
   <meta name="theme-color" content="#0a0a0f">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -41,15 +41,14 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
+      line-height: 1.7;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Canvas */
     #particleCanvas {
       position: fixed;
       top: 0;
@@ -60,7 +59,6 @@
       pointer-events: none;
     }
 
-    /* Gradient Orbs */
     .orb {
       position: fixed;
       border-radius: 50%;
@@ -86,7 +84,6 @@
       left: -150px;
     }
 
-    /* Header */
     .header {
       position: fixed;
       top: 0;
@@ -137,7 +134,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -194,11 +190,11 @@
     }
 
     .hero-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(42px, 10vw, 80px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
       margin-bottom: 24px;
       opacity: 0;
     }
@@ -210,9 +206,19 @@
       background-clip: text;
     }
 
-    .hero-subtitle {
-      font-size: clamp(20px, 4vw, 28px);
+    .hero-title-en {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.4em;
       font-weight: 500;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      -webkit-text-fill-color: var(--text-tertiary);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 600;
       color: var(--accent);
       margin-bottom: 24px;
       opacity: 0;
@@ -220,7 +226,7 @@
     }
 
     .hero-desc {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--text-secondary);
       max-width: 600px;
       line-height: 1.8;
@@ -228,18 +234,16 @@
       transform: translateY(20px);
     }
 
-    /* Container */
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
       position: relative;
       z-index: 1;
     }
 
-    /* Section */
     .section {
-      padding: 120px 0;
+      padding: 100px 0;
     }
 
     .section-header {
@@ -264,17 +268,61 @@
     }
 
     .section-title {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
       font-size: clamp(28px, 5vw, 42px);
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
 
     .section-desc {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.7;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 32px 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-rgb), 0.3);
+    }
+
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-secondary);
     }
 
     /* Target Cards */
@@ -291,12 +339,13 @@
     .target-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 28px;
+      border-radius: 24px;
+      padding: 40px 32px;
       text-align: center;
-      transition: all 0.4s var(--ease-out-expo);
+      transition: all 0.5s var(--ease-out-expo);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .target-card::before {
@@ -305,106 +354,258 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), transparent);
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-out-expo);
+    }
+
+    .target-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), 0.1) 0%, transparent 70%);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.5s;
     }
 
     .target-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(var(--accent-rgb), 0.3);
-      box-shadow: 0 20px 60px rgba(var(--accent-rgb), 0.15);
+      transform: translateY(-12px) scale(1.02);
+      border-color: rgba(var(--accent-rgb), 0.4);
+      box-shadow: 0 30px 80px rgba(var(--accent-rgb), 0.2);
     }
 
-    .target-card:hover::before { opacity: 1; }
+    .target-card:hover::before { transform: scaleX(1); }
+    .target-card:hover::after { opacity: 1; }
 
     .target-icon {
-      width: 72px;
-      height: 72px;
+      width: 80px;
+      height: 80px;
       margin: 0 auto 24px;
       background: rgba(var(--accent-rgb), 0.1);
-      border-radius: 20px;
+      border: 2px solid rgba(var(--accent-rgb), 0.2);
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+
+    .target-card:hover .target-icon {
+      background: rgba(var(--accent-rgb), 0.2);
+      border-color: var(--accent);
+      transform: scale(1.1) rotate(5deg);
     }
 
     .target-icon svg {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       color: var(--accent);
     }
 
     .target-title {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
       font-size: 22px;
       font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .target-title-en {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
       margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .target-desc {
       font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Delivery Features */
-    .delivery-list {
+    /* Delivery Flow Diagram */
+    .flow-section {
+      padding: 100px 0;
+    }
+
+    .flow-diagram {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 0;
+      position: relative;
     }
 
-    .delivery-item {
+    .flow-line {
+      position: absolute;
+      left: 40px;
+      top: 80px;
+      bottom: 80px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), rgba(var(--accent-rgb), 0.1));
+    }
+
+    @media (max-width: 640px) {
+      .flow-line { left: 24px; }
+    }
+
+    .flow-item {
       display: flex;
-      gap: 20px;
-      padding: 28px;
+      gap: 32px;
+      padding: 32px 0;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    @media (max-width: 640px) {
+      .flow-item { gap: 20px; }
+    }
+
+    .flow-num {
+      width: 80px;
+      height: 80px;
       background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.3);
       transition: all 0.4s var(--ease-out-expo);
     }
 
-    .delivery-item:hover {
+    @media (max-width: 640px) {
+      .flow-num { width: 48px; height: 48px; font-size: 16px; }
+    }
+
+    .flow-item:hover .flow-num {
+      transform: scale(1.15);
+      box-shadow: 0 0 50px rgba(var(--accent-rgb), 0.5);
+    }
+
+    .flow-content {
+      flex: 1;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+
+    .flow-item:hover .flow-content {
       border-color: rgba(var(--accent-rgb), 0.3);
       transform: translateX(8px);
     }
 
-    .delivery-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 600;
+    .flow-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .flow-title-en {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
       color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .flow-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Value Proposition */
+    .value-section {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+      margin: 0 -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .value-grid { grid-template-columns: 1fr; }
+    }
+
+    .value-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+
+    .value-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      transform: translateY(-4px);
+    }
+
+    .value-icon {
+      width: 48px;
+      height: 48px;
       background: rgba(var(--accent-rgb), 0.1);
-      width: 40px;
-      height: 40px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      margin-bottom: 20px;
     }
 
-    .delivery-content h4 {
-      font-family: 'Space Grotesk', sans-serif;
+    .value-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .value-title {
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
-    .delivery-content p {
-      font-size: 15px;
+    .value-desc {
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
     /* Role Box */
     .role-box {
-      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.1) 0%, rgba(var(--accent-rgb), 0.03) 100%);
-      border: 1px solid rgba(var(--accent-rgb), 0.2);
-      border-radius: 24px;
-      padding: 48px;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.15) 0%, rgba(var(--accent-rgb), 0.03) 100%);
+      border: 1px solid rgba(var(--accent-rgb), 0.3);
+      border-radius: 32px;
+      padding: 60px 48px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -416,13 +617,42 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+    }
+
+    .role-box::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.2) 0%, transparent 70%);
+      top: -150px;
+      right: -150px;
+      pointer-events: none;
+    }
+
+    .role-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: rgba(var(--accent-rgb), 0.2);
+      border: 2px solid rgba(var(--accent-rgb), 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .role-icon svg {
+      width: 40px;
+      height: 40px;
+      color: var(--accent);
     }
 
     .role-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 26px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 28px;
       font-weight: 700;
       color: var(--accent);
       margin-bottom: 20px;
@@ -431,21 +661,33 @@
     .role-desc {
       font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.8;
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .role-desc strong {
+      color: var(--text-primary);
+      font-weight: 600;
     }
 
     /* CTA */
     .cta-section {
       text-align: center;
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .cta-text {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
     }
 
     .cta-btn {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 20px 40px;
+      padding: 20px 48px;
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
       border-radius: 16px;
       font-size: 17px;
@@ -453,22 +695,34 @@
       color: white;
       text-decoration: none;
       transition: all 0.4s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
 
     .cta-btn:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 50px rgba(var(--accent-rgb), 0.4);
+      box-shadow: 0 20px 60px rgba(var(--accent-rgb), 0.5);
     }
 
-    .cta-btn svg {
-      transition: transform 0.3s;
+    .cta-btn:hover::before { opacity: 1; }
+
+    .cta-btn span, .cta-btn svg {
+      position: relative;
+      z-index: 1;
     }
 
-    .cta-btn:hover svg {
-      transform: translateX(4px);
-    }
+    .cta-btn svg { transition: transform 0.3s; }
+    .cta-btn:hover svg { transform: translateX(4px); }
 
-    /* Footer */
     .footer {
       padding: 40px 24px;
       border-top: 1px solid var(--border);
@@ -482,7 +736,6 @@
       color: var(--text-muted);
     }
 
-    /* Reveal Animation */
     .reveal {
       opacity: 0;
       transform: translateY(50px);
@@ -499,7 +752,7 @@
     <div class="header-inner">
       <a href="./" class="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        3-Lane Overview
+        3-Lane 개요
       </a>
       <span class="lane-badge">LANE 01</span>
     </div>
@@ -509,22 +762,48 @@
     <div class="hero-number">01</div>
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
-      STUDIO DELIVERY
+      핵심 사업 영역
     </div>
-    <h1 class="hero-title"><span>Studio Delivery</span></h1>
-    <p class="hero-subtitle">Real Value, Long-term Brand</p>
+    <h1 class="hero-title">
+      <span>스튜디오 납품</span>
+      <span class="hero-title-en">Studio Delivery</span>
+    </h1>
+    <p class="hero-subtitle">진짜 가치, 장기 브랜드</p>
     <p class="hero-desc">
-      Deliver websites and AI systems to real customers.<br>
-      This is the main business, and the source of trust.
+      실제 고객에게 웹사이트와 AI 시스템을 납품합니다.<br>
+      이게 본업이고, 동선 스튜디오 <strong>신뢰의 근거</strong>입니다.
     </p>
   </section>
 
   <div class="container">
+    <!-- Stats -->
+    <section class="stats-section reveal">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" data-target="100">0</div>
+          <div class="stat-label">고객 만족도 (%)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="5">0</div>
+          <div class="stat-label">납품 구성요소</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="3">0</div>
+          <div class="stat-label">타겟 업종</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="24">0</div>
+          <div class="stat-label">사후 지원 (시간)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Customers -->
     <section class="section">
       <div class="section-header reveal">
         <span class="section-label">// TARGET_CUSTOMERS</span>
-        <h2 class="section-title">Target Customers</h2>
-        <p class="section-desc">Focus on businesses that need digital transformation but lack technical capability.</p>
+        <h2 class="section-title">타겟 고객</h2>
+        <p class="section-desc">디지털 전환이 필요하지만 기술 역량이 부족한 사업체에 집중합니다.</p>
       </div>
 
       <div class="target-grid">
@@ -534,8 +813,9 @@
               <path d="M3 21h18M9 8h6M9 12h6M9 16h6M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/>
             </svg>
           </div>
-          <h3 class="target-title">Small Business</h3>
-          <p class="target-desc">Local shops, restaurants, cafes, hair salons</p>
+          <h3 class="target-title">소상공인</h3>
+          <div class="target-title-en">Small Business</div>
+          <p class="target-desc">동네 가게, 식당, 카페, 미용실 등<br>오프라인 매장을 온라인으로 확장</p>
         </div>
 
         <div class="target-card reveal">
@@ -544,8 +824,9 @@
               <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"/>
             </svg>
           </div>
-          <h3 class="target-title">Real Estate</h3>
-          <p class="target-desc">Agents, property offices</p>
+          <h3 class="target-title">부동산</h3>
+          <div class="target-title-en">Real Estate</div>
+          <p class="target-desc">공인중개사, 부동산 사무소<br>매물 소개와 고객 응대 자동화</p>
         </div>
 
         <div class="target-card reveal">
@@ -554,82 +835,152 @@
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
             </svg>
           </div>
-          <h3 class="target-title">Solopreneurs</h3>
-          <p class="target-desc">Freelancers, creators, consultants</p>
+          <h3 class="target-title">1인 사업자</h3>
+          <div class="target-title-en">Solopreneurs</div>
+          <p class="target-desc">프리랜서, 크리에이터, 컨설턴트<br>개인 브랜드 구축과 자동화</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- Delivery Flow -->
+    <section class="flow-section">
       <div class="section-header reveal">
         <span class="section-label">// DELIVERY_COMPONENTS</span>
-        <h2 class="section-title">Delivery Components</h2>
-        <p class="section-desc">Not pages. Systems. We design flow.</p>
+        <h2 class="section-title">납품 구성</h2>
+        <p class="section-desc">페이지가 아니라 시스템을 납품합니다. 동선을 설계합니다.</p>
       </div>
 
-      <div class="delivery-list">
-        <div class="delivery-item reveal">
-          <span class="delivery-num">01</span>
-          <div class="delivery-content">
-            <h4>Brand Narrative</h4>
-            <p>Define "what story does this business tell"</p>
+      <div class="flow-diagram">
+        <div class="flow-line"></div>
+
+        <div class="flow-item">
+          <div class="flow-num">01</div>
+          <div class="flow-content">
+            <h4 class="flow-title">브랜드 서사 구축</h4>
+            <div class="flow-title-en">Brand Narrative</div>
+            <p class="flow-desc">"이 가게는 어떤 이야기를 가진 곳인가"를 정의합니다. 단순한 업체 소개가 아니라 고객이 공감하는 스토리를 만듭니다.</p>
           </div>
         </div>
 
-        <div class="delivery-item reveal">
-          <span class="delivery-num">02</span>
-          <div class="delivery-content">
-            <h4>Behavior Flow Design</h4>
-            <p>Build structures where visitors naturally take the next action</p>
+        <div class="flow-item">
+          <div class="flow-num">02</div>
+          <div class="flow-content">
+            <h4 class="flow-title">행동 동선 설계</h4>
+            <div class="flow-title-en">Behavior Flow Design</div>
+            <p class="flow-desc">방문자가 자연스럽게 다음 행동으로 이어지는 구조를 만듭니다. 설득 없이도 움직이게 되는 선.</p>
           </div>
         </div>
 
-        <div class="delivery-item reveal">
-          <span class="delivery-num">03</span>
-          <div class="delivery-content">
-            <h4>Web Scene Production</h4>
-            <p>We create 'scenes', not pages. A path where people don't stop.</p>
+        <div class="flow-item">
+          <div class="flow-num">03</div>
+          <div class="flow-content">
+            <h4 class="flow-title">웹 장면 연출</h4>
+            <div class="flow-title-en">Web Scene Production</div>
+            <p class="flow-desc">페이지가 아니라 '장면'을 만듭니다. 사람이 멈추지 않는 길, 스크롤하면서 경험하는 시퀀스.</p>
           </div>
         </div>
 
-        <div class="delivery-item reveal">
-          <span class="delivery-num">04</span>
-          <div class="delivery-content">
-            <h4>AI Integration</h4>
-            <p>Automate inquiries, reservations, and guidance. Reduce human workload.</p>
+        <div class="flow-item">
+          <div class="flow-num">04</div>
+          <div class="flow-content">
+            <h4 class="flow-title">AI 연동</h4>
+            <div class="flow-title-en">AI Integration</div>
+            <p class="flow-desc">문의 응대, 예약, 안내를 자동화합니다. 사람이 해야 할 일을 줄이고, 24시간 응대가 가능해집니다.</p>
           </div>
         </div>
 
-        <div class="delivery-item reveal">
-          <span class="delivery-num">05</span>
-          <div class="delivery-content">
-            <h4>Operation Manual</h4>
-            <p>Provide guides so they can self-operate after delivery.</p>
+        <div class="flow-item">
+          <div class="flow-num">05</div>
+          <div class="flow-content">
+            <h4 class="flow-title">운영 매뉴얼</h4>
+            <div class="flow-title-en">Operation Manual</div>
+            <p class="flow-desc">납품 후에도 스스로 운영할 수 있도록 가이드를 제공합니다. 의존성 없이 자립할 수 있는 구조.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Value Proposition -->
+    <section class="value-section">
+      <div class="container">
+        <div class="section-header reveal" style="text-align: center;">
+          <span class="section-label">// VALUE_PROPOSITION</span>
+          <h2 class="section-title">우리가 다른 점</h2>
+        </div>
+
+        <div class="value-grid">
+          <div class="value-card reveal">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h4 class="value-title">검증된 방법론</h4>
+            <p class="value-desc">Lane 2에서 직접 실험하고 검증된 것만 납품합니다. 이론이 아니라 경험.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </div>
+            <h4 class="value-title">투명한 과정</h4>
+            <p class="value-desc">블랙박스 없이 모든 작업 과정을 공유합니다. 원하면 직접 할 수 있게 가르쳐드립니다.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h4 class="value-title">빠른 실행</h4>
+            <p class="value-desc">불필요한 회의 없이 바로 시작합니다. 필요한 건 결과물, 빠르게 전달합니다.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <h4 class="value-title">장기 관계</h4>
+            <p class="value-desc">1회성이 아닙니다. 납품 후에도 성장을 함께 합니다. 같이 크는 구조.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Role -->
     <section class="section">
       <div class="role-box reveal">
-        <h3 class="role-title">Lane 1's Role</h3>
+        <div class="role-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+          </svg>
+        </div>
+        <h3 class="role-title">Lane 1의 역할</h3>
         <p class="role-desc">
-          Delivery cases become content for Lane 2 & 3.<br>
-          Real customers build trust, and trust sells services.
+          납품 사례는 <strong>Lane 2, 3의 콘텐츠</strong>가 됩니다.<br>
+          실제 고객이 있어야 <strong>신뢰</strong>가 생기고,<br>
+          신뢰가 있어야 <strong>용역도 팝니다</strong>.
         </p>
       </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section">
+      <p class="cta-text">프로젝트 상담을 원하시면 Console에서 문의해주세요.</p>
       <a href="../console/" class="cta-btn">
-        View Console
+        <span>Console 바로가기</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </section>
   </div>
 
   <footer class="footer">
-    <p class="footer-text">DONGSEON Studio Lane 1 - Studio Delivery</p>
+    <p class="footer-text">DONGSEON Studio · Lane 1 스튜디오 납품</p>
   </footer>
 
   <script>
@@ -644,41 +995,50 @@
       .to('.hero-desc', { opacity: 1, y: 0, duration: 1 }, 1);
 
     // Orb animation
-    gsap.to('.orb-1', { x: 40, y: -30, duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    gsap.to('.orb-2', { x: -30, y: 40, duration: 12, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.orb-1', { x: 50, y: -40, duration: 12, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.orb-2', { x: -40, y: 50, duration: 15, repeat: -1, yoyo: true, ease: 'sine.inOut' });
 
     // Reveal animations
     gsap.utils.toArray('.reveal').forEach(elem => {
       gsap.to(elem, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
         scrollTrigger: { trigger: elem, start: 'top 85%' }
       });
     });
 
-    // Target cards stagger
+    // Stats counter
+    gsap.utils.toArray('.stat-value').forEach(stat => {
+      const target = parseInt(stat.dataset.target);
+      gsap.to(stat, {
+        innerHTML: target,
+        duration: 2,
+        ease: 'power2.out',
+        snap: { innerHTML: 1 },
+        scrollTrigger: { trigger: stat, start: 'top 80%' }
+      });
+    });
+
+    // Target cards
     gsap.utils.toArray('.target-card').forEach((card, i) => {
       gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        delay: i * 0.12,
-        ease: 'power3.out',
+        opacity: 1, y: 0, duration: 0.6, delay: i * 0.15, ease: 'power3.out',
         scrollTrigger: { trigger: '.target-grid', start: 'top 80%' }
       });
     });
 
-    // Delivery items stagger
-    gsap.utils.toArray('.delivery-item').forEach((item, i) => {
+    // Flow items
+    gsap.utils.toArray('.flow-item').forEach((item, i) => {
       gsap.to(item, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        delay: i * 0.1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.delivery-list', start: 'top 80%' }
+        opacity: 1, x: 0, duration: 0.8, delay: i * 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: '.flow-diagram', start: 'top 70%' }
+      });
+    });
+
+    // Value cards
+    gsap.utils.toArray('.value-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 0.6, delay: i * 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.value-grid', start: 'top 80%' }
       });
     });
 
@@ -694,14 +1054,14 @@
     window.addEventListener('resize', resizeCanvas);
 
     const particles = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.3 + 0.1
+        size: Math.random() * 2.5 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.4,
+        speedY: (Math.random() - 0.5) * 0.4,
+        opacity: Math.random() * 0.4 + 0.1
       });
     }
 
@@ -725,11 +1085,11 @@
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
+          if (dist < 150) {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(34, 197, 94, ${0.08 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(34, 197, 94, ${0.12 * (1 - dist / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
