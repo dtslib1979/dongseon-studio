@@ -662,7 +662,9 @@
 
         try {
           // jsDelivr format: /gh/user/repo@branch/file
-          const url = `${BASE_URL}/${repo}@${BRANCH}/${actualFile}`;
+          // URL encode the file path to handle Korean characters
+          const encodedFile = actualFile.split('/').map(encodeURIComponent).join('/');
+          const url = `${BASE_URL}/${repo}@${BRANCH}/${encodedFile}`;
           const response = await fetch(url, { cache: 'no-store' });
 
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
