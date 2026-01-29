@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lane 2: 채널 실험 | DONGSEON</title>
+  <meta name="theme-color" content="#030712">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #030712;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --lane2: #3b82f6;
+      --lane2-glow: rgba(59,130,246,0.4);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: var(--lane2);
+      border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.2;
+      top: -200px;
+      right: -200px;
+      z-index: -1;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(3,7,18,0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 20px;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--lane2); }
+
+    .lane-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 100px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--lane2);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 120px;
+      font-weight: 900;
+      color: var(--lane2);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -40px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--lane2);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--lane2);
+      border-radius: 2px;
+    }
+
+    .experiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .experiment-grid { grid-template-columns: 1fr; }
+    }
+
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .exp-card:hover {
+      border-color: rgba(59,130,246,0.3);
+      transform: translateY(-4px);
+    }
+
+    .exp-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.02) 100%);
+      border-color: rgba(59,130,246,0.2);
+    }
+
+    @media (max-width: 640px) {
+      .exp-card.featured { grid-column: span 1; }
+    }
+
+    .exp-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .exp-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .exp-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .exp-status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      background: rgba(59,130,246,0.15);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--lane2);
+    }
+
+    .philosophy-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .philosophy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .philosophy-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--lane2);
+      background: rgba(59,130,246,0.15);
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .philosophy-text {
+      flex: 1;
+    }
+
+    .philosophy-text h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .philosophy-text p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.05) 100%);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .highlight-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lane2);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--lane2);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--lane2-glow);
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 100px 16px 60px; }
+      .hero-num { font-size: 80px; margin-bottom: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-link">← 3-Lane Overview</a>
+      <span class="lane-badge">LANE 02</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-num">02</div>
+      <h1 class="hero-title">채널 실험</h1>
+      <p class="hero-subtitle">학습, 데이터 축적</p>
+      <p class="hero-desc">
+        쇼츠, 자동화, 크롤링을 직접 테스트합니다.
+        실패해도 데이터, 성공하면 상품이 됩니다.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">실험 영역</h2>
+      <div class="experiment-grid">
+        <div class="exp-card featured">
+          <div class="exp-icon">📹</div>
+          <h3 class="exp-title">YouTube 쇼츠 자동화</h3>
+          <p class="exp-desc">
+            AI로 콘텐츠 생성, 편집 자동화, 업로드까지.
+            조회수 구조를 몸으로 경험합니다.
+          </p>
+          <span class="exp-status">ACTIVE</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">🔄</div>
+          <h3 class="exp-title">크롤링/수집</h3>
+          <p class="exp-desc">데이터 수집과 가공 파이프라인 테스트</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">🤖</div>
+          <h3 class="exp-title">AI 워크플로우</h3>
+          <p class="exp-desc">LLM 활용 자동화 시나리오 검증</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">📊</div>
+          <h3 class="exp-title">바이럴 테스트</h3>
+          <p class="exp-desc">어떤 콘텐츠가 퍼지는지 실험</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">⚡</div>
+          <h3 class="exp-title">툴킷 개발</h3>
+          <p class="exp-desc">반복 작업을 줄이는 도구 제작</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">실험 철학</h2>
+      <div class="philosophy-box">
+        <div class="philosophy-item">
+          <span class="philosophy-num">01</span>
+          <div class="philosophy-text">
+            <h4>실패도 데이터다</h4>
+            <p>안 되는 걸 빨리 알면 그게 경쟁력이다.</p>
+          </div>
+        </div>
+        <div class="philosophy-item">
+          <span class="philosophy-num">02</span>
+          <div class="philosophy-text">
+            <h4>작게 빠르게</h4>
+            <p>큰 프로젝트 말고, 작은 실험을 많이 돌린다.</p>
+          </div>
+        </div>
+        <div class="philosophy-item">
+          <span class="philosophy-num">03</span>
+          <div class="philosophy-text">
+            <h4>기록한다</h4>
+            <p>모든 실험은 문서화해서 재현 가능하게.</p>
+          </div>
+        </div>
+        <div class="philosophy-item">
+          <span class="philosophy-num">04</span>
+          <div class="philosophy-text">
+            <h4>상품화 염두</h4>
+            <p>되는 건 바로 Lane 3으로 넘긴다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="highlight-box">
+        <h3>Lane 2의 역할</h3>
+        <p>
+          여기서 삽질한 게 Lane 3의 상품이 됩니다.<br>
+          "이거 해봤는데 이렇게 하면 됩니다"가 가치입니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <a href="../staff-office/" class="cta-btn">
+        📋 실험 기록 보기 →
+      </a>
+    </section>
+  </main>
+</body>
+</html>

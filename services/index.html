@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>3-Lane Studio | DONGSEON</title>
+  <meta name="description" content="동선 스튜디오 3-Lane 비즈니스 모델. 납품 + 실험 + 용역이 서로 먹여살리는 구조.">
+  <meta name="theme-color" content="#030712">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #030712;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --lane1: #10b981;
+      --lane1-glow: rgba(16,185,129,0.4);
+      --lane2: #3b82f6;
+      --lane2-glow: rgba(59,130,246,0.4);
+      --lane3: #f59e0b;
+      --lane3-glow: rgba(245,158,11,0.4);
+      --purple: #8b5cf6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background Effects */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: -1;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.3;
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .glow-1 { background: var(--lane1); top: -200px; left: -200px; }
+    .glow-2 { background: var(--lane2); top: 40%; right: -200px; animation-delay: -7s; }
+    .glow-3 { background: var(--lane3); bottom: -200px; left: 30%; animation-delay: -14s; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(3,7,18,0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 20px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 32px;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--lane1) 0%, var(--lane2) 50%, var(--lane3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 500;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .hero-quote {
+      font-size: 16px;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 20px 32px;
+      border-left: 3px solid var(--purple);
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      max-width: 500px;
+    }
+
+    /* 3-Lane Visualization */
+    .lanes-section {
+      padding: 80px 24px 120px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 80px;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--lane2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+    }
+
+    /* Lane Cards */
+    .lanes-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .lanes-grid { grid-template-columns: 1fr; }
+    }
+
+    .lane-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+
+    .lane-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .lane-card.lane-1::before { background: linear-gradient(90deg, var(--lane1), var(--lane1-glow)); }
+    .lane-card.lane-2::before { background: linear-gradient(90deg, var(--lane2), var(--lane2-glow)); }
+    .lane-card.lane-3::before { background: linear-gradient(90deg, var(--lane3), var(--lane3-glow)); }
+
+    .lane-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .lane-card.lane-1:hover { box-shadow: 0 24px 60px var(--lane1-glow); }
+    .lane-card.lane-2:hover { box-shadow: 0 24px 60px var(--lane2-glow); }
+    .lane-card.lane-3:hover { box-shadow: 0 24px 60px var(--lane3-glow); }
+
+    .lane-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      opacity: 0.2;
+    }
+
+    .lane-card.lane-1 .lane-num { color: var(--lane1); }
+    .lane-card.lane-2 .lane-num { color: var(--lane2); }
+    .lane-card.lane-3 .lane-num { color: var(--lane3); }
+
+    .lane-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .lane-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .lane-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .lane-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .lane-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .lane-feature::before {
+      content: '✓';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .lane-card.lane-1 .lane-feature::before { background: rgba(16,185,129,0.2); color: var(--lane1); }
+    .lane-card.lane-2 .lane-feature::before { background: rgba(59,130,246,0.2); color: var(--lane2); }
+    .lane-card.lane-3 .lane-feature::before { background: rgba(245,158,11,0.2); color: var(--lane3); }
+
+    .lane-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .lane-card.lane-1 .lane-cta { color: var(--lane1); }
+    .lane-card.lane-2 .lane-cta { color: var(--lane2); }
+    .lane-card.lane-3 .lane-cta { color: var(--lane3); }
+
+    /* Synergy Diagram */
+    .synergy-section {
+      padding: 80px 24px 120px;
+      background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.03) 50%, transparent 100%);
+    }
+
+    .synergy-visual {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .synergy-diagram {
+      width: 100%;
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .synergy-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: var(--surface);
+      border: 2px solid var(--purple);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--purple);
+      text-align: center;
+      z-index: 10;
+      box-shadow: 0 0 60px rgba(139,92,246,0.3);
+    }
+
+    .synergy-node {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .synergy-node:hover {
+      transform: scale(1.05);
+    }
+
+    .synergy-node.node-1 {
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-color: var(--lane1);
+    }
+
+    .synergy-node.node-2 {
+      bottom: 15%;
+      left: 10%;
+      border-color: var(--lane2);
+    }
+
+    .synergy-node.node-3 {
+      bottom: 15%;
+      right: 10%;
+      border-color: var(--lane3);
+    }
+
+    .synergy-node .node-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .synergy-node .node-label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .synergy-node.node-1 .node-label { color: var(--lane1); }
+    .synergy-node.node-2 .node-label { color: var(--lane2); }
+    .synergy-node.node-3 .node-label { color: var(--lane3); }
+
+    /* Animated Arrows */
+    .synergy-arrows {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+    }
+
+    .synergy-arrows svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .arrow-path {
+      fill: none;
+      stroke-width: 2;
+      stroke-dasharray: 8 4;
+      animation: dash 20s linear infinite;
+    }
+
+    .arrow-1 { stroke: var(--lane1); }
+    .arrow-2 { stroke: var(--lane2); }
+    .arrow-3 { stroke: var(--lane3); }
+
+    @keyframes dash {
+      to { stroke-dashoffset: -100; }
+    }
+
+    .synergy-labels {
+      max-width: 600px;
+      margin: 60px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .synergy-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .synergy-label strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .synergy-label.label-1 strong { color: var(--lane1); }
+    .synergy-label.label-2 strong { color: var(--lane2); }
+    .synergy-label.label-3 strong { color: var(--lane3); }
+
+    /* Meta Layer Section */
+    .meta-section {
+      padding: 80px 24px 120px;
+    }
+
+    .meta-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(139,92,246,0.1) 0%, rgba(59,130,246,0.05) 100%);
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 24px;
+      padding: 60px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .meta-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--lane1), var(--lane2), var(--lane3), var(--purple));
+    }
+
+    .meta-icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    .meta-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--lane2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .meta-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .meta-quote {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+
+    .meta-quote strong {
+      color: var(--purple);
+    }
+
+    .meta-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--lane2) 100%);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .meta-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(139,92,246,0.4);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero { padding: 100px 16px 60px; }
+      .hero-quote { padding: 16px 20px; font-size: 14px; }
+      .lanes-section, .synergy-section, .meta-section { padding: 60px 16px 80px; }
+      .lane-card { padding: 32px 24px; }
+      .synergy-labels { grid-template-columns: 1fr; gap: 16px; }
+      .meta-card { padding: 40px 24px; }
+      .synergy-node { width: 100px; height: 100px; font-size: 10px; }
+      .synergy-node .node-icon { font-size: 20px; }
+      .synergy-center { width: 80px; height: 80px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="../" class="logo">DONGSEON</a>
+      <a href="../" class="back-link">← Back to Studio</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>META LAYER</span>
+      Business Model
+    </div>
+
+    <h1 class="hero-title">3-LANE STUDIO</h1>
+
+    <p class="hero-subtitle">
+      납품 + 실험 + 용역<br>
+      <strong>3개가 서로 먹여살리는 구조</strong>
+    </p>
+
+    <blockquote class="hero-quote">
+      "플레이어를 넘어서, 판을 설계하는 자리로"
+    </blockquote>
+  </section>
+
+  <!-- 3-Lane Cards -->
+  <section class="lanes-section">
+    <div class="section-header">
+      <span class="section-label">Business Model</span>
+      <h2 class="section-title">3-Lane Architecture</h2>
+      <p class="section-desc">
+        각 Lane이 독립적으로 수익을 만들면서 서로를 강화합니다.
+      </p>
+    </div>
+
+    <div class="lanes-grid">
+      <!-- Lane 1: 납품 -->
+      <a href="lane-1.html" class="lane-card lane-1">
+        <div class="lane-num">01</div>
+        <h3 class="lane-title">스튜디오 납품</h3>
+        <p class="lane-subtitle">진짜 가치, 장기 브랜드</p>
+        <p class="lane-desc">
+          실제 고객에게 웹사이트와 AI 시스템을 납품합니다.
+          이게 본업이고, 신뢰의 근거입니다.
+        </p>
+        <div class="lane-features">
+          <div class="lane-feature">웹사이트 제작</div>
+          <div class="lane-feature">AI 연동 (문의/예약/안내)</div>
+          <div class="lane-feature">업종별 패키지</div>
+        </div>
+        <span class="lane-cta">자세히 보기 →</span>
+      </a>
+
+      <!-- Lane 2: 실험 -->
+      <a href="lane-2.html" class="lane-card lane-2">
+        <div class="lane-num">02</div>
+        <h3 class="lane-title">채널 실험</h3>
+        <p class="lane-subtitle">학습, 데이터 축적</p>
+        <p class="lane-desc">
+          쇼츠, 자동화, 크롤링을 직접 테스트합니다.
+          실패도 데이터, 성공하면 상품.
+        </p>
+        <div class="lane-features">
+          <div class="lane-feature">YouTube 쇼츠 자동화</div>
+          <div class="lane-feature">바이럴 실험</div>
+          <div class="lane-feature">워크플로우 검증</div>
+        </div>
+        <span class="lane-cta">자세히 보기 →</span>
+      </a>
+
+      <!-- Lane 3: 용역 -->
+      <a href="lane-3.html" class="lane-card lane-3">
+        <div class="lane-num">03</div>
+        <h3 class="lane-title">바이럴 용역</h3>
+        <p class="lane-subtitle">현금, 즉시 수익</p>
+        <p class="lane-desc">
+          "우리가 하는 거 그대로 해드립니다"
+          실험에서 검증된 걸 서비스로 판매합니다.
+        </p>
+        <div class="lane-features">
+          <div class="lane-feature">쇼츠 제작 대행</div>
+          <div class="lane-feature">바이럴 마케팅</div>
+          <div class="lane-feature">자동화 세팅</div>
+        </div>
+        <span class="lane-cta">자세히 보기 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Synergy Diagram -->
+  <section class="synergy-section">
+    <div class="section-header">
+      <span class="section-label">Synergy</span>
+      <h2 class="section-title">서로 먹여살리는 구조</h2>
+      <p class="section-desc">
+        3개 Lane이 순환하며 각각을 강화합니다.
+      </p>
+    </div>
+
+    <div class="synergy-visual">
+      <div class="synergy-diagram">
+        <!-- Center -->
+        <div class="synergy-center">
+          DONGSEON<br>STUDIO
+        </div>
+
+        <!-- Nodes -->
+        <div class="synergy-node node-1">
+          <span class="node-icon">🏢</span>
+          <span class="node-label">Lane 1<br>납품</span>
+        </div>
+
+        <div class="synergy-node node-2">
+          <span class="node-icon">🧪</span>
+          <span class="node-label">Lane 2<br>실험</span>
+        </div>
+
+        <div class="synergy-node node-3">
+          <span class="node-icon">🚀</span>
+          <span class="node-label">Lane 3<br>용역</span>
+        </div>
+
+        <!-- Animated Arrows -->
+        <div class="synergy-arrows">
+          <svg viewBox="0 0 400 400">
+            <!-- Lane 2 → Lane 3 -->
+            <path class="arrow-path arrow-2" d="M 100 300 Q 200 350 300 300" />
+            <!-- Lane 3 → Lane 1 -->
+            <path class="arrow-path arrow-3" d="M 300 280 Q 350 150 200 80" />
+            <!-- Lane 1 → Lane 2 -->
+            <path class="arrow-path arrow-1" d="M 180 100 Q 50 150 100 280" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="synergy-labels">
+        <div class="synergy-label label-2">
+          <strong>Lane 2 → Lane 3</strong>
+          실험에서 삽질한 거<br>→ 용역으로 팔기
+        </div>
+        <div class="synergy-label label-3">
+          <strong>Lane 3 → Lane 1</strong>
+          용역에서 번 돈<br>→ 납품 투자
+        </div>
+        <div class="synergy-label label-1">
+          <strong>Lane 1 → Lane 2</strong>
+          납품 사례<br>→ 콘텐츠 소재
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meta Layer -->
+  <section class="meta-section">
+    <div class="meta-card">
+      <div class="meta-icon">🎯</div>
+      <h2 class="meta-title">META LAYER</h2>
+      <p class="meta-subtitle">플레이어를 넘어서, 판을 설계하는 자리</p>
+
+      <p class="meta-quote">
+        우리는 <strong>"AI로 돈 벌고 싶은 사람들"</strong>을 상대로<br>
+        그 판을 직접 굴리면서,<br>
+        동시에 그 판을 설계해서 파는 위치로 올라간다.
+      </p>
+
+      <a href="../staff-office/" class="meta-cta">
+        📋 철학 문서 보기 →
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">DONGSEON</div>
+    <p class="footer-copy">3-Lane Digital Studio | DTSLIB Group © 2026</p>
+  </footer>
+</body>
+</html>

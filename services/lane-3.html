@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lane 3: 바이럴 용역 | DONGSEON</title>
+  <meta name="theme-color" content="#030712">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #030712;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --lane3: #f59e0b;
+      --lane3-glow: rgba(245,158,11,0.4);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: var(--lane3);
+      border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.2;
+      top: -200px;
+      right: -200px;
+      z-index: -1;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(3,7,18,0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 20px;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--lane3); }
+
+    .lane-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--lane3);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 120px;
+      font-weight: 900;
+      color: var(--lane3);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -40px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--lane3);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--lane3);
+      border-radius: 2px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(245,158,11,0.3);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .service-price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--lane3);
+    }
+
+    .diff-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .diff-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .diff-header span {
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .diff-header span:first-child {
+      background: rgba(255,255,255,0.03);
+      color: var(--text-muted);
+    }
+
+    .diff-header span:last-child {
+      background: rgba(245,158,11,0.1);
+      color: var(--lane3);
+    }
+
+    .diff-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+
+    .diff-row span {
+      padding: 14px 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .diff-row span:first-child {
+      color: var(--text-muted);
+    }
+
+    .diff-row span:last-child {
+      color: var(--text-secondary);
+      background: rgba(245,158,11,0.03);
+    }
+
+    .transparency-box {
+      background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(245,158,11,0.05) 100%);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .transparency-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lane3);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .transparency-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .transparency-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+    }
+
+    .transparency-item::before {
+      content: '✓';
+      width: 24px;
+      height: 24px;
+      background: rgba(245,158,11,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--lane3);
+      flex-shrink: 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(245,158,11,0.05) 100%);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .highlight-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lane3);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--lane3);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #030712;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--lane3-glow);
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 100px 16px 60px; }
+      .hero-num { font-size: 80px; margin-bottom: -20px; }
+      .diff-header span, .diff-row span { padding: 12px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-link">← 3-Lane Overview</a>
+      <span class="lane-badge">LANE 03</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-num">03</div>
+      <h1 class="hero-title">바이럴 용역</h1>
+      <p class="hero-subtitle">현금, 즉시 수익</p>
+      <p class="hero-desc">
+        "우리가 하는 거 그대로 해드립니다"<br>
+        Lane 2에서 검증된 것들을 서비스로 판매합니다.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">서비스 메뉴</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon">📹</div>
+          <h3 class="service-title">쇼츠 제작 대행</h3>
+          <p class="service-desc">우리가 실험한 자동화 파이프라인으로 쇼츠 콘텐츠 제작</p>
+          <span class="service-price">협의</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3 class="service-title">바이럴 마케팅</h3>
+          <p class="service-desc">실제로 퍼진 방법론 그대로 적용</p>
+          <span class="service-price">협의</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">자동화 세팅</h3>
+          <p class="service-desc">AI 워크플로우, 크롤링, 알림 시스템 구축</p>
+          <span class="service-price">협의</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3 class="service-title">채널 컨설팅</h3>
+          <p class="service-desc">우리가 삽질한 경험 기반 채널 전략 설계</p>
+          <span class="service-price">협의</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">일반 바이럴 업체와 다른 점</h2>
+      <div class="diff-box">
+        <div class="diff-header">
+          <span>일반 바이럴 업체</span>
+          <span>DONGSEON Lane 3</span>
+        </div>
+        <div class="diff-row">
+          <span>블랙박스</span>
+          <span>과정 전부 공개</span>
+        </div>
+        <div class="diff-row">
+          <span>결과만 보장</span>
+          <span>방법론 전수</span>
+        </div>
+        <div class="diff-row">
+          <span>1회성 의뢰</span>
+          <span>내재화 지원</span>
+        </div>
+        <div class="diff-row">
+          <span>검증 안 됨</span>
+          <span>Lane 2에서 검증</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="transparency-box">
+        <h3 class="transparency-title">🔓 투명 운영 원칙</h3>
+        <div class="transparency-list">
+          <div class="transparency-item">모든 작업 과정을 고객에게 공개합니다</div>
+          <div class="transparency-item">사용하는 도구와 방법론을 가르쳐드립니다</div>
+          <div class="transparency-item">결과뿐 아니라 과정 데이터도 제공합니다</div>
+          <div class="transparency-item">의뢰 후 스스로 할 수 있게 됩니다</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="highlight-box">
+        <h3>Lane 3의 역할</h3>
+        <p>
+          용역으로 번 돈이 Lane 1 투자로 갑니다.<br>
+          현금이 돌아야 장기 브랜드도 만들 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <a href="../console/" class="cta-btn">
+        💬 문의하기 →
+      </a>
+    </section>
+  </main>
+</body>
+</html>

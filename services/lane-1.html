@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lane 1: 스튜디오 납품 | DONGSEON</title>
+  <meta name="theme-color" content="#030712">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #030712;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --lane1: #10b981;
+      --lane1-glow: rgba(16,185,129,0.4);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: var(--lane1);
+      border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.2;
+      top: -200px;
+      right: -200px;
+      z-index: -1;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(3,7,18,0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 20px;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--lane1); }
+
+    .lane-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 100px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--lane1);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 120px;
+      font-weight: 900;
+      color: var(--lane1);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -40px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--lane1);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--lane1);
+      border-radius: 2px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .feature-check {
+      width: 24px;
+      height: 24px;
+      background: rgba(16,185,129,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--lane1);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .feature-content h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .highlight-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lane1);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--lane1);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--lane1-glow);
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 100px 16px 60px; }
+      .hero-num { font-size: 80px; margin-bottom: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-link">← 3-Lane Overview</a>
+      <span class="lane-badge">LANE 01</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-num">01</div>
+      <h1 class="hero-title">스튜디오 납품</h1>
+      <p class="hero-subtitle">진짜 가치, 장기 브랜드</p>
+      <p class="hero-desc">
+        실제 고객에게 웹사이트와 AI 시스템을 납품합니다.
+        이게 본업이고, 동선 스튜디오 신뢰의 근거입니다.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">타겟 고객</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏪</div>
+          <h3 class="card-title">소상공인</h3>
+          <p class="card-desc">동네 가게, 식당, 카페, 미용실</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏢</div>
+          <h3 class="card-title">부동산</h3>
+          <p class="card-desc">공인중개사, 부동산 사무소</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">👤</div>
+          <h3 class="card-title">1인 사업자</h3>
+          <p class="card-desc">프리랜서, 크리에이터, 컨설턴트</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">납품 구성</h2>
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feature-check">✓</div>
+          <div class="feature-content">
+            <h4>브랜드 서사 구축</h4>
+            <p>"이 가게는 어떤 이야기를 가진 곳인가"를 정의합니다.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">✓</div>
+          <div class="feature-content">
+            <h4>행동 동선 설계</h4>
+            <p>방문자가 자연스럽게 다음 행동으로 이어지는 구조를 만듭니다.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">✓</div>
+          <div class="feature-content">
+            <h4>웹 장면 연출</h4>
+            <p>페이지가 아니라 '장면'을 만듭니다. 사람이 멈추지 않는 길.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">✓</div>
+          <div class="feature-content">
+            <h4>AI 연동</h4>
+            <p>문의 응대, 예약, 안내를 자동화합니다. 사람이 할 일을 줄입니다.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-check">✓</div>
+          <div class="feature-content">
+            <h4>운영 매뉴얼</h4>
+            <p>납품 후에도 스스로 운영할 수 있도록 가이드를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="highlight-box">
+        <h3>Lane 1의 역할</h3>
+        <p>
+          납품 사례는 Lane 2, 3의 콘텐츠가 됩니다.<br>
+          실제 고객이 있어야 신뢰가 생기고, 신뢰가 있어야 용역도 팝니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <a href="../console/" class="cta-btn">
+        🏢 Console에서 자세히 보기 →
+      </a>
+    </section>
+  </main>
+</body>
+</html>
