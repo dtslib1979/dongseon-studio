@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Specs | 大提學</title>
+  <meta name="description" content="大提學 시스템 문서. 정관, 비즈니스 모델, 프로토콜.">
+  <meta name="theme-color" content="#0F0F0F">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --crimson: #8B0000;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .header-back {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .header-back:hover { color: var(--gold); }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(60px + var(--safe-bottom));
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+    }
+
+    .hero-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .hero-version {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 6px 16px;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Doc List */
+    .doc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .doc-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .doc-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(212,175,55,0.4);
+      transform: translateX(4px);
+    }
+
+    .doc-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .doc-icon.gold { background: rgba(212,175,55,0.15); }
+    .doc-icon.green { background: rgba(16,185,129,0.15); }
+    .doc-icon.blue { background: rgba(59,130,246,0.15); }
+    .doc-icon.crimson { background: rgba(139,0,0,0.15); }
+
+    .doc-content { flex: 1; }
+
+    .doc-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .doc-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .doc-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .doc-badge.version {
+      background: rgba(212,175,55,0.1);
+      color: var(--gold);
+    }
+
+    .doc-badge.md {
+      background: rgba(59,130,246,0.1);
+      color: var(--blue);
+    }
+
+    .doc-badge.json {
+      background: rgba(16,185,129,0.1);
+      color: var(--green);
+    }
+
+    .doc-arrow {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    /* Summary Box */
+    .summary-box {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .summary-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .summary-item {
+      padding: 16px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .summary-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Quote */
+    .quote-box {
+      margin-top: 32px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .quote-text strong { color: var(--gold); }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-link:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 500px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .doc-card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../" class="header-logo">大提學</a>
+      <a href="../" class="header-back">← 홈으로</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-icon">📜</div>
+        <h1 class="hero-title">Specs</h1>
+        <p class="hero-desc">大提學 시스템 문서</p>
+        <div class="hero-version">v2.1</div>
+      </div>
+
+      <!-- Core Documents -->
+      <div class="section">
+        <div class="section-title">📋 핵심 문서</div>
+        <div class="doc-list">
+          <a href="https://github.com/dtslib1979/dongseon-studio/blob/main/CLAUDE.md" target="_blank" class="doc-card">
+            <div class="doc-icon gold">📜</div>
+            <div class="doc-content">
+              <div class="doc-name">CLAUDE.md</div>
+              <div class="doc-desc">大提學 정관 — 비즈니스 모델, 프로덕트 피라미드, 권위 빌딩</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v2.1</span>
+              <span class="doc-badge md">.md</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/dtslib1979/dongseon-studio/blob/main/00_TRUTH/whitepaper.md" target="_blank" class="doc-card">
+            <div class="doc-icon gold">📄</div>
+            <div class="doc-content">
+              <div class="doc-name">Whitepaper</div>
+              <div class="doc-desc">大提學 비즈니스 모델 상세 — 네트워크 자본, 종교화 구조</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v2.1</span>
+              <span class="doc-badge md">.md</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/dtslib1979/dongseon-studio/blob/main/FACTORY.json" target="_blank" class="doc-card">
+            <div class="doc-icon green">⚙️</div>
+            <div class="doc-content">
+              <div class="doc-name">FACTORY.json</div>
+              <div class="doc-desc">스튜디오 설정 — 프로덕트 피라미드, 권위 빌딩, 파일럿 모델</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v2.1</span>
+              <span class="doc-badge json">.json</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/dtslib1979/dongseon-studio/blob/main/docs/premium-package-2026-01.md" target="_blank" class="doc-card">
+            <div class="doc-icon crimson">👑</div>
+            <div class="doc-content">
+              <div class="doc-name">Premium Package</div>
+              <div class="doc-desc">프로덕트 피라미드 상세 — Tier 1/2/3, 수익 시뮬레이션</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v2.1</span>
+              <span class="doc-badge md">.md</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Protocol Documents -->
+      <div class="section">
+        <div class="section-title">🔧 프로토콜</div>
+        <div class="doc-list">
+          <a href="flow-protocol.md" target="_blank" class="doc-card">
+            <div class="doc-icon blue">🔄</div>
+            <div class="doc-content">
+              <div class="doc-name">Flow Protocol</div>
+              <div class="doc-desc">동선 설계 방법론 — LAND → EXPLORE → ACT → RETURN</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v1.0</span>
+              <span class="doc-badge md">.md</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/dtslib1979/dongseon-studio/blob/main/engines/llm/prompts/system.md" target="_blank" class="doc-card">
+            <div class="doc-icon blue">🤖</div>
+            <div class="doc-content">
+              <div class="doc-name">LLM System Prompt</div>
+              <div class="doc-desc">AI 어시스턴트 프롬프트 — 大提學 철학 + 응답 스타일</div>
+            </div>
+            <div class="doc-meta">
+              <span class="doc-badge version">v2.1</span>
+              <span class="doc-badge md">.md</span>
+            </div>
+            <span class="doc-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="section">
+        <div class="summary-box">
+          <h3 class="summary-title">v2.1 핵심 수치</h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <div class="summary-value">3.5</div>
+              <div class="summary-label">현재 권위 점수</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value">9.1</div>
+              <div class="summary-label">목표 권위 점수</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value">₩500만</div>
+              <div class="summary-label">Tier 1 (현재)</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value">₩3억</div>
+              <div class="summary-label">Tier 3 (목표)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="quote-box">
+        <p class="quote-text">
+          "AI를 팔지 않는다.<br><strong>'내 아들은 왕세자급'이라는 아버지의 허세를 판다.</strong>"
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-links">
+          <a href="../" class="footer-link">홈</a>
+          <a href="../console/" class="footer-link">師承 오피스</a>
+          <a href="../services/" class="footer-link">프로덕트</a>
+          <a href="https://github.com/dtslib1979/dongseon-studio" target="_blank" class="footer-link">GitHub</a>
+        </div>
+        <p class="footer-copy">大提學 · v2.1 · 2026-01-30</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
