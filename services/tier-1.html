@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tier 1: 워크플로우 모델링 | 大提學</title>
+  <meta name="description" content="25개 레포 생태계 + 워크플로우 모델링 + Termux/Claude Code 세팅. ₩500만~1천만 / 3개월.">
+  <meta name="theme-color" content="#0F0F0F">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .header-title {
+      flex: 1;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .header-badge {
+      padding: 6px 12px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(60px + var(--safe-bottom));
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.03) 100%);
+      border: 2px solid rgba(16,185,129,0.3);
+      border-radius: 24px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--green);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(16,185,129,0.2);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hero-price-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .hero-price-period {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Feature List */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: rgba(16,185,129,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .feature-content { flex: 1; }
+
+    .feature-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Process */
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .process-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .process-num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), #059669);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .process-content { flex: 1; }
+
+    .process-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .process-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Target */
+    .target-box {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .target-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .target-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .target-icon { font-size: 18px; }
+
+    /* CTA */
+    .cta-section {
+      padding: 32px 24px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 100%);
+      border: 2px solid rgba(16,185,129,0.3);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .cta-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--green), #059669);
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(16,185,129,0.3);
+    }
+
+    .cta-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Next Tier */
+    .next-tier {
+      margin-top: 32px;
+      padding: 20px;
+      background: rgba(212,175,55,0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .next-tier-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .next-tier-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .next-tier-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-link:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-btn">←</a>
+      <div class="header-title">TIER 1</div>
+      <div class="header-badge">지금 가능</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-badge">TIER 1</div>
+        <h1 class="hero-title">워크플로우 모델링 접근권</h1>
+        <p class="hero-desc">25개 레포 생태계 구조를 직접 보고 배우는 3개월 과정</p>
+        <div class="hero-price">
+          <span class="hero-price-value">₩500만~</span>
+          <span class="hero-price-period">/ 3개월</span>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="section">
+        <div class="section-title">✓ 포함 내용</div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">📦</div>
+            <div class="feature-content">
+              <div class="feature-name">25개 레포 구조 설명</div>
+              <div class="feature-desc">본사 3Tier, 미디어 3종, 스튜디오 3종, 브랜치 5개, 지식관리, 인프라 — 전체 생태계 아키텍처 해설</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-content">
+              <div class="feature-name">워크플로우 모델링 1:1 세션</div>
+              <div class="feature-desc">당신의 비즈니스에 맞는 워크플로우 설계. 편집 0분, 말만 하면 되는 구조.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div class="feature-content">
+              <div class="feature-name">Termux + Claude Code 세팅</div>
+              <div class="feature-desc">PC 없이 핸드폰만으로 개발하는 환경 구축. 모바일 퍼스트 개발 입문.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎬</div>
+            <div class="feature-content">
+              <div class="feature-name">OrbitPrompt 칠판 시스템</div>
+              <div class="feature-desc">화면 녹화 = 완성물. YouTube 업로드까지 원스톱 콘텐츠 생산 파이프라인.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process -->
+      <div class="section">
+        <div class="section-title">📋 진행 과정</div>
+        <div class="process-list">
+          <div class="process-item">
+            <div class="process-num">1</div>
+            <div class="process-content">
+              <div class="process-title">상담 및 진단</div>
+              <div class="process-desc">현재 상황 파악, 목표 설정, 맞춤 커리큘럼 설계</div>
+            </div>
+          </div>
+          <div class="process-item">
+            <div class="process-num">2</div>
+            <div class="process-content">
+              <div class="process-title">환경 세팅</div>
+              <div class="process-desc">Termux, Claude Code, GitHub 연동, 기본 레포 구조 생성</div>
+            </div>
+          </div>
+          <div class="process-item">
+            <div class="process-num">3</div>
+            <div class="process-content">
+              <div class="process-title">워크플로우 모델링</div>
+              <div class="process-desc">비즈니스에 맞는 자동화 파이프라인 설계 및 구축</div>
+            </div>
+          </div>
+          <div class="process-item">
+            <div class="process-num">4</div>
+            <div class="process-content">
+              <div class="process-title">콘텐츠 생산 실습</div>
+              <div class="process-desc">OrbitPrompt로 실제 콘텐츠 제작, YouTube 업로드까지</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target -->
+      <div class="section">
+        <div class="section-title">👤 이런 분께 추천</div>
+        <div class="target-box">
+          <div class="target-list">
+            <div class="target-item">
+              <span class="target-icon">✓</span>
+              IT에 관심 있는 1인 사업자 / 크리에이터
+            </div>
+            <div class="target-item">
+              <span class="target-icon">✓</span>
+              콘텐츠 제작에 시간을 너무 많이 쓰는 분
+            </div>
+            <div class="target-item">
+              <span class="target-icon">✓</span>
+              AI를 활용해 생산성을 높이고 싶은 분
+            </div>
+            <div class="target-item">
+              <span class="target-icon">✓</span>
+              핸드폰만으로 개발/자동화를 원하는 분
+            </div>
+            <div class="target-item">
+              <span class="target-icon">✓</span>
+              시스템을 받아들이고 실행할 의지가 있는 분
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h3 class="cta-title">상담 신청</h3>
+        <p class="cta-desc">현재 권위 3.5점 기준 ₩500만~1천만</p>
+        <a href="mailto:dtslib1979@gmail.com?subject=Tier 1 상담 신청" class="cta-btn">이메일 문의 →</a>
+        <p class="cta-note">dtslib1979@gmail.com</p>
+      </div>
+
+      <!-- Next Tier -->
+      <div class="next-tier">
+        <div class="next-tier-label">다음 단계</div>
+        <div class="next-tier-name">Tier 2: 검증된 시스템 이식</div>
+        <div class="next-tier-desc">파일럿 완료 후 오픈 · ₩5천만~1억</div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-links">
+          <a href="./" class="footer-link">← 전체 상품</a>
+          <a href="../" class="footer-link">홈</a>
+          <a href="../console/" class="footer-link">師承 오피스</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
