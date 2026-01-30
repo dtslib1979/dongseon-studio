@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>문생 레지스트리 | 師承 오피스</title>
+  <meta name="theme-color" content="#0F0F0F">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --crimson: #8B0000;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --border-active: rgba(212,175,55,0.5);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .header-title {
+      flex: 1;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .header-badge {
+      padding: 6px 12px;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 32px 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .hero-count {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(212,175,55,0.2);
+      border-radius: 100px;
+    }
+
+    .hero-count-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    .hero-count-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .section { margin-bottom: 24px; }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tier-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .tier-badge {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .tier-badge.tier1 {
+      background: rgba(16,185,129,0.15);
+      color: var(--green);
+    }
+
+    .tier-badge.tier2 {
+      background: rgba(212,175,55,0.15);
+      color: var(--gold);
+    }
+
+    .tier-badge.tier3 {
+      background: rgba(139,0,0,0.15);
+      color: var(--crimson);
+    }
+
+    .tier-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tier-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .tier-price {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .tier-status {
+      text-align: right;
+    }
+
+    .tier-status-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .tier-status-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .tier-status-badge.available {
+      background: rgba(16,185,129,0.15);
+      color: var(--green);
+    }
+
+    .tier-status-badge.upcoming {
+      background: rgba(212,175,55,0.15);
+      color: var(--gold);
+    }
+
+    .tier-status-badge.locked {
+      background: rgba(139,0,0,0.15);
+      color: var(--crimson);
+    }
+
+    .student-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .student-empty {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+    }
+
+    .student-empty-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .student-empty-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .student-empty-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 100px;
+      color: var(--bg);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .network-value {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .network-formula {
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .network-item {
+      text-align: center;
+    }
+
+    .network-n {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .network-v {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .quote-box {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .quote-text strong {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-btn">←</a>
+      <div class="header-title">👑 문생 레지스트리</div>
+      <div class="header-badge">0명</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-icon">👑</div>
+        <h1 class="hero-title">문생 레지스트리</h1>
+        <p class="hero-desc">師承 계보에 편입된 문하생</p>
+        <div class="hero-count">
+          <span class="hero-count-value">0</span>
+          <span class="hero-count-label">명</span>
+        </div>
+      </div>
+
+      <!-- Tier Cards -->
+      <div class="section">
+        <div class="section-title">📊 Tier별 현황</div>
+
+        <div class="tier-card">
+          <div class="tier-header">
+            <span class="tier-badge tier1">TIER 1</span>
+            <span class="tier-count">0명</span>
+          </div>
+          <div class="tier-info">
+            <div>
+              <div class="tier-name">워크플로우 모델링</div>
+              <div class="tier-price">₩500만~1천만 / 3개월</div>
+            </div>
+            <div class="tier-status">
+              <div class="tier-status-text">파일럿 완료 후</div>
+              <span class="tier-status-badge upcoming">준비 중</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-header">
+            <span class="tier-badge tier2">TIER 2</span>
+            <span class="tier-count">0명</span>
+          </div>
+          <div class="tier-info">
+            <div>
+              <div class="tier-name">시스템 이식</div>
+              <div class="tier-price">₩5천만~1억 / 6개월</div>
+            </div>
+            <div class="tier-status">
+              <div class="tier-status-text">정부 씰 필요</div>
+              <span class="tier-status-badge locked">잠금</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-header">
+            <span class="tier-badge tier3">TIER 3</span>
+            <span class="tier-count">0명</span>
+          </div>
+          <div class="tier-info">
+            <div>
+              <div class="tier-name">大提學 師承</div>
+              <div class="tier-price">₩3억 / 3년</div>
+            </div>
+            <div class="tier-status">
+              <div class="tier-status-text">씰 스택 필요</div>
+              <span class="tier-status-badge locked">잠금</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student List -->
+      <div class="section">
+        <div class="section-title">📋 문생 목록</div>
+        <div class="student-list">
+          <div class="student-empty">
+            <div class="student-empty-icon">👤</div>
+            <p class="student-empty-text">아직 등록된 문생이 없습니다.<br>파일럿 완료 후 Tier 1 판매가 시작됩니다.</p>
+            <a href="../#packages" class="student-empty-btn">프로덕트 피라미드 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Network Value -->
+      <div class="section">
+        <div class="section-title">💎 네트워크 자본</div>
+        <div class="network-value">
+          <div class="network-formula">V(n) = n × (n-1) / 2 × α</div>
+          <div class="network-grid">
+            <div class="network-item">
+              <div class="network-n">n=5</div>
+              <div class="network-v">10억</div>
+            </div>
+            <div class="network-item">
+              <div class="network-n">n=10</div>
+              <div class="network-v">45억</div>
+            </div>
+            <div class="network-item">
+              <div class="network-n">n=20</div>
+              <div class="network-v">190억</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="section">
+        <div class="quote-box">
+          <p class="quote-text">
+            고객이 아니라 <strong>문생</strong>.<br>
+            매출이 아니라 <strong>계보</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

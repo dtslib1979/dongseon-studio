@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>권위 빌딩 트래커 | 師承 오피스</title>
+  <meta name="theme-color" content="#0F0F0F">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --crimson: #8B0000;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --border-active: rgba(212,175,55,0.5);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .header-title {
+      flex: 1;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .header-badge {
+      padding: 6px 12px;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 32px 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .hero-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-progress-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .section { margin-bottom: 24px; }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .seal-card {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seal-card.current {
+      border-color: var(--green);
+      background: rgba(16,185,129,0.05);
+    }
+
+    .seal-card.locked {
+      opacity: 0.6;
+    }
+
+    .seal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .seal-card.layer0::before { background: var(--green); }
+    .seal-card.layer1::before { background: #3b82f6; }
+    .seal-card.layer2::before { background: var(--gold); }
+    .seal-card.layer3::before { background: var(--crimson); }
+
+    .seal-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .seal-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .seal-icon.layer0 { background: rgba(16,185,129,0.15); }
+    .seal-icon.layer1 { background: rgba(59,130,246,0.15); }
+    .seal-icon.layer2 { background: rgba(212,175,55,0.15); }
+    .seal-icon.layer3 { background: rgba(139,0,0,0.15); }
+
+    .seal-info { flex: 1; }
+
+    .seal-layer {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .seal-layer.layer0 { color: var(--green); }
+    .seal-layer.layer1 { color: #3b82f6; }
+    .seal-layer.layer2 { color: var(--gold); }
+    .seal-layer.layer3 { color: var(--crimson); }
+
+    .seal-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .seal-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .seal-status {
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .seal-status.active {
+      background: rgba(16,185,129,0.15);
+      color: var(--green);
+    }
+
+    .seal-status.pending {
+      background: rgba(212,175,55,0.15);
+      color: var(--gold);
+    }
+
+    .seal-status.locked {
+      background: rgba(139,0,0,0.15);
+      color: var(--crimson);
+    }
+
+    .seal-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .seal-detail {
+      text-align: center;
+    }
+
+    .seal-detail-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .seal-detail-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .action-item:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-active);
+    }
+
+    .action-icon { font-size: 18px; }
+    .action-text { flex: 1; font-size: 14px; }
+    .action-arrow { color: var(--text-muted); }
+
+    .quote-box {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.8;
+    }
+
+    .quote-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-btn">←</a>
+      <div class="header-title">🏛️ 권위 빌딩 트래커</div>
+      <div class="header-badge">0/3 씰</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-icon">🏛️</div>
+        <h1 class="hero-title">권위 빌딩</h1>
+        <p class="hero-desc">씰이 붙을 때마다 가격이 올라간다</p>
+        <div class="hero-progress">
+          <span class="hero-progress-text">0 / 3 씰 획득</span>
+        </div>
+      </div>
+
+      <!-- Seal List -->
+      <div class="section">
+        <div class="section-title">🎖️ 씰 로드맵</div>
+        <div class="seal-list">
+          <!-- Layer 0: 동선 파일럿 -->
+          <div class="seal-card layer0 current">
+            <div class="seal-header">
+              <div class="seal-icon layer0">🎯</div>
+              <div class="seal-info">
+                <div class="seal-layer layer0">LAYER 0</div>
+                <div class="seal-name">동선 파일럿</div>
+                <div class="seal-desc">실적 증빙 — GitHub, YouTube, 방송국</div>
+              </div>
+              <span class="seal-status active">진행 중</span>
+            </div>
+            <div class="seal-details">
+              <div class="seal-detail">
+                <div class="seal-detail-label">권위 점수</div>
+                <div class="seal-detail-value">3.5 → 5.5</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">해금 상품</div>
+                <div class="seal-detail-value">Tier 1</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">예상 기간</div>
+                <div class="seal-detail-value">6개월</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 1: 정부 씰 -->
+          <div class="seal-card layer1 locked">
+            <div class="seal-header">
+              <div class="seal-icon layer1">🏛️</div>
+              <div class="seal-info">
+                <div class="seal-layer layer1">LAYER 1</div>
+                <div class="seal-name">대한민국 정부 씰</div>
+                <div class="seal-desc">국책과제 수행</div>
+              </div>
+              <span class="seal-status locked">잠금</span>
+            </div>
+            <div class="seal-details">
+              <div class="seal-detail">
+                <div class="seal-detail-label">권위 점수</div>
+                <div class="seal-detail-value">5.5 → 7.75</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">해금 상품</div>
+                <div class="seal-detail-value">Tier 2</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">예상 기간</div>
+                <div class="seal-detail-value">12개월</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 2: 바티칸 씰 -->
+          <div class="seal-card layer2 locked">
+            <div class="seal-header">
+              <div class="seal-icon layer2">⛪</div>
+              <div class="seal-info">
+                <div class="seal-layer layer2">LAYER 2</div>
+                <div class="seal-name">바티칸 씰</div>
+                <div class="seal-desc">Rome Call for AI Ethics 참여</div>
+              </div>
+              <span class="seal-status locked">잠금</span>
+            </div>
+            <div class="seal-details">
+              <div class="seal-detail">
+                <div class="seal-detail-label">권위 점수</div>
+                <div class="seal-detail-value">7.75 → 9.1</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">해금 상품</div>
+                <div class="seal-detail-value">Tier 3</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">예상 기간</div>
+                <div class="seal-detail-value">24개월</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layer 3: 글로벌 -->
+          <div class="seal-card layer3 locked">
+            <div class="seal-header">
+              <div class="seal-icon layer3">🌍</div>
+              <div class="seal-info">
+                <div class="seal-layer layer3">LAYER 3</div>
+                <div class="seal-name">글로벌 판매</div>
+                <div class="seal-desc">권위 스택 완성 — 전 세계 동북아 부호</div>
+              </div>
+              <span class="seal-status locked">잠금</span>
+            </div>
+            <div class="seal-details">
+              <div class="seal-detail">
+                <div class="seal-detail-label">권위 점수</div>
+                <div class="seal-detail-value">9.1+</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">가격</div>
+                <div class="seal-detail-value">₩3억+</div>
+              </div>
+              <div class="seal-detail">
+                <div class="seal-detail-label">상태</div>
+                <div class="seal-detail-value">최종 목표</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Actions -->
+      <div class="section">
+        <div class="section-title">📋 다음 액션</div>
+        <div class="action-list">
+          <a href="pilot.html" class="action-item">
+            <span class="action-icon">🎯</span>
+            <span class="action-text">동선 파일럿 실적 확인</span>
+            <span class="action-arrow">→</span>
+          </a>
+          <a href="https://www.iris.go.kr" target="_blank" class="action-item">
+            <span class="action-icon">🔍</span>
+            <span class="action-text">국책과제 공고 검색 (IRIS)</span>
+            <span class="action-arrow">→</span>
+          </a>
+          <a href="https://www.romecall.org" target="_blank" class="action-item">
+            <span class="action-icon">⛪</span>
+            <span class="action-text">Rome Call for AI Ethics</span>
+            <span class="action-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="section">
+        <div class="quote-box">
+          <p class="quote-text">
+            "국가 + 종교 = 반박 불가"
+          </p>
+          <p class="quote-sub">씰이 붙을 때마다 가격이 올라간다</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

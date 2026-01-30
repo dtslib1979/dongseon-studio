@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>파일럿 대시보드 | 師承 오피스</title>
+  <meta name="theme-color" content="#0F0F0F">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --crimson: #8B0000;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --border-active: rgba(212,175,55,0.5);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .header-title {
+      flex: 1;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .header-badge {
+      padding: 6px 12px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 32px 24px;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.03) 100%);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .hero-day {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(16,185,129,0.2);
+      border-radius: 100px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .section { margin-bottom: 24px; }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .stat-icon { font-size: 24px; margin-bottom: 8px; }
+
+    .stat-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stat-change {
+      font-size: 11px;
+      color: var(--green);
+      margin-top: 8px;
+    }
+
+    .milestone-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .milestone-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .milestone-item.done {
+      border-color: var(--green);
+      background: rgba(16,185,129,0.05);
+    }
+
+    .milestone-check {
+      width: 24px; height: 24px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: transparent;
+    }
+
+    .milestone-item.done .milestone-check {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--bg);
+    }
+
+    .milestone-content { flex: 1; }
+
+    .milestone-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .milestone-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .milestone-target {
+      font-size: 11px;
+      color: var(--gold);
+      padding: 4px 10px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 100px;
+    }
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .activity-icon { font-size: 18px; }
+
+    .activity-text {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .activity-time {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .quote-box {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.8;
+    }
+
+    .quote-author {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="back-btn">←</a>
+      <div class="header-title">🎯 파일럿 대시보드</div>
+      <div class="header-badge">진행 중</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-icon">🎯</div>
+        <h1 class="hero-title">동선 파일럿</h1>
+        <p class="hero-desc">첫 번째 성공 사례를 만드는 중</p>
+        <div class="hero-day">Day <span id="pilotDay">1</span></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="section">
+        <div class="section-title">📊 실적 현황</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-value" id="repoCount">25</div>
+            <div class="stat-label">GitHub 레포</div>
+            <div class="stat-change">+2 this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎬</div>
+            <div class="stat-value" id="videoCount">8</div>
+            <div class="stat-label">YouTube 영상</div>
+            <div class="stat-change">+1 this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📡</div>
+            <div class="stat-value" id="channelCount">3</div>
+            <div class="stat-label">방송국 채널</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value" id="branchCount">5</div>
+            <div class="stat-label">브랜치 지인</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestones -->
+      <div class="section">
+        <div class="section-title">🏆 마일스톤</div>
+        <div class="milestone-list">
+          <div class="milestone-item done">
+            <div class="milestone-check">✓</div>
+            <div class="milestone-content">
+              <div class="milestone-title">GitHub 레포 25개</div>
+              <div class="milestone-desc">생태계 구조 완성</div>
+            </div>
+            <div class="milestone-target">완료</div>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-check">✓</div>
+            <div class="milestone-content">
+              <div class="milestone-title">YouTube 구독자 100명</div>
+              <div class="milestone-desc">8개 채널 합산</div>
+            </div>
+            <div class="milestone-target">0/100</div>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-check">✓</div>
+            <div class="milestone-content">
+              <div class="milestone-title">첫 수익 발생</div>
+              <div class="milestone-desc">YouTube 수익화 or 상담</div>
+            </div>
+            <div class="milestone-target">₩0</div>
+          </div>
+          <div class="milestone-item">
+            <div class="milestone-check">✓</div>
+            <div class="milestone-content">
+              <div class="milestone-title">브랜치 5명 활성화</div>
+              <div class="milestone-desc">각자 채널 운영 시작</div>
+            </div>
+            <div class="milestone-target">0/5</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="section">
+        <div class="section-title">🕐 최근 활동</div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <span class="activity-icon">📝</span>
+            <span class="activity-text">랜딩 페이지 v2.1 업데이트</span>
+            <span class="activity-time">오늘</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🎨</span>
+            <span class="activity-text">師承 오피스 콘솔 재설계</span>
+            <span class="activity-time">오늘</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">📋</span>
+            <span class="activity-text">大提學 비즈니스 모델 정리</span>
+            <span class="activity-time">어제</span>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🔧</span>
+            <span class="activity-text">FACTORY.json v2.1 업데이트</span>
+            <span class="activity-time">어제</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="section">
+        <div class="quote-box">
+          <p class="quote-text">
+            "첫 고객을 찾지 마라.<br>첫 고객을 만들어라."
+          </p>
+          <p class="quote-author">— 大提學 v2.1</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Pilot Day Counter
+    function calculatePilotDays() {
+      const startDate = new Date('2026-01-30');
+      const today = new Date();
+      const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+      return Math.max(1, diff + 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('pilotDay').textContent = calculatePilotDays();
+    });
+  </script>
+</body>
+</html>
