@@ -2,24 +2,40 @@
   "id": "dongseon-studio",
   "name": "DONGSEON",
   "nameKo": "동선",
-  "tagline": "Business, Drawn",
+  "tagline": "大提學 — 판의 문지기",
   "hq": "dtslib1979/dtslib-papyrus",
-  "version": "1.0",
+  "version": "2.0",
   "status": "active",
   "visibility": "public",
   "tier": 2,
-  "type": "studio-protocol-hq",
+  "type": "daejehak-studio-hq",
   "domain": "digital",
   "language": "ko-KR",
 
+  "model": {
+    "name": "大提學 비즈니스 모델",
+    "version": "2.0",
+    "core": "AI를 팔지 않는다. '내 아들은 왕세자급'이라는 아버지의 허세를 판다.",
+    "selling": "師承 입문비 (₩3억)",
+    "relationship": "평생 멘토-제자 네트워크"
+  },
+
   "theme": {
-    "primary": "#2563EB",
-    "accent": "#F59E0B",
-    "bg": "#0F172A",
-    "text": "#F8FAFC"
+    "primary": "#B8860B",
+    "accent": "#8B0000",
+    "bg": "#0F0F0F",
+    "text": "#F5F5DC"
   },
 
   "nodes": [],
+
+  "networkCapital": {
+    "formula": "V(n) = n × (n-1) / 2 × α",
+    "currentN": 0,
+    "targetN5": "10억 관계 자산",
+    "targetN10": "45억 관계 자산",
+    "targetN20": "190억 관계 자산"
+  },
 
   "subscriptions": [
     {
@@ -37,14 +53,13 @@
   ],
 
   "features": [
-    "digital-studio-os",
-    "flow-protocol",
-    "5-layer-architecture",
-    "llm-engine",
-    "automation-engine",
-    "ontology-engine",
-    "package-system",
-    "node-system"
+    "daejehak-model",
+    "sasung-lineage",
+    "network-capital",
+    "religious-lock-in",
+    "hybrid-business-model",
+    "northeast-asia-monopoly",
+    "repo-as-proof"
   ],
 
   "sibling": {
@@ -54,8 +69,16 @@
   },
 
   "partnership": {
-    "designer": "박씨",
-    "operator": "동선",
-    "model": "친구 + 상생"
+    "daejehak": "박씨 (大提學)",
+    "operator": "동선 (실행자)",
+    "model": "師承 + 상생"
+  },
+
+  "pricing": {
+    "unitPrice": "₩3억",
+    "duration": "3년",
+    "annualTarget": 2,
+    "annualRevenue": "6억",
+    "totalLTV": "9억+ (세대 전승)"
   }
 }
