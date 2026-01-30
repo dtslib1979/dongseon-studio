@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Console | DONGSEON Studio</title>
-  <meta name="theme-color" content="#000000">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>師承 오피스 | 大提學</title>
+  <meta name="theme-color" content="#0F0F0F">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --matrix-green: #00ff41;
-      --matrix-dark: #003b00;
-      --matrix-glow: rgba(0,255,65,0.5);
-      --cyber-blue: #00d4ff;
-      --warning-amber: #ffaa00;
-      --danger-red: #ff3333;
-      --bg-black: #000000;
-      --bg-panel: rgba(0,20,0,0.8);
-      --bg-card: rgba(0,40,0,0.6);
-      --border-matrix: rgba(0,255,65,0.3);
-      --text-primary: #00ff41;
-      --text-secondary: rgba(0,255,65,0.7);
-      --text-muted: rgba(0,255,65,0.4);
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --gold-light: #F4D03F;
+      --crimson: #8B0000;
+      --green: #10b981;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --border-active: rgba(212,175,55,0.5);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -33,83 +33,11 @@
     }
 
     body {
-      font-family: 'JetBrains Mono', 'Noto Sans KR', monospace;
-      background: var(--bg-black);
-      color: var(--text-primary);
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
-      line-height: 1.5;
-      position: relative;
-    }
-
-    /* Matrix Rain Background */
-    .matrix-rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.15;
-    }
-
-    .rain-column {
-      position: absolute;
-      top: -100%;
-      font-size: 14px;
-      line-height: 1;
-      color: var(--matrix-green);
-      text-shadow: 0 0 10px var(--matrix-green);
-      animation: rain-fall linear infinite;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    @keyframes rain-fall {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(200vh); }
-    }
-
-    /* Scan Line Effect */
-    .scanline {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1000;
-      background: linear-gradient(
-        transparent 0%,
-        rgba(0,255,65,0.03) 50%,
-        transparent 100%
-      );
-      background-size: 100% 4px;
-      animation: scanline-move 8s linear infinite;
-    }
-
-    @keyframes scanline-move {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 100vh; }
-    }
-
-    /* CRT Flicker */
-    .crt-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-      background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%);
-    }
-
-    /* Grid Background */
-    .grid-bg {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: 0;
+      line-height: 1.6;
     }
 
     /* Header */
@@ -118,32 +46,16 @@
       top: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
-      border-bottom: 1px solid var(--border-matrix);
-      padding: 12px 20px;
-      padding-top: calc(12px + var(--safe-top));
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      padding-top: calc(16px + var(--safe-top));
       z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
-      animation: header-glow 3s ease-in-out infinite;
-    }
-
-    @keyframes header-glow {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+      backdrop-filter: blur(20px);
     }
 
     .header-inner {
-      max-width: 1400px;
+      max-width: 600px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -153,996 +65,797 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .logo-mark {
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--matrix-green);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Orbitron', sans-serif;
+    .header-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
       font-weight: 900;
-      font-size: 16px;
-      color: var(--matrix-green);
-      text-shadow: 0 0 10px var(--matrix-glow);
-      animation: logo-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes logo-pulse {
-      0%, 100% { box-shadow: 0 0 10px var(--matrix-glow), inset 0 0 10px rgba(0,255,65,0.1); }
-      50% { box-shadow: 0 0 20px var(--matrix-glow), inset 0 0 20px rgba(0,255,65,0.2); }
+      color: var(--gold);
     }
 
     .header-title {
-      font-family: 'Orbitron', sans-serif;
       font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-secondary);
     }
 
-    .header-status {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .header-phase {
+      padding: 6px 12px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 100px;
       font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
       letter-spacing: 0.05em;
     }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--matrix-green);
-      box-shadow: 0 0 10px var(--matrix-green);
-      animation: status-blink 1s ease-in-out infinite;
-    }
-
-    @keyframes status-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .status-dot.warning { background: var(--warning-amber); box-shadow: 0 0 10px var(--warning-amber); }
-    .status-dot.danger { background: var(--danger-red); box-shadow: 0 0 10px var(--danger-red); }
-
-    .time-display {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--cyber-blue);
-      text-shadow: 0 0 10px rgba(0,212,255,0.5);
-    }
-
-    /* Main Content */
+    /* Main */
     .main {
-      position: relative;
-      z-index: 10;
       padding-top: calc(80px + var(--safe-top));
       padding-bottom: calc(100px + var(--safe-bottom));
       min-height: 100vh;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 600px;
       margin: 0 auto;
       padding: 20px;
     }
 
-    /* Command Center Title */
-    .command-header {
+    /* Status Banner */
+    .status-banner {
       text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .command-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .command-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(24px, 5vw, 36px);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, var(--matrix-green) 0%, var(--cyber-blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      filter: drop-shadow(0 0 20px var(--matrix-glow));
-    }
-
-    .command-subtitle {
-      font-size: 12px;
-      color: var(--text-secondary);
-      letter-spacing: 0.1em;
-      margin-top: 8px;
-    }
-
-    /* Stats Dashboard */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
       margin-bottom: 32px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
     }
 
-    @media (max-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .status-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
     }
 
-    .stat-card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-matrix);
-      border-radius: 12px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
-    }
-
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, var(--matrix-glow) 0%, transparent 70%);
-      opacity: 0.3;
-    }
-
-    .stat-icon {
-      font-size: 20px;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 5px var(--matrix-glow));
-    }
-
-    .stat-value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--matrix-green);
-      text-shadow: 0 0 20px var(--matrix-glow);
+    .status-score {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--gold);
       margin-bottom: 4px;
     }
 
-    .stat-value.blue { color: var(--cyber-blue); text-shadow: 0 0 20px rgba(0,212,255,0.5); }
-    .stat-value.amber { color: var(--warning-amber); text-shadow: 0 0 20px rgba(255,170,0,0.5); }
-
-    .stat-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .stat-change {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 4px;
-      background: rgba(0,255,65,0.15);
-      color: var(--matrix-green);
-    }
-
-    /* Operations Panel */
-    .panel {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-matrix);
-      border-radius: 16px;
-      margin-bottom: 24px;
-      overflow: hidden;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-matrix);
-      background: rgba(0,255,65,0.03);
-    }
-
-    .panel-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .panel-title::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--matrix-green);
-      box-shadow: 0 0 10px var(--matrix-green);
-    }
-
-    .panel-badge {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 100px;
-      background: rgba(0,212,255,0.15);
-      color: var(--cyber-blue);
-      letter-spacing: 0.05em;
-    }
-
-    .panel-body {
-      padding: 20px;
-    }
-
-    /* Layer Architecture */
-    .layer-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .layer-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-matrix);
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .layer-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--matrix-green);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-    }
-
-    .layer-item:hover::before,
-    .layer-item.active::before {
-      transform: scaleY(1);
-    }
-
-    .layer-item:hover,
-    .layer-item.active {
-      border-color: var(--matrix-green);
-      background: rgba(0,255,65,0.05);
-      box-shadow: 0 0 30px rgba(0,255,65,0.1);
-    }
-
-    .layer-num {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border-matrix);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .status-label {
+      font-size: 14px;
       color: var(--text-secondary);
     }
 
-    .layer-item:hover .layer-num,
-    .layer-item.active .layer-num {
-      border-color: var(--matrix-green);
-      color: var(--matrix-green);
-      box-shadow: 0 0 10px var(--matrix-glow);
+    .status-bar {
+      margin-top: 16px;
+      height: 6px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 3px;
+      overflow: hidden;
     }
 
-    .layer-info {
-      flex: 1;
+    .status-bar-fill {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      border-radius: 3px;
     }
 
-    .layer-name {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .layer-desc {
-      font-size: 11px;
+    .status-next {
+      margin-top: 12px;
+      font-size: 12px;
       color: var(--text-muted);
     }
 
-    .layer-status {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: rgba(0,255,65,0.1);
-      color: var(--matrix-green);
-      letter-spacing: 0.05em;
-    }
-
-    .layer-arrow {
-      font-size: 16px;
-      color: var(--text-muted);
-      transition: all 0.3s ease;
-    }
-
-    .layer-item:hover .layer-arrow {
-      color: var(--matrix-green);
-      transform: translateX(4px);
-    }
-
-    /* Quick Actions Grid */
-    .actions-grid {
+    /* Core IP Grid */
+    .core-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
+      margin-bottom: 24px;
     }
 
-    .action-btn {
+    .core-card {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
       padding: 20px;
       background: var(--bg-card);
-      border: 1px solid var(--border-matrix);
-      border-radius: 12px;
-      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+      color: inherit;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .action-btn:hover {
-      border-color: var(--matrix-green);
-      background: rgba(0,255,65,0.08);
-      box-shadow: 0 0 30px rgba(0,255,65,0.15);
+    .core-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-active);
       transform: translateY(-2px);
     }
 
-    .action-icon {
-      font-size: 24px;
-      filter: drop-shadow(0 0 5px var(--matrix-glow));
+    .core-card.active {
+      border-color: var(--green);
+      background: rgba(16,185,129,0.05);
     }
 
-    /* Terminal Log */
-    .terminal {
-      background: rgba(0,0,0,0.8);
-      border: 1px solid var(--border-matrix);
-      border-radius: 12px;
-      overflow: hidden;
+    .core-card.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
-    .terminal-header {
+    .core-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .core-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .core-status {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .core-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .core-badge.active {
+      background: rgba(16,185,129,0.15);
+      color: var(--green);
+    }
+
+    .core-badge.pending {
+      background: rgba(212,175,55,0.15);
+      color: var(--gold);
+    }
+
+    .core-badge.locked {
+      background: rgba(139,0,0,0.15);
+      color: var(--crimson);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 16px;
-      background: rgba(0,255,65,0.05);
-      border-bottom: 1px solid var(--border-matrix);
     }
 
-    .terminal-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .terminal-dot.red { background: #ff5f56; }
-    .terminal-dot.yellow { background: #ffbd2e; }
-    .terminal-dot.green { background: #27ca40; }
-
-    .terminal-title {
-      flex: 1;
-      text-align: center;
+    .section-count {
       font-size: 11px;
-      font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
     }
 
-    .terminal-body {
-      padding: 16px;
-      font-size: 12px;
-      line-height: 1.8;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    .terminal-line {
+    /* Today's Tasks */
+    .task-list {
       display: flex;
+      flex-direction: column;
       gap: 8px;
     }
 
-    .terminal-prompt {
-      color: var(--cyber-blue);
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .task-item:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .task-item.done {
+      opacity: 0.5;
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+    }
+
+    .task-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-active);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .task-item.done .task-checkbox {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+
+    .task-text {
+      flex: 1;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .task-tag {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(212,175,55,0.1);
+      color: var(--gold);
+    }
+
+    /* Quick Stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .stat-value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Timeline */
+    .timeline {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .timeline-dot.current {
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .timeline-dot.future {
+      background: var(--border);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(212,175,55,0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(212,175,55,0.1); }
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-title {
       font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
-    .terminal-text {
-      color: var(--text-secondary);
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--text-muted);
     }
 
-    .terminal-success { color: var(--matrix-green); }
-    .terminal-warning { color: var(--warning-amber); }
-    .terminal-error { color: var(--danger-red); }
-
-    .terminal-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 14px;
-      background: var(--matrix-green);
-      animation: cursor-blink 1s step-end infinite;
-      margin-left: 4px;
-      vertical-align: middle;
+    .timeline-meta {
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 8px;
     }
 
-    @keyframes cursor-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* Admin Button */
-    .admin-section {
+    /* Footer Actions */
+    .footer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       margin-top: 32px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border-matrix);
     }
 
-    .admin-btn {
-      width: 100%;
+    .action-btn {
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(255,51,51,0.1) 0%, rgba(255,170,0,0.1) 100%);
-      border: 1px solid rgba(255,51,51,0.3);
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      color: var(--danger-red);
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-active);
+    }
+
+    .action-btn-icon {
+      font-size: 20px;
+    }
+
+    .action-btn-text {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .action-btn-arrow {
+      color: var(--text-muted);
+    }
+
+    /* Admin Button */
+    .admin-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(139,0,0,0.08);
+      border: 1px solid rgba(139,0,0,0.2);
+      border-radius: 12px;
+      color: var(--crimson);
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .admin-btn:hover {
-      border-color: var(--danger-red);
-      box-shadow: 0 0 30px rgba(255,51,51,0.2);
+      background: rgba(139,0,0,0.12);
+      border-color: rgba(139,0,0,0.3);
     }
 
-    .admin-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      background: rgba(255,51,51,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .admin-info {
-      flex: 1;
-      text-align: left;
-    }
-
-    .admin-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .admin-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .admin-arrow {
-      font-size: 20px;
-    }
-
-    /* Back to Studio */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 24px;
-      padding: 12px 20px;
-      font-size: 12px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border: 1px solid var(--border-matrix);
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .back-link:hover {
-      color: var(--matrix-green);
-      border-color: var(--matrix-green);
-    }
-
-    /* Admin Modal */
-    .admin-modal {
+    /* Modal */
+    .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.9);
       backdrop-filter: blur(20px);
-      z-index: 2000;
+      z-index: 1000;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
 
-    .admin-modal.show { display: flex; }
+    .modal.show { display: flex; }
 
-    .admin-box {
-      background: linear-gradient(145deg, rgba(0,30,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
-      border: 1px solid rgba(255,51,51,0.3);
+    .modal-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 40px 32px;
+      padding: 32px;
       width: 100%;
       max-width: 360px;
       text-align: center;
-      box-shadow: 0 0 60px rgba(255,51,51,0.1);
     }
 
-    .admin-modal-icon {
+    .modal-icon {
       font-size: 48px;
       margin-bottom: 16px;
-      filter: drop-shadow(0 0 20px rgba(255,51,51,0.5));
     }
 
-    .admin-modal-title {
-      font-family: 'Orbitron', sans-serif;
+    .modal-title {
+      font-family: 'Noto Serif KR', serif;
       font-size: 20px;
       font-weight: 700;
-      color: var(--danger-red);
-      letter-spacing: 0.1em;
+      color: var(--gold);
       margin-bottom: 8px;
     }
 
-    .admin-modal-desc {
-      font-size: 12px;
+    .modal-desc {
+      font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
-    .admin-input {
-      width: 100%;
-      padding: 18px;
-      background: rgba(0,0,0,0.8);
-      border: 1px solid var(--border-matrix);
-      border-radius: 12px;
-      color: var(--matrix-green);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      text-align: center;
-      letter-spacing: 0.4em;
-      margin-bottom: 20px;
-    }
-
-    .admin-input:focus {
-      outline: none;
-      border-color: var(--danger-red);
-      box-shadow: 0 0 20px rgba(255,51,51,0.3);
-    }
-
-    .admin-submit {
+    .modal-input {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #ff3333 0%, #ff6600 100%);
+      background: rgba(212,175,55,0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--gold);
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.3em;
+      margin-bottom: 16px;
+    }
+
+    .modal-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .modal-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
       border: none;
       border-radius: 12px;
-      color: white;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 13px;
+      color: var(--bg);
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.15em;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .admin-submit:hover {
-      box-shadow: 0 0 30px rgba(255,51,51,0.4);
+    .modal-submit:hover {
       transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.3);
     }
 
-    .admin-cancel {
-      margin-top: 16px;
-      padding: 12px 24px;
+    .modal-cancel {
+      margin-top: 12px;
+      padding: 12px;
       background: transparent;
-      border: 1px solid var(--border-matrix);
+      border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 13px;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
 
-    .admin-cancel:hover {
-      border-color: var(--text-muted);
-      color: var(--text-secondary);
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-10px); }
-      75% { transform: translateX(10px); }
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 640px) {
-      .header-status { display: none; }
-      .command-title { font-size: 20px; }
-      .stats-grid { gap: 10px; }
-      .stat-card { padding: 16px; }
-      .stat-value { font-size: 24px; }
-      .panel-body { padding: 16px; }
-      .layer-item { padding: 14px; }
-      .actions-grid { grid-template-columns: 1fr; }
+    /* Responsive */
+    @media (max-width: 480px) {
+      .status-score { font-size: 36px; }
+      .core-grid { gap: 10px; }
+      .core-card { padding: 16px; }
+      .stat-value { font-size: 20px; }
     }
   </style>
 </head>
 <body>
-  <!-- Matrix Rain Effect -->
-  <div class="matrix-rain" id="matrixRain"></div>
-
-  <!-- Grid Background -->
-  <div class="grid-bg"></div>
-
-  <!-- CRT Overlay -->
-  <div class="crt-overlay"></div>
-
-  <!-- Scanline -->
-  <div class="scanline"></div>
-
   <!-- Header -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <div class="logo-mark">DS</div>
-        <div class="header-title">Command Console</div>
+        <div class="header-logo">大提學</div>
+        <div class="header-title">師承 오피스</div>
       </div>
-      <div class="header-status">
-        <div class="status-item">
-          <div class="status-dot"></div>
-          <span>SYSTEMS ONLINE</span>
-        </div>
-        <div class="time-display" id="timeDisplay">00:00:00</div>
-      </div>
+      <div class="header-phase">Phase 0</div>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="main">
     <div class="container">
-      <!-- Command Header -->
-      <div class="command-header">
-        <div class="command-label">DONGSEON STUDIO</div>
-        <h1 class="command-title">Operation Center</h1>
-        <p class="command-subtitle">Digital Studio Protocol v2.0 • Secure Connection Established</p>
+      <!-- Status Banner -->
+      <div class="status-banner">
+        <div class="status-title">현재 권위 점수</div>
+        <div class="status-score">3.5</div>
+        <div class="status-label">/ 10.0</div>
+        <div class="status-bar">
+          <div class="status-bar-fill"></div>
+        </div>
+        <div class="status-next">다음 목표: 7.75 (파일럿 완료)</div>
       </div>
 
-      <!-- Stats Dashboard -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">📡</div>
-          <div class="stat-value" id="totalNodes">0</div>
-          <div class="stat-label">Total Nodes</div>
-          <div class="stat-change">+2 NEW</div>
+      <!-- Core IP 4종 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">📜 Core IP 4종</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-value blue" id="activeNodes">0</div>
-          <div class="stat-label">Active Ops</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🔄</div>
-          <div class="stat-value amber" id="inProgress">0</div>
-          <div class="stat-label">In Progress</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">💎</div>
-          <div class="stat-value" id="revenue">0</div>
-          <div class="stat-label">Revenue (KRW)</div>
+        <div class="core-grid">
+          <!-- 파일럿 대시보드 -->
+          <a href="pilot.html" class="core-card active">
+            <div class="core-icon">🎯</div>
+            <div class="core-name">파일럿</div>
+            <div class="core-status">동선 실적 트래킹</div>
+            <span class="core-badge active">진행 중</span>
+          </a>
+
+          <!-- 문생 레지스트리 -->
+          <a href="students.html" class="core-card">
+            <div class="core-icon">👑</div>
+            <div class="core-name">문생</div>
+            <div class="core-status">0명 / Tier 1</div>
+            <span class="core-badge pending">대기</span>
+          </a>
+
+          <!-- 권위 빌딩 트래커 -->
+          <a href="seals.html" class="core-card">
+            <div class="core-icon">🏛️</div>
+            <div class="core-name">씰</div>
+            <div class="core-status">0/3 획득</div>
+            <span class="core-badge pending">준비</span>
+          </a>
+
+          <!-- 콘텐츠 공장 -->
+          <a href="../engines/orbitprompt/" class="core-card">
+            <div class="core-icon">🎬</div>
+            <div class="core-name">콘텐츠</div>
+            <div class="core-status">OrbitPrompt</div>
+            <span class="core-badge active">실행</span>
+          </a>
         </div>
       </div>
 
-      <!-- Quick Actions -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Quick Operations</div>
-          <div class="panel-badge">5 AVAILABLE</div>
+      <!-- Quick Stats -->
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value" id="githubCommits">0</div>
+          <div class="stat-label">GitHub 커밋</div>
         </div>
-        <div class="panel-body">
-          <div class="actions-grid">
-            <a href="../staff-office/" class="action-btn">
-              <span class="action-icon">📋</span>
-              <span>STAFF OFFICE</span>
-            </a>
-            <button class="action-btn" onclick="createNode()">
-              <span class="action-icon">➕</span>
-              <span>NEW NODE</span>
-            </button>
-            <a href="../delivery/packages/" class="action-btn">
-              <span class="action-icon">📦</span>
-              <span>PACKAGES</span>
-            </a>
-            <a href="../engines/llm/" class="action-btn">
-              <span class="action-icon">🤖</span>
-              <span>LLM ENGINE</span>
-            </a>
-            <a href="../" class="action-btn">
-              <span class="action-icon">🏠</span>
-              <span>STUDIO HOME</span>
-            </a>
+        <div class="stat-item">
+          <div class="stat-value" id="youtubeVideos">0</div>
+          <div class="stat-label">YouTube 영상</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="pilotDays">0</div>
+          <div class="stat-label">파일럿 Day</div>
+        </div>
+      </div>
+
+      <!-- Today's Tasks -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">✓ 오늘 할 일</div>
+          <div class="section-count" id="taskCount">0/3</div>
+        </div>
+        <div class="task-list" id="taskList">
+          <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox">✓</div>
+            <div class="task-text">GitHub 커밋 1회</div>
+            <div class="task-tag">파일럿</div>
+          </div>
+          <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox">✓</div>
+            <div class="task-text">YouTube 쇼츠 1개 업로드</div>
+            <div class="task-tag">콘텐츠</div>
+          </div>
+          <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox">✓</div>
+            <div class="task-text">국책과제 공고 확인</div>
+            <div class="task-tag">씰</div>
           </div>
         </div>
       </div>
 
-      <!-- 5-Layer Architecture -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">5-Layer Architecture</div>
-          <div class="panel-badge">SYSTEM MAP</div>
+      <!-- 권위 빌딩 타임라인 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">🛤️ 권위 빌딩 로드맵</div>
         </div>
-        <div class="panel-body">
-          <div class="layer-list">
-            <a href="../delivery/" class="layer-item">
-              <div class="layer-num">L1</div>
-              <div class="layer-info">
-                <div class="layer-name">Delivery</div>
-                <div class="layer-desc">납품 및 배포 관리</div>
-              </div>
-              <div class="layer-status">READY</div>
-              <span class="layer-arrow">→</span>
-            </a>
-            <a href="../interfaces/" class="layer-item">
-              <div class="layer-num">L2</div>
-              <div class="layer-info">
-                <div class="layer-name">Interfaces</div>
-                <div class="layer-desc">동선 설계 및 UI</div>
-              </div>
-              <div class="layer-status">READY</div>
-              <span class="layer-arrow">→</span>
-            </a>
-            <a href="../engines/" class="layer-item">
-              <div class="layer-num">L3</div>
-              <div class="layer-info">
-                <div class="layer-name">Engines</div>
-                <div class="layer-desc">LLM, 자동화, 미디어</div>
-              </div>
-              <div class="layer-status">ACTIVE</div>
-              <span class="layer-arrow">→</span>
-            </a>
-            <a href="./" class="layer-item active">
-              <div class="layer-num">L4</div>
-              <div class="layer-info">
-                <div class="layer-name">Console</div>
-                <div class="layer-desc">현재 위치 • Command Center</div>
-              </div>
-              <div class="layer-status">ONLINE</div>
-              <span class="layer-arrow">→</span>
-            </a>
-            <a href="../archive/" class="layer-item">
-              <div class="layer-num">L5</div>
-              <div class="layer-info">
-                <div class="layer-name">Archive</div>
-                <div class="layer-desc">지식 및 데이터 축적</div>
-              </div>
-              <div class="layer-status">READY</div>
-              <span class="layer-arrow">→</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Terminal Log -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">System Terminal</div>
-          <div class="panel-badge">LIVE</div>
-        </div>
-        <div class="panel-body" style="padding: 0;">
-          <div class="terminal">
-            <div class="terminal-header">
-              <span class="terminal-dot red"></span>
-              <span class="terminal-dot yellow"></span>
-              <span class="terminal-dot green"></span>
-              <span class="terminal-title">dongseon@studio ~ %</span>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot current"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">Phase 0: 동선 파일럿</div>
+              <div class="timeline-desc">실적 축적 중 — GitHub, YouTube, 방송국</div>
+              <div class="timeline-meta">현재 진행 중 · 권위 3.5</div>
             </div>
-            <div class="terminal-body" id="terminalBody">
-              <div class="terminal-line">
-                <span class="terminal-prompt">$</span>
-                <span class="terminal-text">Initializing DONGSEON Protocol...</span>
-              </div>
-              <div class="terminal-line">
-                <span class="terminal-prompt">$</span>
-                <span class="terminal-text terminal-success">✓ System boot complete</span>
-              </div>
-              <div class="terminal-line">
-                <span class="terminal-prompt">$</span>
-                <span class="terminal-text terminal-success">✓ All layers operational</span>
-              </div>
-              <div class="terminal-line">
-                <span class="terminal-prompt">$</span>
-                <span class="terminal-text">Ready for operations<span class="terminal-cursor"></span></span>
-              </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot future"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">Phase 1: Tier 1 판매</div>
+              <div class="timeline-desc">워크플로우 모델링 ₩500만~</div>
+              <div class="timeline-meta">6개월 후 · 권위 5.5</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot future"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">Phase 2: 정부 씰</div>
+              <div class="timeline-desc">국책과제 수행 + Tier 2 판매</div>
+              <div class="timeline-meta">12개월 후 · 권위 7.75</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot future"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">Phase 3: 바티칸 씰</div>
+              <div class="timeline-desc">Rome Call + Tier 3 大提學 師承</div>
+              <div class="timeline-meta">24개월 후 · 권위 9.1</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Admin Access -->
-      <div class="admin-section">
+      <!-- Footer Actions -->
+      <div class="footer-actions">
+        <a href="../" class="action-btn">
+          <span class="action-btn-icon">🏠</span>
+          <span class="action-btn-text">랜딩 페이지</span>
+          <span class="action-btn-arrow">→</span>
+        </a>
+        <a href="../specs/" class="action-btn">
+          <span class="action-btn-icon">📋</span>
+          <span class="action-btn-text">Specs 문서</span>
+          <span class="action-btn-arrow">→</span>
+        </a>
+        <a href="https://github.com/dtslib1979" target="_blank" class="action-btn">
+          <span class="action-btn-icon">📦</span>
+          <span class="action-btn-text">GitHub 레포</span>
+          <span class="action-btn-arrow">→</span>
+        </a>
         <button class="admin-btn" onclick="openAdminModal()">
-          <div class="admin-icon">🔐</div>
-          <div class="admin-info">
-            <div class="admin-title">ADMIN ACCESS</div>
-            <div class="admin-desc">Restricted Area • Authorization Required</div>
-          </div>
-          <span class="admin-arrow">→</span>
+          <span class="action-btn-icon">🔐</span>
+          <span class="action-btn-text">Admin Access</span>
+          <span class="action-btn-arrow">→</span>
         </button>
       </div>
-
-      <!-- Back Link -->
-      <a href="../" class="back-link">
-        ← Return to Studio
-      </a>
     </div>
   </main>
 
   <!-- Admin Modal -->
-  <div class="admin-modal" id="adminModal" onclick="closeAdminModalOutside(event)">
-    <div class="admin-box">
-      <div class="admin-modal-icon">🔐</div>
-      <h3 class="admin-modal-title">ADMIN ACCESS</h3>
-      <p class="admin-modal-desc">Enter authorization code</p>
-      <input type="password" class="admin-input" id="adminPassword" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
-      <button class="admin-submit" onclick="checkAdminPassword()">AUTHORIZE</button>
-      <button class="admin-cancel" onclick="closeAdminModal()">CANCEL</button>
+  <div class="modal" id="adminModal" onclick="closeModalOutside(event)">
+    <div class="modal-box">
+      <div class="modal-icon">🔐</div>
+      <h3 class="modal-title">Admin Access</h3>
+      <p class="modal-desc">인증 코드를 입력하세요</p>
+      <input type="password" class="modal-input" id="adminPassword" maxlength="4" placeholder="••••" inputmode="numeric">
+      <button class="modal-submit" onclick="checkPassword()">인증</button>
+      <button class="modal-cancel" onclick="closeModal()">취소</button>
     </div>
   </div>
 
   <script>
-    // Matrix Rain Effect
-    function createMatrixRain() {
-      const container = document.getElementById('matrixRain');
-      const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      const columns = Math.floor(window.innerWidth / 20);
+    // Task Toggle
+    function toggleTask(el) {
+      el.classList.toggle('done');
+      updateTaskCount();
+      saveTasks();
+    }
 
-      for (let i = 0; i < columns; i++) {
-        const column = document.createElement('div');
-        column.className = 'rain-column';
-        column.style.left = (i * 20) + 'px';
-        column.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        column.style.animationDelay = (Math.random() * 5) + 's';
+    function updateTaskCount() {
+      const total = document.querySelectorAll('.task-item').length;
+      const done = document.querySelectorAll('.task-item.done').length;
+      document.getElementById('taskCount').textContent = `${done}/${total}`;
+    }
 
-        let text = '';
-        const length = Math.floor(Math.random() * 20) + 10;
-        for (let j = 0; j < length; j++) {
-          text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
-        }
-        column.innerHTML = text;
-        container.appendChild(column);
+    function saveTasks() {
+      const tasks = [];
+      document.querySelectorAll('.task-item').forEach((item, i) => {
+        tasks.push(item.classList.contains('done'));
+      });
+      localStorage.setItem('daejehak_tasks_' + new Date().toDateString(), JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      const saved = localStorage.getItem('daejehak_tasks_' + new Date().toDateString());
+      if (saved) {
+        const tasks = JSON.parse(saved);
+        document.querySelectorAll('.task-item').forEach((item, i) => {
+          if (tasks[i]) item.classList.add('done');
+        });
       }
+      updateTaskCount();
     }
 
-    // Time Display
-    function updateTime() {
-      const now = new Date();
-      const time = now.toTimeString().split(' ')[0];
-      document.getElementById('timeDisplay').textContent = time;
-    }
-
-    // Load Stats
-    async function loadStats() {
-      try {
-        const res = await fetch('../nodes/registry.json');
-        const data = await res.json();
-
-        document.getElementById('totalNodes').textContent = data.stats?.total || 0;
-        document.getElementById('activeNodes').textContent = data.stats?.active || 0;
-        document.getElementById('inProgress').textContent = data.nodes?.filter(n => n.status === 'in-progress').length || 0;
-
-        const revenue = data.nodes?.reduce((sum, n) => sum + (n.revenue?.received || 0), 0) || 0;
-        document.getElementById('revenue').textContent = revenue.toLocaleString();
-      } catch (e) {
-        console.log('Registry not loaded');
-      }
-    }
-
-    function createNode() {
-      alert('Node 생성 기능 - 추후 구현');
+    // Pilot Day Counter
+    function calculatePilotDays() {
+      const startDate = new Date('2026-01-30');
+      const today = new Date();
+      const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+      return Math.max(1, diff + 1);
     }
 
     // Admin Modal
     const ADMIN_PASSWORD = '1126';
-    const adminModal = document.getElementById('adminModal');
-    const adminInput = document.getElementById('adminPassword');
+    const modal = document.getElementById('adminModal');
+    const input = document.getElementById('adminPassword');
 
     function openAdminModal() {
-      adminModal.classList.add('show');
-      adminInput.value = '';
-      setTimeout(() => adminInput.focus(), 100);
+      modal.classList.add('show');
+      input.value = '';
+      setTimeout(() => input.focus(), 100);
     }
 
-    function closeAdminModal() {
-      adminModal.classList.remove('show');
+    function closeModal() {
+      modal.classList.remove('show');
     }
 
-    function closeAdminModalOutside(e) {
-      if (e.target === adminModal) closeAdminModal();
+    function closeModalOutside(e) {
+      if (e.target === modal) closeModal();
     }
 
-    function checkAdminPassword() {
-      if (adminInput.value === ADMIN_PASSWORD) {
-        closeAdminModal();
-        alert('관리자 모드 진입 성공!\n(관리자 페이지 추후 구현)');
+    function checkPassword() {
+      if (input.value === ADMIN_PASSWORD) {
+        closeModal();
+        window.location.href = 'admin.html';
       } else {
-        adminInput.value = '';
-        adminInput.style.borderColor = '#ff3333';
-        adminInput.style.animation = 'shake 0.3s';
-        setTimeout(() => {
-          adminInput.style.borderColor = '';
-          adminInput.style.animation = '';
-        }, 300);
+        input.value = '';
+        input.style.borderColor = '#8B0000';
+        setTimeout(() => input.style.borderColor = '', 300);
       }
     }
 
-    adminInput.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') checkAdminPassword();
+    input.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') checkPassword();
     });
 
     // Initialize
-    createMatrixRain();
-    updateTime();
-    setInterval(updateTime, 1000);
-    loadStats();
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTasks();
+      document.getElementById('pilotDays').textContent = calculatePilotDays();
+
+      // TODO: Load actual stats from API
+      document.getElementById('githubCommits').textContent = '25';
+      document.getElementById('youtubeVideos').textContent = '8';
+    });
   </script>
 </body>
 </html>
