@@ -1917,6 +1917,177 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ═══════════════════════════════════════════
+       ROADMAP TIMELINE - Mobile Responsive
+    ═══════════════════════════════════════════ */
+    .roadmap-timeline {
+      position: relative;
+    }
+
+    .roadmap-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.4) 50%, rgba(212,175,55,0.1) 100%);
+      transform: translateX(-50%);
+    }
+
+    .roadmap-phase {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .roadmap-phase:last-child {
+      margin-bottom: 0;
+    }
+
+    .roadmap-left {
+      flex: 1;
+      text-align: right;
+      padding-right: 24px;
+    }
+
+    .roadmap-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .roadmap-dot.active {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 0 20px rgba(16,185,129,0.4);
+    }
+
+    .roadmap-dot.pending {
+      background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.1));
+      border: 2px solid rgba(212,175,55,0.4);
+    }
+
+    .roadmap-dot.locked {
+      background: linear-gradient(135deg, rgba(139,0,0,0.3), rgba(139,0,0,0.1));
+      border: 2px solid rgba(139,0,0,0.4);
+    }
+
+    .roadmap-dot-icon {
+      font-size: 20px;
+    }
+
+    .roadmap-right {
+      flex: 1;
+      padding-left: 24px;
+    }
+
+    .roadmap-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .roadmap-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .roadmap-title.green { color: #10b981; }
+    .roadmap-title.gold { color: #d4af37; }
+    .roadmap-title.crimson { color: #8B0000; }
+
+    .roadmap-card {
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .roadmap-card.green {
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+
+    .roadmap-card.gold {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+
+    .roadmap-card.crimson {
+      background: rgba(139,0,0,0.1);
+      border: 1px solid rgba(139,0,0,0.3);
+    }
+
+    .roadmap-card-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .roadmap-card-title.green { color: #10b981; }
+    .roadmap-card-title.gold { color: #d4af37; }
+    .roadmap-card-title.crimson { color: #8B0000; }
+
+    .roadmap-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Mobile Roadmap */
+    @media (max-width: 640px) {
+      .roadmap-line {
+        left: 24px;
+        transform: none;
+      }
+
+      .roadmap-phase {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-left: 56px;
+        margin-bottom: 32px;
+      }
+
+      .roadmap-dot {
+        position: absolute;
+        left: 0;
+        width: 40px;
+        height: 40px;
+      }
+
+      .roadmap-dot-icon {
+        font-size: 18px;
+      }
+
+      .roadmap-left,
+      .roadmap-right {
+        flex: none;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+      }
+
+      .roadmap-card {
+        padding: 16px;
+      }
+
+      .roadmap-title {
+        font-size: 16px;
+      }
+
+      section.roadmap {
+        padding: 60px 16px;
+      }
+
+      .roadmap-card-desc {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2205,75 +2376,75 @@
       </div>
 
       <!-- Timeline -->
-      <div class="reveal" style="position:relative;">
+      <div class="reveal roadmap-timeline">
         <!-- Vertical Line -->
-        <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.4) 50%, rgba(212,175,55,0.1) 100%);transform:translateX(-50%);"></div>
+        <div class="roadmap-line"></div>
 
         <!-- Phase 0: 현재 -->
-        <div style="display:flex;align-items:center;gap:32px;margin-bottom:48px;position:relative;">
-          <div style="flex:1;text-align:right;padding-right:24px;">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">현재 ~ 6개월</div>
-            <div style="font-size:18px;font-weight:700;color:#10b981;">Phase 0</div>
+        <div class="roadmap-phase">
+          <div class="roadmap-left">
+            <div class="roadmap-time">현재 ~ 6개월</div>
+            <div class="roadmap-title green">Phase 0</div>
           </div>
-          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 20px rgba(16,185,129,0.4);">
-            <span style="font-size:20px;">🎯</span>
+          <div class="roadmap-dot active">
+            <span class="roadmap-dot-icon">🎯</span>
           </div>
-          <div style="flex:1;padding-left:24px;">
-            <div style="padding:20px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;">
-              <div style="font-weight:700;color:#10b981;margin-bottom:8px;">동선 파일럿</div>
-              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">실적 축적 중<br>권위: <strong>3.5</strong> / 가격: -</div>
+          <div class="roadmap-right">
+            <div class="roadmap-card green">
+              <div class="roadmap-card-title green">동선 파일럿</div>
+              <div class="roadmap-card-desc">실적 축적 중<br>권위: <strong>3.5</strong> / 가격: -</div>
             </div>
           </div>
         </div>
 
         <!-- Phase 1 -->
-        <div style="display:flex;align-items:center;gap:32px;margin-bottom:48px;position:relative;">
-          <div style="flex:1;text-align:right;padding-right:24px;">
-            <div style="padding:20px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:12px;">
-              <div style="font-weight:700;color:#d4af37;margin-bottom:8px;">Tier 1 판매 시작</div>
-              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">동선 증빙 완성<br>권위: <strong>5.5</strong> / 가격: ₩500만</div>
+        <div class="roadmap-phase">
+          <div class="roadmap-left">
+            <div class="roadmap-card gold">
+              <div class="roadmap-card-title gold">Tier 1 판매 시작</div>
+              <div class="roadmap-card-desc">동선 증빙 완성<br>권위: <strong>5.5</strong> / 가격: ₩500만</div>
             </div>
           </div>
-          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(212,175,55,0.3),rgba(212,175,55,0.1));border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;z-index:1;">
-            <span style="font-size:20px;">📦</span>
+          <div class="roadmap-dot pending">
+            <span class="roadmap-dot-icon">📦</span>
           </div>
-          <div style="flex:1;padding-left:24px;">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">6 ~ 12개월</div>
-            <div style="font-size:18px;font-weight:700;color:#d4af37;">Phase 1</div>
+          <div class="roadmap-right">
+            <div class="roadmap-time">6 ~ 12개월</div>
+            <div class="roadmap-title gold">Phase 1</div>
           </div>
         </div>
 
         <!-- Phase 2 -->
-        <div style="display:flex;align-items:center;gap:32px;margin-bottom:48px;position:relative;">
-          <div style="flex:1;text-align:right;padding-right:24px;">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">12 ~ 24개월</div>
-            <div style="font-size:18px;font-weight:700;color:#d4af37;">Phase 2</div>
+        <div class="roadmap-phase">
+          <div class="roadmap-left">
+            <div class="roadmap-time">12 ~ 24개월</div>
+            <div class="roadmap-title gold">Phase 2</div>
           </div>
-          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(212,175,55,0.3),rgba(212,175,55,0.1));border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;z-index:1;">
-            <span style="font-size:20px;">🏛️</span>
+          <div class="roadmap-dot pending">
+            <span class="roadmap-dot-icon">🏛️</span>
           </div>
-          <div style="flex:1;padding-left:24px;">
-            <div style="padding:20px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:12px;">
-              <div style="font-weight:700;color:#d4af37;margin-bottom:8px;">정부 씰 획득</div>
-              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">국책과제 수행<br>권위: <strong>7.75</strong> / 가격: ₩5천만</div>
+          <div class="roadmap-right">
+            <div class="roadmap-card gold">
+              <div class="roadmap-card-title gold">정부 씰 획득</div>
+              <div class="roadmap-card-desc">국책과제 수행<br>권위: <strong>7.75</strong> / 가격: ₩5천만</div>
             </div>
           </div>
         </div>
 
         <!-- Phase 3 -->
-        <div style="display:flex;align-items:center;gap:32px;position:relative;">
-          <div style="flex:1;text-align:right;padding-right:24px;">
-            <div style="padding:20px;background:rgba(139,0,0,0.1);border:1px solid rgba(139,0,0,0.3);border-radius:12px;">
-              <div style="font-weight:700;color:#8B0000;margin-bottom:8px;">바티칸 씰 획득</div>
-              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Rome Call for AI Ethics<br>권위: <strong>9.1</strong> / 가격: ₩3억</div>
+        <div class="roadmap-phase">
+          <div class="roadmap-left">
+            <div class="roadmap-card crimson">
+              <div class="roadmap-card-title crimson">바티칸 씰 획득</div>
+              <div class="roadmap-card-desc">Rome Call for AI Ethics<br>권위: <strong>9.1</strong> / 가격: ₩3억</div>
             </div>
           </div>
-          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(139,0,0,0.3),rgba(139,0,0,0.1));border:2px solid rgba(139,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:1;">
-            <span style="font-size:20px;">⛪</span>
+          <div class="roadmap-dot locked">
+            <span class="roadmap-dot-icon">⛪</span>
           </div>
-          <div style="flex:1;padding-left:24px;">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">24개월+</div>
-            <div style="font-size:18px;font-weight:700;color:#8B0000;">Phase 3</div>
+          <div class="roadmap-right">
+            <div class="roadmap-time">24개월+</div>
+            <div class="roadmap-title crimson">Phase 3</div>
           </div>
         </div>
       </div>
