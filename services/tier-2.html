@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tier 2: 검증된 시스템 이식 | 大提學</title>
+  <meta name="description" content="大提學 Tier 2. 검증된 시스템 이식. ₩5천만~1억 / 6개월. 파일럿 완료 후 오픈.">
+  <meta name="theme-color" content="#0F0F0F">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-card: rgba(212,175,55,0.03);
+      --bg-card-hover: rgba(212,175,55,0.08);
+      --gold: #D4AF37;
+      --gold-dark: #8B6914;
+      --green: #10b981;
+      --crimson: #8B0000;
+      --text: #F5F5DC;
+      --text-secondary: rgba(245,245,220,0.7);
+      --text-muted: rgba(245,245,220,0.4);
+      --border: rgba(212,175,55,0.2);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,15,15,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      padding-top: calc(16px + var(--safe-top));
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .header-back {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .header-back:hover { color: var(--gold); }
+
+    .main {
+      padding-top: calc(80px + var(--safe-top));
+      padding-bottom: calc(60px + var(--safe-bottom));
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .tier-badge {
+      display: inline-block;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.1));
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .price-box {
+      padding: 32px;
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+      margin-bottom: 32px;
+    }
+
+    .price {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .price-period {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .features {
+      text-align: left;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+
+    .features-title {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .feature-item:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .requirements {
+      padding: 20px;
+      background: rgba(212,175,55,0.05);
+      border: 1px dashed rgba(212,175,55,0.3);
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+
+    .requirements-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .requirements-list {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .timeline-box {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+
+    .timeline-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .timeline-dot.done {
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(16,185,129,0.4);
+    }
+
+    .timeline-dot.current {
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(212,175,55,0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .timeline-dot.pending {
+      background: rgba(212,175,55,0.3);
+      border: 2px solid rgba(212,175,55,0.5);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .timeline-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .timeline-text.muted {
+      color: var(--text-muted);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(212,175,55,0.4);
+      transform: translateY(-2px);
+    }
+
+    .quote {
+      margin-top: 48px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .quote-text strong {
+      color: var(--gold);
+    }
+
+    @media (max-width: 600px) {
+      .title { font-size: 26px; }
+      .price { font-size: 36px; }
+      .price-box { padding: 24px; }
+      .container { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../" class="header-logo">大提學</a>
+      <a href="./" class="header-back">← 프로덕트</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="status-badge">
+        <span>⏳</span> 파일럿 완료 후 오픈
+      </div>
+
+      <div class="tier-badge">TIER 2</div>
+
+      <h1 class="title">검증된 시스템 이식</h1>
+      <p class="subtitle">동선 파일럿 성공 후 판매 시작</p>
+
+      <div class="price-box">
+        <div class="price">₩5천만~1억</div>
+        <div class="price-period">6개월 과정</div>
+      </div>
+
+      <div class="features">
+        <div class="features-title">📦 포함 내용</div>
+        <div class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Tier 1 전체 과정 포함</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>시스템 이식 컨설팅 (6개월)</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>GitHub 생태계 구축 지원</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>자동화 파이프라인 설계</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>대면 세션 (월 2회)</span>
+        </div>
+      </div>
+
+      <div class="requirements">
+        <div class="requirements-title">🔐 오픈 요건</div>
+        <div class="requirements-list">
+          동선 성공 사례 완성<br>
+          파일럿 실적 증빙<br>
+          권위 점수 7.75 달성
+        </div>
+      </div>
+
+      <div class="timeline-box">
+        <div class="timeline-title">오픈 타임라인</div>
+        <div class="timeline-item">
+          <div class="timeline-dot current"></div>
+          <div class="timeline-text">Phase 0: 동선 파일럿 진행 중</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot pending"></div>
+          <div class="timeline-text muted">Phase 1: Tier 1 판매 시작 (6개월 후)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot pending"></div>
+          <div class="timeline-text muted">Phase 2: Tier 2 오픈 (12개월 후)</div>
+        </div>
+      </div>
+
+      <a href="./" class="back-link">
+        ← 프로덕트 피라미드로 돌아가기
+      </a>
+
+      <div class="quote">
+        <p class="quote-text">
+          "증빙 없이 ₩5천만을 받을 수 없다.<br>
+          <strong>동선이 살아있는 증빙이 된다.</strong>"
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

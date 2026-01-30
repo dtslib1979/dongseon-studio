@@ -365,6 +365,30 @@
       cursor: not-allowed;
     }
 
+    .tier-cta.upcoming {
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold);
+    }
+
+    .tier-cta.upcoming:hover {
+      background: rgba(212,175,55,0.25);
+      border-color: rgba(212,175,55,0.5);
+      transform: translateY(-2px);
+    }
+
+    .tier-cta.locked-link {
+      background: rgba(139,0,0,0.1);
+      border: 1px solid rgba(139,0,0,0.3);
+      color: var(--crimson);
+    }
+
+    .tier-cta.locked-link:hover {
+      background: rgba(139,0,0,0.2);
+      border-color: rgba(139,0,0,0.5);
+      transform: translateY(-2px);
+    }
+
     /* Authority Explanation */
     .authority-box {
       padding: 28px;
@@ -592,7 +616,7 @@
                 자동화 파이프라인 세팅
               </div>
             </div>
-            <span class="tier-cta locked">동선 파일럿 완료 후 오픈</span>
+            <a href="tier-2.html" class="tier-cta upcoming">자세히 보기 →</a>
           </div>
 
           <!-- Tier 3 -->
@@ -639,7 +663,7 @@
                 문생 네트워크 접근권
               </div>
             </div>
-            <span class="tier-cta locked">정부 씰 + 바티칸 씰 획득 후 오픈</span>
+            <a href="tier-3.html" class="tier-cta locked-link">자세히 보기 →</a>
           </div>
         </div>
       </div>
