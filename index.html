@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>DONGSEON — Digital Studio</title>
-  <meta name="description" content="동선 스튜디오. 1인 사업자를 위한 디지털 스튜디오. 핸드폰 하나로 9시간 만에 2,000만원 가치를 만드는 시스템.">
-  <meta name="theme-color" content="#030712">
+  <title>大提學 — 동북아 부호 2세를 위한 AI 왕도 교육</title>
+  <meta name="description" content="大提學. 동북아 부호 2세를 위한 AI 왕도(王道) 교육. AI를 팔지 않는다. '내 아들은 왕세자급'이라는 아버지의 허세를 판다.">
+  <meta name="theme-color" content="#0F0F0F">
   <link rel="manifest" href="manifest.webmanifest">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="DONGSEON — Digital Studio">
-  <meta property="og:description" content="1인 사업자를 위한 디지털 스튜디오. 핸드폰 하나로 9시간 만에 2,000만원 가치를 만드는 시스템.">
+  <meta property="og:title" content="大提學 — AI 왕도 교육">
+  <meta property="og:description" content="동북아 부호 2세를 위한 AI 왕도(王道) 교육. 帝王의 子弟를 가르치는 最高 學官.">
   <meta property="og:url" content="https://dtslib1979.github.io/dongseon-studio/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,23 +21,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #030712;
-      --bg-subtle: #0a0f1a;
-      --surface: rgba(255,255,255,0.03);
-      --surface-hover: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.06);
-      --border-hover: rgba(255,255,255,0.12);
-      --text: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-tertiary: #64748b;
-      --text-muted: #475569;
-      --accent: #3b82f6;
-      --accent-glow: rgba(59,130,246,0.4);
-      --purple: #8b5cf6;
-      --cyan: #06b6d4;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --rose: #f43f5e;
+      /* Daejehak Gold Palette */
+      --bg: #0F0F0F;
+      --bg-subtle: #1A1A1A;
+      --surface: rgba(212,175,55,0.03);
+      --surface-hover: rgba(212,175,55,0.08);
+      --border: rgba(212,175,55,0.15);
+      --border-hover: rgba(212,175,55,0.3);
+      --text: #F5F5DC;
+      --text-secondary: #D4AF37;
+      --text-tertiary: #8B7355;
+      --text-muted: #6B5B45;
+      --accent: #D4AF37;
+      --accent-glow: rgba(212,175,55,0.4);
+      --accent-dark: #8B6914;
+      --purple: #8B0000;
+      --cyan: #B8860B;
+      --emerald: #DAA520;
+      --amber: #F4D03F;
+      --rose: #A52A2A;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -82,14 +84,14 @@
 
     .mesh-1 {
       width: 600px; height: 600px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
       top: -200px; left: -100px;
       animation-delay: 0s;
     }
 
     .mesh-2 {
       width: 500px; height: 500px;
-      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%);
       top: 30%; right: -150px;
       animation-delay: -5s;
       animation-duration: 25s;
@@ -97,7 +99,7 @@
 
     .mesh-3 {
       width: 400px; height: 400px;
-      background: linear-gradient(135deg, #8b5cf6 0%, #f43f5e 100%);
+      background: linear-gradient(135deg, #8B6914 0%, #8B0000 100%);
       bottom: 10%; left: -100px;
       animation-delay: -10s;
       animation-duration: 22s;
@@ -173,8 +175,8 @@
       align-items: center;
       gap: 10px;
       padding: 8px 14px;
-      background: linear-gradient(145deg, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.9) 100%);
-      border: 1px solid rgba(59,130,246,0.3);
+      background: linear-gradient(145deg, rgba(26,26,26,0.9) 0%, rgba(15,15,15,0.95) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 10px;
       cursor: pointer;
       position: relative;
@@ -187,15 +189,15 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f43f5e);
+      background: linear-gradient(90deg, #D4AF37, #F4D03F, #8B6914);
       background-size: 200% 100%;
       animation: shimmer 3s ease-in-out infinite;
     }
 
     .logo-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(59,130,246,0.5);
-      box-shadow: 0 8px 24px rgba(59,130,246,0.2);
+      border-color: rgba(212,175,55,0.5);
+      box-shadow: 0 8px 24px rgba(212,175,55,0.2);
     }
 
     .logo-card-icon {
@@ -276,19 +278,19 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.2) 100%);
-      border: 1px solid rgba(59,130,246,0.4);
+      background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(139,105,20,0.2) 100%);
+      border: 1px solid rgba(212,175,55,0.4);
       border-radius: 10px;
-      color: #3b82f6;
+      color: #D4AF37;
       transition: all 0.3s ease;
     }
 
     .nav-email:hover {
-      background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(139,92,246,0.3) 100%);
-      border-color: rgba(59,130,246,0.6);
+      background: linear-gradient(135deg, rgba(212,175,55,0.3) 0%, rgba(139,105,20,0.3) 100%);
+      border-color: rgba(212,175,55,0.6);
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(59,130,246,0.3);
-      color: #60a5fa;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+      color: #F4D03F;
     }
 
     .email-icon {
@@ -407,7 +409,7 @@
     }
 
     .hero-title-gradient {
-      background: linear-gradient(135deg, #fff 0%, #fff 40%, #3b82f6 60%, #8b5cf6 80%, #f43f5e 100%);
+      background: linear-gradient(135deg, #F5F5DC 0%, #F4D03F 30%, #D4AF37 50%, #8B6914 70%, #8B0000 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -649,23 +651,23 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-      color: white;
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.3), 0 8px 32px rgba(59,130,246,0.3);
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
+      color: #0F0F0F;
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.3), 0 8px 32px rgba(212,175,55,0.3);
     }
 
     .btn-primary::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 100%);
       opacity: 0;
       transition: opacity 0.3s;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.5), 0 16px 48px rgba(59,130,246,0.4);
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.5), 0 16px 48px rgba(212,175,55,0.4);
     }
 
     .btn-primary:hover::before { opacity: 1; }
@@ -1478,23 +1480,23 @@
       align-items: center;
       gap: 12px;
       padding: 14px 28px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(59,130,246,0.5);
+      border: 1px solid rgba(212,175,55,0.5);
       border-radius: 100px;
       font-size: 14px;
       font-weight: 600;
-      color: white;
-      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+      color: #0F0F0F;
+      box-shadow: 0 8px 32px rgba(212,175,55,0.3);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
     }
 
     .floating-btn:hover {
-      border-color: rgba(59,130,246,0.8);
-      box-shadow: 0 8px 40px rgba(59,130,246,0.4);
+      border-color: rgba(212,175,55,0.8);
+      box-shadow: 0 8px 40px rgba(212,175,55,0.4);
       transform: translateY(-2px);
-      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 100%);
     }
 
     @media (max-width: 640px) {
@@ -1586,20 +1588,20 @@
     .business-card {
       width: 100%;
       max-width: 380px;
-      background: linear-gradient(145deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%);
-      border: 1px solid rgba(59,130,246,0.3);
+      background: linear-gradient(145deg, rgba(26,26,26,0.95) 0%, rgba(15,15,15,0.98) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 24px;
       padding: 32px 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 100px rgba(212,175,55,0.1);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .business-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 60px rgba(0,0,0,0.6), 0 0 120px rgba(59,130,246,0.15);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.6), 0 0 120px rgba(212,175,55,0.15);
     }
 
     .business-card::before {
@@ -1607,7 +1609,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #f43f5e 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #8B6914 100%);
       background-size: 200% 100%;
       animation: shimmer 3s ease-in-out infinite;
     }
@@ -1645,9 +1647,9 @@
       height: 80px;
       margin: 0 auto 20px;
       border-radius: 50%;
-      border: 2px solid var(--accent);
+      border: 2px solid #D4AF37;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
     }
 
     .card-logo img {
@@ -1665,7 +1667,7 @@
       font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #fff 0%, #3b82f6 50%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #F5F5DC 0%, #D4AF37 50%, #8B6914 100%);
       background-size: 200% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1682,7 +1684,7 @@
 
     .card-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
       margin: 20px 0;
     }
 
@@ -1735,27 +1737,27 @@
       gap: 8px;
       padding: 12px 16px;
       background: transparent;
-      border: 1px solid rgba(59,130,246,0.3);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 12px;
-      color: var(--accent);
+      color: #D4AF37;
       font-size: 12px;
       font-weight: 600;
       transition: all 0.2s;
     }
 
     .card-btn:hover {
-      background: rgba(59,130,246,0.1);
-      border-color: var(--accent);
+      background: rgba(212,175,55,0.1);
+      border-color: #D4AF37;
     }
 
     .card-btn.primary {
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-      color: white;
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
+      color: #0F0F0F;
       border: none;
     }
 
     .card-btn.primary:hover {
-      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.4);
     }
 
     .card-footer-note {
@@ -1808,19 +1810,19 @@
     .password-box {
       width: 100%;
       max-width: 320px;
-      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid rgba(59,130,246,0.3);
+      background: linear-gradient(145deg, #1A1A1A 0%, #0F0F0F 100%);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(59,130,246,0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(212,175,55,0.1);
     }
 
     .password-title {
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #60a5fa;
+      color: #D4AF37;
     }
 
     .password-desc {
@@ -1832,10 +1834,10 @@
     .password-input {
       width: 100%;
       padding: 16px;
-      background: rgba(3,7,18,0.8);
-      border: 1px solid rgba(59,130,246,0.3);
+      background: rgba(15,15,15,0.8);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 12px;
-      color: #60a5fa;
+      color: #D4AF37;
       font-size: 24px;
       font-weight: 700;
       text-align: center;
@@ -1846,8 +1848,8 @@
     }
 
     .password-input:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 20px rgba(59,130,246,0.2);
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212,175,55,0.2);
     }
 
     .password-input.error {
@@ -1864,10 +1866,10 @@
     .password-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
       border: none;
       border-radius: 12px;
-      color: white;
+      color: #0F0F0F;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -1876,7 +1878,7 @@
     }
 
     .password-submit:hover {
-      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.4);
       transform: translateY(-1px);
     }
 
@@ -1932,11 +1934,11 @@
     <div class="header-inner">
       <button class="logo-card" onclick="openCardModal()">
         <div class="logo-card-icon">
-          <img src="assets/logo-ds.png" alt="DS">
+          <img src="assets/logo-ds.png" alt="大提學">
         </div>
         <div class="logo-card-text">
-          <span class="logo-card-name">DONGSEON</span>
-          <span class="logo-card-label">Business Card</span>
+          <span class="logo-card-name">大提學</span>
+          <span class="logo-card-label">AI 王道 敎育</span>
         </div>
       </button>
       <nav class="header-nav">
@@ -1952,29 +1954,58 @@
     </div>
   </header>
 
-  <!-- ACT 1: HOOK - 충격적인 도입 -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
-      실화입니다
+      AI 왕도 교육
+      <span class="hero-badge-tag">v2.1</span>
     </div>
 
     <h1 class="hero-title">
-      <span class="hero-title-gradient">식당에서 12시간 일하고</span>
+      <span class="hero-title-gradient">大提學</span>
     </h1>
 
-    <p class="hero-tagline" style="font-size:clamp(20px,4vw,32px);margin-bottom:16px;">
-      밤에 핸드폰 하나로<br>
-      <strong style="color:var(--accent);">9시간 만에 2,000만원 가치를 만들었습니다.</strong>
+    <!-- Hanja Display -->
+    <div class="hanja-display">
+      <div class="hanja-group">
+        <div class="hanja-char">
+          <span class="hanja-main" id="char1">大</span>
+          <span class="hanja-cursor"></span>
+        </div>
+        <span class="hanja-meaning" id="meaning1">큰</span>
+        <span class="hanja-hangul">대</span>
+      </div>
+      <div class="hanja-group">
+        <div class="hanja-char">
+          <span class="hanja-main" id="char2">提</span>
+          <span class="hanja-cursor"></span>
+        </div>
+        <span class="hanja-meaning" id="meaning2">이끌</span>
+        <span class="hanja-hangul">제</span>
+      </div>
+      <div class="hanja-group">
+        <div class="hanja-char">
+          <span class="hanja-main" id="char3">學</span>
+          <span class="hanja-cursor"></span>
+        </div>
+        <span class="hanja-meaning" id="meaning3">배움</span>
+        <span class="hanja-hangul">학</span>
+      </div>
+    </div>
+
+    <p class="hero-subtitle-ko" style="margin-bottom:16px;font-size:clamp(14px,3vw,18px);color:var(--text-tertiary);">
+      帝王의 子弟를 가르치는 最高 學官
     </p>
 
-    <p style="color:var(--text-tertiary);font-size:14px;margin-bottom:32px;">
-      PC 없음. 편집 없음. 돈 없음.<br>
-      그래서 찾은 방법입니다.
+    <p class="hero-tagline">
+      "이건 AI 과외 사업이 아니다.<br>
+      <strong>동북아 부호 2세 비밀 클럽의 문지기</strong>가 되는 것이다."
     </p>
 
     <div class="hero-cta">
-      <a href="#story" class="btn btn-primary"><span>어떻게 가능한가 ↓</span></a>
+      <a href="#pyramid" class="btn btn-primary"><span>프로덕트 피라미드</span></a>
+      <a href="#philosophy" class="btn btn-secondary">師承의 철학</a>
     </div>
 
     <div class="hero-scroll">
@@ -1983,101 +2014,75 @@
     </div>
   </section>
 
-  <!-- ACT 2: CONTEXT - 제약 조건 -->
-  <section class="manifesto" id="story">
+  <!-- About -->
+  <section class="manifesto" id="about">
     <div class="manifesto-inner reveal">
-      <p style="font-size:14px;color:var(--text-tertiary);margin-bottom:24px;">제약 조건</p>
-      <p class="manifesto-quote" style="font-size:clamp(20px,4vw,36px);">
-        PC가 없습니다.<br>
-        편집할 시간이 없습니다.<br>
-        서버비 낼 돈이 없습니다.
+      <p class="manifesto-quote">
+        AI를 팔지 않는다.<br>
+        <span style="color:var(--accent);">'내 아들은 왕세자급'</span>이라는<br>
+        아버지의 허세를 판다.
       </p>
-      <p class="manifesto-quote-en" style="margin-top:32px;font-style:normal;color:var(--text-secondary);">
-        12시간 육체노동 후에 남는 건<br>
-        <strong style="color:var(--text);">핸드폰과 2시간</strong>뿐이었습니다.
+      <p class="manifesto-quote-en">
+        We don't sell AI. We sell the vanity of "My son is prince-grade."
       </p>
     </div>
   </section>
 
-  <!-- ACT 3: DISCOVERY - 발견 -->
-  <section class="bento" id="discovery">
+  <!-- Core - 권위의 물증 -->
+  <section class="bento" id="core">
     <div class="bento-header reveal">
-      <span class="section-label">발견</span>
-      <h2 class="section-title">그래서 찾은 4가지</h2>
+      <span class="section-label">權威의 物證</span>
+      <h2 class="section-title">25개 레포 = 문지기의 자격</h2>
       <p class="section-desc">
-        제약이 오히려 시스템을 만들었습니다.
+        "5주 만에 핸드폰으로 25개 만든 사람한테 배우면,<br>
+        당신 아들도 이렇게 된다."
       </p>
     </div>
 
     <div class="bento-grid">
       <div class="bento-card bento-half reveal">
-        <div class="bento-icon blue">🎬</div>
-        <h3 class="bento-title">편집 0분 콘텐츠</h3>
+        <div class="bento-icon emerald">👑</div>
+        <h3 class="bento-title">왕세자는 편집하지 않는다</h3>
         <p class="bento-desc">
-          시간이 없어서 찾은 방법.<br>
-          <strong>찍으면 끝.</strong> 후편집 없이 바로 업로드.
+          편집 0분. 명령하면 끝.
         </p>
       </div>
 
       <div class="bento-card bento-half reveal reveal-delay-1">
-        <div class="bento-icon purple">🤖</div>
-        <h3 class="bento-title">말로 하는 자동화</h3>
+        <div class="bento-icon amber">⚔️</div>
+        <h3 class="bento-title">신하가 처리하는 시스템</h3>
         <p class="bento-desc">
-          코딩할 시간이 없어서 찾은 방법.<br>
-          <strong>"이거 해"</strong> 하면 AI가 실행.
+          GUI 자동화. 말로 명령하면 실행.
         </p>
       </div>
 
       <div class="bento-card bento-half reveal reveal-delay-1">
-        <div class="bento-icon amber">💰</div>
-        <h3 class="bento-title">서버비 0원</h3>
+        <div class="bento-icon purple">🏛️</div>
+        <h3 class="bento-title">제국의 영토는 무한 확장</h3>
         <p class="bento-desc">
-          돈이 없어서 찾은 방법.<br>
-          <strong>GitHub만으로</strong> 25개 사업부 운영.
+          서버비 0원. GitHub = 무료 인프라.
         </p>
       </div>
 
       <div class="bento-card bento-half reveal reveal-delay-2">
-        <div class="bento-icon rose">📱</div>
-        <h3 class="bento-title">핸드폰으로 개발</h3>
+        <div class="bento-icon rose">📜</div>
+        <h3 class="bento-title">어디서든 통치 가능</h3>
         <p class="bento-desc">
-          PC가 없어서 찾은 방법.<br>
-          <strong>Galaxy 하나로</strong> 전체 시스템 구축.
+          핸드폰 하나로 개발. 장소 자유.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ACT 4: PROOF - 증명 -->
-  <section class="manifesto" id="proof">
+  <!-- Philosophy - 師承 -->
+  <section class="manifesto" id="philosophy" style="background:var(--bg-subtle);">
     <div class="manifesto-inner reveal">
-      <p style="font-size:14px;color:var(--text-tertiary);margin-bottom:24px;">증명</p>
-      <p class="manifesto-quote" style="font-size:clamp(18px,3.5vw,28px);">
-        2026년 1월 29일, 9시간 동안<br>
-        6,521줄의 코드를 작성했습니다.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:32px;">
-        <span class="layer-pill"><span class="layer-dot l1"></span>시장가 2,000만원</span>
-        <span class="layer-pill"><span class="layer-dot l2"></span>실제 비용 5,500원</span>
-        <span class="layer-pill"><span class="layer-dot l3"></span>ROI 1,090배</span>
-      </div>
-      <p style="margin-top:32px;font-size:15px;color:var(--text-secondary);">
-        이론이 아닙니다.<br>
-        <strong style="color:var(--text);">이 웹사이트가 그 결과물입니다.</strong>
-      </p>
-    </div>
-  </section>
-
-  <!-- ACT 5: PRINCIPLE - 원칙 -->
-  <section class="manifesto" style="background:var(--bg-subtle);">
-    <div class="manifesto-inner reveal">
-      <p style="font-size:14px;color:var(--accent);margin-bottom:24px;">제1원칙</p>
       <p class="manifesto-quote">
-        우리는 당신에게 맞추지 않습니다.<br>
-        당신이 이 시스템에 맞춰야 합니다.
+        고객이 아니라 <span style="color:var(--accent);">문생</span>.<br>
+        매출이 아니라 <span style="color:var(--accent);">계보</span>.
       </p>
-      <p class="manifesto-quote-en" style="margin-top:24px;">
-        대신, 이 시스템은 이미 증명되었습니다.
+      <p class="manifesto-quote-en">
+        "따라할 수 있는 건 실력. 따라할 수 없는 건 계보의 시간."
       </p>
     </div>
   </section>
@@ -2212,8 +2217,8 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-logo">DONG SEON</div>
-        <div class="footer-tagline">1인 사업자를 위한 디지털 스튜디오</div>
+        <div class="footer-logo">大提學</div>
+        <div class="footer-tagline">동북아 부호 2세를 위한 AI 왕도 교육</div>
       </div>
 
       <div class="footer-links">
@@ -2224,17 +2229,17 @@
 
       <div class="footer-copy">
         <p>DTSLIB Group © 2026</p>
-        <span class="footer-tier">Tier 2 · Digital Studio Protocol HQ · DTSLIB-PAPYRUS</span>
+        <span class="footer-tier">大提學 v2.1 · AI 王道 敎育 · DTSLIB-PAPYRUS</span>
       </div>
     </div>
   </footer>
 
-  <!-- Floating CTA - Secret Office -->
+  <!-- Floating CTA - 師承 입문 -->
   <div class="floating-cta">
     <button class="floating-btn" onclick="openPasswordModal()">
-      <span class="floating-btn-icon">🔑</span>
+      <span class="floating-btn-icon">👑</span>
       <span class="floating-btn-text">
-        <span class="floating-btn-title">Secret Office</span>
+        <span class="floating-btn-title">師承 入門</span>
         <span class="floating-btn-sub">Express Entry</span>
       </span>
     </button>
@@ -2250,13 +2255,13 @@
       </div>
 
       <div class="card-brand">
-        <h2 class="card-brand-name">DONG SEON</h2>
-        <p class="card-tagline">비즈니스의 장면을 그리는<br>디지털 스튜 디오</p>
+        <h2 class="card-brand-name">大提學</h2>
+        <p class="card-tagline">동북아 부호 2세를 위한<br>AI 왕도(王道) 교육</p>
       </div>
 
       <div class="card-divider"></div>
 
-      <p class="card-quote">"<span>동선</span> — 사람을 움직이게 되는 선"</p>
+      <p class="card-quote">"<span>師承</span> — 帝王의 子弟를 가르치는 最高 學官"</p>
 
       <div class="card-divider"></div>
 
@@ -2288,13 +2293,13 @@
     </article>
   </div>
 
-  <!-- Password Modal - Secret Office -->
+  <!-- Password Modal - 師承 입문 -->
   <div class="password-modal" id="passwordModal" onclick="closePasswordModalOutside(event)">
     <div class="password-box">
-      <h3 class="password-title">🔐 Secret Office</h3>
-      <p class="password-desc">작업자 전용 입장</p>
+      <h3 class="password-title">👑 師承 入門</h3>
+      <p class="password-desc">大提學 문하생 전용</p>
       <input type="password" class="password-input" id="passwordInput" maxlength="4" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
-      <button class="password-submit" onclick="checkPassword()">Express Entry</button>
+      <button class="password-submit" onclick="checkPassword()">入門</button>
       <button class="password-cancel" onclick="closePasswordModal()">취소</button>
     </div>
   </div>
@@ -2304,38 +2309,33 @@
 
   <script>
     // ═══════════════════════════════════════════
-    // HANJA TYPEWRITER - 동선 의미 순환
+    // HANJA TYPEWRITER - 大提學 의미 순환
     // ═══════════════════════════════════════════
-    const dongVariants = [
-      { char: '動', meaning: '움직임' },
-      { char: '東', meaning: '동쪽' },
-      { char: '同', meaning: '함께' },
-      { char: '棟', meaning: '건물' },
-      { char: '董', meaning: '감독' },
-      { char: '瞳', meaning: '눈동자' },
-      { char: '憧', meaning: '동경' },
-      { char: '洞', meaning: '통찰' },
-      { char: '動', meaning: '움직임' }
+    const char1Variants = [
+      { char: '大', meaning: '큰' },
+      { char: '帝', meaning: '제왕' },
+      { char: '師', meaning: '스승' },
+      { char: '王', meaning: '왕' },
+      { char: '大', meaning: '큰' }
     ];
 
-    const seonVariants = [
-      { char: '線', meaning: '선' },
-      { char: '禪', meaning: '선(禪)' },
-      { char: '善', meaning: '선함' },
-      { char: '先', meaning: '먼저' },
-      { char: '選', meaning: '선택' },
-      { char: '船', meaning: '배' },
-      { char: '宣', meaning: '선언' },
-      { char: '仙', meaning: '신선' },
-      { char: '腺', meaning: '샘' },
-      { char: '詵', meaning: '시' },
-      { char: '羨', meaning: '부러움' },
-      { char: '僊', meaning: '신선' },
-      { char: '線', meaning: '선' }
+    const char2Variants = [
+      { char: '提', meaning: '이끌' },
+      { char: '王', meaning: '왕' },
+      { char: '承', meaning: '이을' },
+      { char: '道', meaning: '길' },
+      { char: '提', meaning: '이끌' }
     ];
 
-    let dongIndex = 0;
-    let seonIndex = 0;
+    const char3Variants = [
+      { char: '學', meaning: '배움' },
+      { char: '學', meaning: '학문' },
+      { char: '制', meaning: '법도' },
+      { char: '敎', meaning: '가르침' },
+      { char: '學', meaning: '배움' }
+    ];
+
+    let idx1 = 0, idx2 = 0, idx3 = 0;
 
     function typeChar(element, meaningEl, char, meaning) {
       element.classList.add('typing');
@@ -2349,32 +2349,34 @@
       }, 150);
     }
 
-    function cycleDong() {
-      const charEl = document.getElementById('dongChar');
-      const meaningEl = document.getElementById('dongMeaning');
+    function cycle1() {
+      const charEl = document.getElementById('char1');
+      const meaningEl = document.getElementById('meaning1');
       if (!charEl || !meaningEl) return;
-
-      typeChar(charEl, meaningEl, dongVariants[dongIndex].char, dongVariants[dongIndex].meaning);
-      dongIndex = (dongIndex + 1) % dongVariants.length;
+      typeChar(charEl, meaningEl, char1Variants[idx1].char, char1Variants[idx1].meaning);
+      idx1 = (idx1 + 1) % char1Variants.length;
     }
 
-    function cycleSeon() {
-      const charEl = document.getElementById('seonChar');
-      const meaningEl = document.getElementById('seonMeaning');
+    function cycle2() {
+      const charEl = document.getElementById('char2');
+      const meaningEl = document.getElementById('meaning2');
       if (!charEl || !meaningEl) return;
+      typeChar(charEl, meaningEl, char2Variants[idx2].char, char2Variants[idx2].meaning);
+      idx2 = (idx2 + 1) % char2Variants.length;
+    }
 
-      typeChar(charEl, meaningEl, seonVariants[seonIndex].char, seonVariants[seonIndex].meaning);
-      seonIndex = (seonIndex + 1) % seonVariants.length;
+    function cycle3() {
+      const charEl = document.getElementById('char3');
+      const meaningEl = document.getElementById('meaning3');
+      if (!charEl || !meaningEl) return;
+      typeChar(charEl, meaningEl, char3Variants[idx3].char, char3Variants[idx3].meaning);
+      idx3 = (idx3 + 1) % char3Variants.length;
     }
 
     // Start cycling with offset timing for natural feel
-    setTimeout(() => {
-      setInterval(cycleDong, 2000);
-    }, 1500);
-
-    setTimeout(() => {
-      setInterval(cycleSeon, 2000);
-    }, 2500);
+    setTimeout(() => setInterval(cycle1, 2500), 1500);
+    setTimeout(() => setInterval(cycle2, 2500), 2000);
+    setTimeout(() => setInterval(cycle3, 2500), 2500);
 
     // ═══════════════════════════════════════════
     // INTERSECTION OBSERVER - Reveal Animations
