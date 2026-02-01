@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1F Lobby — DONGSEON STUDIO</title>
+  <meta name="theme-color" content="#0A0A0A">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #0A0A0A;
+      color: #F5F5DC;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #D4AF37;
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+    .floor-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 40px;
+      background: rgba(212,175,55,0.05);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+    }
+    .floor-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: #D4AF37;
+      color: #0A0A0A;
+      font-weight: 900;
+      border-radius: 30px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 2rem; margin-bottom: 8px; }
+    .subtitle { color: #6B5B45; }
+    .section {
+      background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      color: #D4AF37;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section p { color: #8B7355; line-height: 1.7; }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .link-card {
+      display: block;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 12px;
+      text-decoration: none;
+      color: #F5F5DC;
+      transition: all 0.3s ease;
+    }
+    .link-card:hover {
+      border-color: #D4AF37;
+      transform: translateY(-3px);
+    }
+    .link-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .link-card .title { font-weight: 700; margin-bottom: 4px; }
+    .link-card .desc { font-size: 0.8rem; color: #6B5B45; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../../" class="back-link">← 메인으로</a>
+
+    <div class="floor-header">
+      <span class="floor-badge">1F LOBBY</span>
+      <h1>로비</h1>
+      <p class="subtitle">DONGSEON Studio 공개 구역</p>
+    </div>
+
+    <div class="section">
+      <h2>🎯 스튜디오 소개</h2>
+      <p>
+        DONGSEON Studio는 DTSLIB HQ 산하 Tier 2 비물성(非物性) IT 스튜디오입니다.
+        AI 자동화, AI 영상 제작, Claude + Chrome 바이럴 마케팅을 핵심 축으로 운영합니다.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>🔗 바로가기</h2>
+      <div class="link-grid">
+        <a href="../../card/" class="link-card">
+          <div class="icon">📇</div>
+          <div class="title">명함</div>
+          <div class="desc">Contact Information</div>
+        </a>
+        <a href="https://github.com/dtslib1979/dongseon-studio" class="link-card">
+          <div class="icon">💻</div>
+          <div class="title">GitHub</div>
+          <div class="desc">소스 코드</div>
+        </a>
+        <a href="https://dtslib1979.github.io/dtslib-papyrus/" class="link-card">
+          <div class="icon">🏢</div>
+          <div class="title">DTSLIB HQ</div>
+          <div class="desc">본사 바로가기</div>
+        </a>
+        <a href="../../#building" class="link-card">
+          <div class="icon">🏗️</div>
+          <div class="title">Building</div>
+          <div class="desc">층별 안내</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📊 3대 핵심 축</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">🤖</div>
+          <div class="title">AI 자동화</div>
+          <div class="desc">Claude Code + GitHub Actions + Termux</div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🎬</div>
+          <div class="title">AI 영상 제작</div>
+          <div class="desc">PWA 초크보드 + Galaxy 녹화</div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🌐</div>
+          <div class="title">바이럴 마케팅</div>
+          <div class="desc">Playwright CDP GUI 자동화</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

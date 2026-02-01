@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3F Production Studio — DONGSEON STUDIO</title>
+  <meta name="theme-color" content="#0A0A0A">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #0A0A0A;
+      color: #F5F5DC;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #D4AF37;
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+    .floor-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(139,105,20,0.05) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 20px;
+    }
+    .floor-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6914 100%);
+      color: #0A0A0A;
+      font-weight: 900;
+      border-radius: 30px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 2rem; margin-bottom: 8px; }
+    .subtitle { color: #D4AF37; }
+    .section {
+      background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      color: #D4AF37;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section p { color: #8B7355; line-height: 1.7; margin-bottom: 16px; }
+    .pipeline {
+      background: #1A1A1A;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #D4AF37;
+      line-height: 1.8;
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .tool-card {
+      padding: 24px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .tool-card:hover {
+      border-color: #D4AF37;
+      transform: translateY(-3px);
+    }
+    .tool-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .tool-card .title { font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
+    .tool-card .desc { font-size: 0.85rem; color: #6B5B45; line-height: 1.5; }
+    .template-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .template-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 10px;
+    }
+    .template-item .num {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212,175,55,0.2);
+      border-radius: 50%;
+      font-weight: 900;
+      color: #D4AF37;
+    }
+    .template-item .info { flex: 1; }
+    .template-item .name { font-weight: 700; margin-bottom: 4px; }
+    .template-item .desc { font-size: 0.8rem; color: #6B5B45; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../../" class="back-link">← 메인으로</a>
+
+    <div class="floor-header">
+      <span class="floor-badge">3F PRODUCTION STUDIO</span>
+      <h1>프로덕션 스튜디오</h1>
+      <p class="subtitle">AI 영상 제작 · PWA 초크보드 · Galaxy 녹화</p>
+    </div>
+
+    <div class="section">
+      <h2>🎬 AI 영상 제작 파이프라인</h2>
+      <p>
+        편집 0분. 녹화 = 완성물. PWA 초크보드를 배경으로 Galaxy 화면 녹화만 하면 완성됩니다.
+      </p>
+      <div class="pipeline">
+[입력]
+OrbitPrompt → PWA 초크보드 템플릿 생성
+
+[제작]
+Galaxy 화면 + 오버레이 APK (판서) + 엑시스 (상황판)
+    ↓
+Galaxy 화면 녹화
+    ↓
+녹화 = 완성물 (편집 0분)
+
+[배포]
+YouTube 업로드 → 웹페이지 임베드 → 루핑 구조
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🛠️ 제작 도구</h2>
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="icon">📋</div>
+          <div class="title">PWA 초크보드</div>
+          <div class="desc">방송용 배경 템플릿. Khan Academy, NPR Tiny Desk 스타일.</div>
+        </div>
+        <div class="tool-card">
+          <div class="icon">✏️</div>
+          <div class="title">오버레이 APK</div>
+          <div class="desc">와콤 스타일 판서. 펜 스트로크, 손가락 분리.</div>
+        </div>
+        <div class="tool-card">
+          <div class="icon">📱</div>
+          <div class="title">Galaxy 녹화</div>
+          <div class="desc">화면 녹화 = 최종 아웃풋. 무편집.</div>
+        </div>
+        <div class="tool-card">
+          <div class="icon">🎯</div>
+          <div class="title">OrbitPrompt</div>
+          <div class="desc">프롬프트 → 초크보드 코드 생성.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📄 초크보드 템플릿</h2>
+      <div class="template-list">
+        <div class="template-item">
+          <div class="num">1</div>
+          <div class="info">
+            <div class="name">Math Tutor</div>
+            <div class="desc">Khan Academy 스타일 수학 강의용</div>
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="num">2</div>
+          <div class="info">
+            <div class="name">Tech Demo</div>
+            <div class="desc">Apple Keynote 스타일 기술 데모</div>
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="num">3</div>
+          <div class="info">
+            <div class="name">Documentary</div>
+            <div class="desc">Ken Burns 스타일 다큐멘터리</div>
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="num">4</div>
+          <div class="info">
+            <div class="name">Music Curation</div>
+            <div class="desc">NPR Tiny Desk 스타일 음악 큐레이션</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📺 최근 제작물</h2>
+      <p>아직 등록된 제작물이 없습니다.</p>
+    </div>
+  </div>
+</body>
+</html>
