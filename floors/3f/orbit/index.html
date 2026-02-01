@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrbitPrompt — Production Studio</title>
+  <meta name="theme-color" content="#0A0A0A">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A;
+      --surface: #111111;
+      --surface-2: #1A1A1A;
+      --gold: #D4AF37;
+      --gold-light: #F4D03F;
+      --text: #F5F5DC;
+      --text-muted: #6B5B45;
+      --green: #4CAF50;
+      --blue: #2196F3;
+      --purple: #9C27B0;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(156,39,176,0.1) 100%);
+      border: 1px solid rgba(156,39,176,0.3);
+      border-radius: 20px;
+    }
+    .header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(156,39,176,0.3) 0%, rgba(212,175,55,0.1) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .header-info h1 { font-size: 1.8rem; margin-bottom: 4px; }
+    .header-info .subtitle { color: var(--purple); font-size: 1rem; }
+    .badge {
+      margin-left: auto;
+      padding: 8px 16px;
+      background: rgba(33,150,243,0.2);
+      border: 1px solid rgba(33,150,243,0.5);
+      border-radius: 20px;
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section p { color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .flow-diagram {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--gold);
+      overflow-x: auto;
+    }
+    .input-example {
+      background: rgba(156,39,176,0.1);
+      border: 1px solid rgba(156,39,176,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .input-example .label {
+      font-size: 0.8rem;
+      color: var(--purple);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .input-example .content {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .output-example {
+      background: rgba(76,175,80,0.1);
+      border: 1px solid rgba(76,175,80,0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .output-example .label {
+      font-size: 0.8rem;
+      color: var(--green);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .output-example .content {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .feature-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .feature-card .title { font-weight: 700; margin-bottom: 4px; }
+    .feature-card .desc { font-size: 0.8rem; color: var(--text-muted); }
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+    .link-card:hover {
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+    .link-card .icon { font-size: 1.5rem; }
+    .link-card .info { flex: 1; }
+    .link-card .name { font-weight: 600; margin-bottom: 2px; }
+    .link-card .desc { font-size: 0.85rem; color: var(--text-muted); }
+    .link-card .arrow { color: var(--gold); font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../" class="back-link">← Production Studio</a>
+
+    <div class="header">
+      <div class="header-icon">🎯</div>
+      <div class="header-info">
+        <h1>OrbitPrompt</h1>
+        <div class="subtitle">AI 네이티브 콘텐츠 생성</div>
+      </div>
+      <span class="badge">New</span>
+    </div>
+
+    <div class="section">
+      <h2>🎯 개요</h2>
+      <p>
+        OrbitPrompt는 Claude에게 주제를 말하면 방송용 초크보드 코드를 생성해주는 시스템입니다.
+        "수학 과외: 이차방정식 풀이"라고 말하면 Khan Academy 스타일의 초크보드 HTML이 생성됩니다.
+      </p>
+      <p>
+        DTSLIB 생태계의 <strong>칠판 센터</strong> 역할을 합니다.
+        30개 레포지토리의 메타데이터(UNIV_INDEX.md)를 읽고,
+        디자인 토큰을 적용하여 일관된 브랜드의 콘텐츠를 생산합니다.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>🔄 생성 파이프라인</h2>
+      <div class="flow-diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                   OrbitPrompt Pipeline                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   [Input]                                                   │
+│   ├── 주제: "수학 과외: 이차방정식"                         │
+│   ├── 템플릿: "math-tutor"                                  │
+│   └── 스타일: "Khan Academy"                                │
+│                                                             │
+│   [Process]                                                 │
+│   ├── UNIV_INDEX.md 참조 (관련 레포 메타)                   │
+│   ├── 디자인 토큰 로드 (tango-magenta)                      │
+│   ├── 에셋 매니페스트 참조 (parksy-image)                   │
+│   └── Claude Code로 HTML 생성                               │
+│                                                             │
+│   [Output]                                                  │
+│   ├── chalkboard.html (PWA 초크보드)                        │
+│   ├── script.md (대본)                                      │
+│   └── storyboard.json (스토리보드)                          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>💬 사용 예시</h2>
+      <div class="input-example">
+        <div class="label">📝 INPUT (Claude에게 요청)</div>
+        <div class="content">
+"수학 과외 초크보드 만들어줘.
+주제: 이차방정식의 근의 공식
+스타일: Khan Academy
+길이: 10분 강의용"
+        </div>
+      </div>
+      <div class="output-example">
+        <div class="label">✅ OUTPUT (생성된 파일)</div>
+        <div class="content">
+├── quadratic-formula.html  (PWA 초크보드)
+├── quadratic-script.md     (10분 강의 대본)
+└── quadratic-board.json    (슬라이드 데이터)
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>⚡ 주요 기능</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">🤖</div>
+          <div class="title">AI 생성</div>
+          <div class="desc">Claude Code로<br>자동 코드 생성</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📚</div>
+          <div class="title">컨텍스트 주입</div>
+          <div class="desc">UNIV_INDEX.md<br>자동 참조</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🎨</div>
+          <div class="title">디자인 토큰</div>
+          <div class="desc">일관된 브랜드<br>자동 적용</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📦</div>
+          <div class="title">에셋 연동</div>
+          <div class="desc">이미지/오디오<br>자동 임베드</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔗 관련 레포지토리</h2>
+      <a href="https://github.com/dtslib1979/OrbitPrompt" class="link-card" target="_blank">
+        <div class="icon">🎯</div>
+        <div class="info">
+          <div class="name">OrbitPrompt Repository</div>
+          <div class="desc">Multiple query gen engine to AI</div>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
