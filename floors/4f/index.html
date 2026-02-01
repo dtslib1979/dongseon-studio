@@ -5,22 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>4F 大提學室 — DONGSEON STUDIO</title>
   <meta name="theme-color" content="#0A0A0A">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A;
+      --surface: #111111;
+      --surface-2: #1A1A1A;
+      --gold: #D4AF37;
+      --gold-light: #F4D03F;
+      --text: #F5F5DC;
+      --text-muted: #6B5B45;
+      --green: #4CAF50;
+      --blue: #2196F3;
+      --purple: #9C27B0;
+    }
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background: linear-gradient(180deg, #0A0A0A 0%, #1A1208 100%);
-      color: #F5F5DC;
+      background: linear-gradient(180deg, var(--bg) 0%, #1A1208 100%);
+      color: var(--text);
       min-height: 100vh;
       padding: 20px;
     }
-    .container { max-width: 900px; margin: 0 auto; }
+    .container { max-width: 1000px; margin: 0 auto; }
     .back-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #D4AF37;
+      color: var(--gold);
       text-decoration: none;
       margin-bottom: 30px;
       font-size: 0.9rem;
@@ -51,71 +63,180 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .subtitle { color: #D4AF37; font-size: 1.1rem; }
-    .section {
-      background: rgba(212,175,55,0.05);
-      border: 1px solid rgba(212,175,55,0.2);
+    .subtitle { color: var(--gold); font-size: 1.1rem; margin-bottom: 20px; }
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    .stat-item {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .stat-item .value {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .stat-item .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Quote */
+    .main-quote {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.3);
       border-radius: 16px;
       padding: 30px;
-      margin-bottom: 20px;
+      text-align: center;
+      margin-bottom: 30px;
     }
-    .section h2 {
-      color: #D4AF37;
+    .main-quote .quote {
       font-size: 1.3rem;
-      margin-bottom: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .main-quote .source {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Tools Grid */
+    .section-title {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .section p { color: #8B7355; line-height: 1.7; margin-bottom: 16px; }
-    .tier-pyramid {
-      background: #1A1A1A;
-      border: 1px solid rgba(212,175,55,0.3);
-      border-radius: 12px;
-      padding: 24px;
-      font-family: monospace;
-      font-size: 0.8rem;
-      color: #D4AF37;
-      line-height: 1.6;
-      overflow-x: auto;
-    }
-    .seal-grid {
+    .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
+      margin-bottom: 30px;
     }
-    .seal-card {
+    .tool-card {
+      display: block;
       padding: 24px;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid rgba(212,175,55,0.2);
-      border-radius: 12px;
-      text-align: center;
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
     }
-    .seal-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
-    .seal-card .title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; color: #F5F5DC; }
-    .seal-card .status { font-size: 0.8rem; color: #6B5B45; }
-    .seal-card .status.pending { color: #FF9800; }
-    .seal-card .status.target { color: #D4AF37; }
-    .quote {
-      background: rgba(212,175,55,0.08);
-      border-left: 4px solid #D4AF37;
-      padding: 20px 24px;
-      margin: 20px 0;
-      font-style: italic;
-      color: #D4AF37;
+    .tool-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(212,175,55,0.15);
     }
-    .document-list {
+    .tool-card .icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(0,0,0,0.3) 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+    .tool-card .name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .tool-card .desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .tool-card .arrow {
+      display: block;
+      text-align: right;
+      color: var(--gold);
+      margin-top: 12px;
+      font-size: 1.2rem;
+    }
+
+    /* Pyramid Preview */
+    .pyramid-preview {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .pyramid-visual {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 8px;
     }
+    .pyramid-tier {
+      padding: 14px 20px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .tier-3 {
+      width: 50%;
+      background: rgba(156,39,176,0.15);
+      border: 1px solid rgba(156,39,176,0.4);
+    }
+    .tier-2 {
+      width: 70%;
+      background: rgba(33,150,243,0.15);
+      border: 1px solid rgba(33,150,243,0.4);
+    }
+    .tier-1 {
+      width: 90%;
+      background: rgba(76,175,80,0.15);
+      border: 1px solid rgba(76,175,80,0.4);
+    }
+    .tier-3 .tier-name { color: var(--purple); }
+    .tier-2 .tier-name { color: var(--blue); }
+    .tier-1 .tier-name { color: var(--green); }
+    .tier-name { font-weight: 700; font-size: 0.9rem; }
+    .tier-price { font-weight: 900; color: var(--gold); }
+
+    /* Documents */
+    .documents {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .doc-list { display: flex; flex-direction: column; gap: 10px; }
     .doc-item {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 14px 18px;
       background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.1);
       border-radius: 10px;
     }
     .doc-item .icon { font-size: 1.3rem; }
@@ -128,6 +249,30 @@
       border-radius: 20px;
       color: #FF6B6B;
     }
+
+    /* Key Phrases */
+    .key-phrases {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+    }
+    .phrase {
+      background: rgba(212,175,55,0.08);
+      border-left: 4px solid var(--gold);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 0.95rem;
+    }
+    .phrase:last-child { margin-bottom: 0; }
+
+    @media (max-width: 600px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .pyramid-tier { flex-direction: column; gap: 4px; }
+      .tier-3, .tier-2, .tier-1 { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -138,65 +283,84 @@
       <span class="floor-badge">4F 大提學室</span>
       <h1>大提學</h1>
       <p class="subtitle">帝王의 子弟를 가르치는 最高 學官</p>
-    </div>
-
-    <div class="section">
-      <h2>👑 大提學 비즈니스 모델</h2>
-      <p>
-        AI를 팔지 않습니다. <strong>"내 아들은 왕세자급"</strong>이라는 아버지의 허세를 팝니다.
-        동북아 부호 2세를 위한 AI 왕도(王道) 교육 스튜디오입니다.
+      <p class="tagline">
+        AI를 팔지 않습니다. "내 아들은 왕세자급"이라는 아버지의 허세를 팝니다.
       </p>
-      <div class="quote">
-        "₩3억은 최종 목표. 지금은 권위에 맞는 가격으로 팔면서 권위를 쌓는다."
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="value">3.5</div>
+        <div class="label">현재 권위</div>
+      </div>
+      <div class="stat-item">
+        <div class="value">₩3억</div>
+        <div class="label">Tier 3 목표</div>
+      </div>
+      <div class="stat-item">
+        <div class="value">3단계</div>
+        <div class="label">피라미드</div>
+      </div>
+      <div class="stat-item">
+        <div class="value">6개월</div>
+        <div class="label">파일럿 기간</div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>📊 프로덕트 피라미드</h2>
-      <div class="tier-pyramid">
-┌─────────────────────────────────────────────────────────────┐
-│                    大提學 프로덕트 피라미드                   │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   [Tier 3] 大提學 師承 입문                                 │
-│   가격: ₩3억 / 기간: 3년 / 권위: 9.1/10                     │
-│                                                             │
-│       ▲                                                     │
-│   [Tier 2] 검증된 시스템 이식                               │
-│   가격: ₩5천만~1억 / 기간: 6개월 / 권위: 7.75/10            │
-│                                                             │
-│       ▲                                                     │
-│   [Tier 1] 워크플로우 모델링 접근권                         │
-│   가격: ₩500만~1천만 / 기간: 3개월 / 권위: 3.5/10           │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+    <div class="main-quote">
+      <div class="quote">"₩3억은 최종 목표.<br>지금은 권위에 맞는 가격으로 팔면서 권위를 쌓는다."</div>
+      <div class="source">— 大提學 정관 v2.1</div>
+    </div>
+
+    <h2 class="section-title">🛠️ 대제학 시스템</h2>
+    <div class="tools-grid">
+      <a href="pyramid/" class="tool-card">
+        <div class="icon">📊</div>
+        <div class="name">Product Pyramid</div>
+        <div class="desc">3단계 프로덕트 구조<br>Tier 1 → Tier 2 → Tier 3</div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="authority/" class="tool-card">
+        <div class="icon">🏅</div>
+        <div class="name">Authority Building</div>
+        <div class="desc">권위 빌딩 로드맵<br>씰 레이어 전략</div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="pilot/" class="tool-card">
+        <div class="icon">🚀</div>
+        <div class="name">Dongseon Pilot</div>
+        <div class="desc">Phase 0: 첫 번째 고객<br>살아있는 증빙 생성</div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="revenue/" class="tool-card">
+        <div class="icon">💰</div>
+        <div class="name">Revenue Simulation</div>
+        <div class="desc">수익 시뮬레이션<br>36개월 ₩16억+ 예측</div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="pyramid-preview">
+      <h2 class="section-title">🏛️ 피라미드 구조</h2>
+      <div class="pyramid-visual">
+        <div class="pyramid-tier tier-3">
+          <span class="tier-name">Tier 3 · 大提學 師承</span>
+          <span class="tier-price">₩3억</span>
+        </div>
+        <div class="pyramid-tier tier-2">
+          <span class="tier-name">Tier 2 · 시스템 이식</span>
+          <span class="tier-price">₩5천만~1억</span>
+        </div>
+        <div class="pyramid-tier tier-1">
+          <span class="tier-name">Tier 1 · 워크플로우 모델링</span>
+          <span class="tier-price">₩500만~1천만</span>
+        </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>🏅 권위 씰 (Authority Seals)</h2>
-      <div class="seal-grid">
-        <div class="seal-card">
-          <div class="icon">🇰🇷</div>
-          <div class="title">정부 씰</div>
-          <div class="status pending">목표: 국책과제</div>
-        </div>
-        <div class="seal-card">
-          <div class="icon">⛪</div>
-          <div class="title">바티칸 씰</div>
-          <div class="status target">목표: Rome Call for AI Ethics</div>
-        </div>
-        <div class="seal-card">
-          <div class="icon">📈</div>
-          <div class="title">파일럿 증빙</div>
-          <div class="status pending">진행 중</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>📜 師承 문서</h2>
-      <div class="document-list">
+    <div class="documents">
+      <h2 class="section-title">📜 師承 문서</h2>
+      <div class="doc-list">
         <div class="doc-item">
           <div class="icon">📕</div>
           <div class="name">大提學 정관 v2.1</div>
@@ -220,15 +384,15 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2>🎯 핵심 문구</h2>
-      <div class="quote">
+    <div class="key-phrases">
+      <h2 class="section-title">💎 핵심 문구</h2>
+      <div class="phrase">
         "AI를 팔지 않는다. '내 아들은 왕세자급'이라는 아버지의 허세를 판다."
       </div>
-      <div class="quote">
+      <div class="phrase">
         "씰이 붙을 때마다 가격이 올라간다. 국가 + 종교 = 반박 불가."
       </div>
-      <div class="quote">
+      <div class="phrase">
         "첫 고객을 찾지 마라. 만들어라. 동선이 살아있는 증빙이 된다."
       </div>
     </div>
