@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNS Auto Poster — Automation Center</title>
+  <meta name="theme-color" content="#0A0A0A">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A;
+      --surface: #111111;
+      --surface-2: #1A1A1A;
+      --gold: #D4AF37;
+      --gold-light: #F4D03F;
+      --text: #F5F5DC;
+      --text-muted: #6B5B45;
+      --green: #4CAF50;
+      --orange: #FF9800;
+      --red: #F44336;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+    }
+    .header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(33,150,243,0.2) 0%, rgba(212,175,55,0.1) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .header-info h1 { font-size: 1.8rem; margin-bottom: 4px; }
+    .header-info .subtitle { color: var(--gold); font-size: 1rem; }
+    .status-badge {
+      margin-left: auto;
+      padding: 8px 16px;
+      background: rgba(255,152,0,0.2);
+      border: 1px solid rgba(255,152,0,0.5);
+      border-radius: 20px;
+      color: var(--orange);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .platform-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .platform-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px;
+    }
+    .platform-item .icon { font-size: 2rem; }
+    .platform-item .info { flex: 1; }
+    .platform-item .name { font-weight: 700; margin-bottom: 4px; }
+    .platform-item .desc { font-size: 0.8rem; color: var(--text-muted); }
+    .platform-item .status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .platform-item .status.ready { background: rgba(76,175,80,0.2); color: var(--green); }
+    .platform-item .status.wip { background: rgba(255,152,0,0.2); color: var(--orange); }
+    .platform-item .status.planned { background: rgba(212,175,55,0.2); color: var(--gold); }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .feature-card .icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .feature-card .title { font-weight: 700; margin-bottom: 4px; }
+    .feature-card .desc { font-size: 0.8rem; color: var(--text-muted); }
+    .workflow {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--gold);
+    }
+    .account-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .account-card {
+      padding: 16px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .account-card .count { font-size: 1.5rem; font-weight: 900; color: var(--gold); }
+    .account-card .label { font-size: 0.75rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../" class="back-link">← Automation Center</a>
+
+    <div class="header">
+      <div class="header-icon">📱</div>
+      <div class="header-info">
+        <h1>SNS Auto Poster</h1>
+        <div class="subtitle">멀티 플랫폼 자동 포스팅</div>
+      </div>
+      <span class="status-badge">WIP</span>
+    </div>
+
+    <div class="section">
+      <h2>📊 계정 현황</h2>
+      <div class="account-grid">
+        <div class="account-card">
+          <div class="count">8</div>
+          <div class="label">YouTube 채널</div>
+        </div>
+        <div class="account-card">
+          <div class="count">15</div>
+          <div class="label">티스토리</div>
+        </div>
+        <div class="account-card">
+          <div class="count">3</div>
+          <div class="label">네이버</div>
+        </div>
+        <div class="account-card">
+          <div class="count">41</div>
+          <div class="label">총 플랫폼</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📱 지원 플랫폼</h2>
+      <div class="platform-list">
+        <div class="platform-item">
+          <div class="icon">📺</div>
+          <div class="info">
+            <div class="name">YouTube</div>
+            <div class="desc">Shorts, 일반 영상, 커뮤니티 포스팅 자동화</div>
+          </div>
+          <span class="status ready">Ready</span>
+        </div>
+        <div class="platform-item">
+          <div class="icon">📝</div>
+          <div class="info">
+            <div class="name">티스토리</div>
+            <div class="desc">블로그 포스팅, 이미지 첨부, SEO 최적화</div>
+          </div>
+          <span class="status ready">Ready</span>
+        </div>
+        <div class="platform-item">
+          <div class="icon">📗</div>
+          <div class="info">
+            <div class="name">네이버 블로그</div>
+            <div class="desc">스마트에디터 자동화, 이미지/동영상 첨부</div>
+          </div>
+          <span class="status wip">WIP</span>
+        </div>
+        <div class="platform-item">
+          <div class="icon">📷</div>
+          <div class="info">
+            <div class="name">Instagram</div>
+            <div class="desc">피드, 스토리, 릴스 자동 업로드</div>
+          </div>
+          <span class="status planned">Planned</span>
+        </div>
+        <div class="platform-item">
+          <div class="icon">🎵</div>
+          <div class="info">
+            <div class="name">TikTok</div>
+            <div class="desc">숏폼 영상 자동 업로드</div>
+          </div>
+          <span class="status planned">Planned</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>⚡ 주요 기능</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">🔄</div>
+          <div class="title">크로스 포스팅</div>
+          <div class="desc">한 번에 여러 플랫폼 동시 게시</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">⏰</div>
+          <div class="title">예약 발행</div>
+          <div class="desc">최적 시간대 자동 포스팅</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📐</div>
+          <div class="title">포맷 변환</div>
+          <div class="desc">플랫폼별 이미지/영상 규격 자동 변환</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📊</div>
+          <div class="title">성과 추적</div>
+          <div class="desc">조회수, 참여도 통합 대시보드</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔧 워크플로우</h2>
+      <div class="workflow">
+┌─────────────────────────────────────────────────────────────┐
+│                  SNS Auto Poster Workflow                    │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   [Input]                                                   │
+│   ├── 콘텐츠 (텍스트/이미지/영상)                           │
+│   ├── 메타데이터 (제목, 설명, 태그)                         │
+│   └── 타겟 플랫폼 선택                                      │
+│                                                             │
+│   [Process]                                                 │
+│   ├── 플랫폼별 포맷 변환                                    │
+│   │   ├── YouTube: 16:9, 9:16 (Shorts)                     │
+│   │   ├── Instagram: 1:1, 4:5, 9:16                        │
+│   │   └── TikTok: 9:16                                     │
+│   ├── Playwright CDP 로그인                                 │
+│   └── 콘텐츠 업로드                                         │
+│                                                             │
+│   [Output]                                                  │
+│   ├── 포스팅 완료 알림                                      │
+│   ├── URL 수집                                              │
+│   └── 성과 추적 시작                                        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+      </div>
+    </div>
+  </div>
+</body>
+</html>
