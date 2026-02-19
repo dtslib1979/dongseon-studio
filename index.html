@@ -227,7 +227,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       HERO - TYPING ANIMATION
+       HERO - HANJA TYPEWRITER
        ═══════════════════════════════════════════ */
     main {
       padding-top: calc(100px + var(--safe-top));
@@ -245,87 +245,114 @@
       justify-content: center;
     }
 
-    /* Main Title - Typing Effect */
-    .hero-title {
+    /* Hanja Display */
+    .hanja-display {
+      display: flex;
+      justify-content: center;
+      gap: clamp(24px, 6vw, 60px);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.15s both;
+    }
+
+    .hanja-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hanja-char {
       position: relative;
-      margin-bottom: 16px;
-      min-height: 120px;
+      width: clamp(90px, 22vw, 150px);
+      height: clamp(90px, 22vw, 150px);
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: border-color 0.3s;
     }
 
-    .title-typing {
-      font-family: 'Noto Serif KR', serif;
-      font-size: clamp(4rem, 15vw, 8rem);
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      color: transparent;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .char {
-      display: inline-block;
+    .hanja-char::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(139,105,20,0.05) 100%);
       opacity: 0;
-      transform: translateY(20px);
+      transition: opacity 0.3s;
+    }
+
+    .hanja-char:hover::before { opacity: 1; }
+    .hanja-char:hover { border-color: rgba(212,175,55,0.5); }
+
+    .hanja-main {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(48px, 14vw, 85px);
+      font-weight: 300;
       background: linear-gradient(180deg,
         var(--gold-light) 0%,
         var(--gold) 40%,
         var(--gold-dark) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px var(--gold-glow);
-      animation: charReveal 0.5s ease forwards;
+      transition: all 0.15s ease-out;
+      position: relative;
+      z-index: 1;
     }
 
-    .char.space {
-      width: 0.3em;
+    .hanja-main.typing {
+      animation: typeFlicker 0.15s ease-out;
     }
 
-    @keyframes charReveal {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.8);
-        filter: blur(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
+    @keyframes typeFlicker {
+      0% { opacity: 0.3; transform: scale(0.92); }
+      50% { opacity: 1; transform: scale(1.03); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
-    /* Typing Cursor */
-    .typing-cursor {
-      display: inline-block;
-      width: 4px;
-      height: 1em;
+    .hanja-cursor {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 3px;
+      height: 24px;
       background: var(--gold);
-      margin-left: 8px;
-      animation: cursorBlink 0.8s step-end infinite;
-      box-shadow: 0 0 15px var(--gold-glow), 0 0 30px var(--gold-glow);
-      vertical-align: middle;
+      border-radius: 2px;
+      animation: cursorBlink 1s step-end infinite;
+      box-shadow: 0 0 10px var(--gold-glow);
     }
 
     @keyframes cursorBlink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    /* Subtitle with typing */
-    .hero-en {
+    .hanja-meaning {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(0.7rem, 2vw, 0.9rem);
-      font-weight: 400;
-      letter-spacing: 0.4em;
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      font-weight: 500;
       color: var(--text-muted);
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease forwards;
-      animation-delay: 2s;
+      padding: 6px 16px;
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 100px;
+      transition: all 0.2s;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .hanja-meaning.typing {
+      color: var(--gold);
+      border-color: rgba(212,175,55,0.4);
+    }
+
+    .hanja-hangul {
+      font-size: clamp(14px, 3vw, 18px);
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
     }
 
     @keyframes fadeInUp {
@@ -339,42 +366,18 @@
       }
     }
 
-    /* Hook Line */
-    .hook {
+    /* Subtitle */
+    .hero-en {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      color: var(--text-muted);
+      margin-bottom: 40px;
       text-transform: uppercase;
-      margin-bottom: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
       opacity: 0;
       animation: fadeInUp 0.8s ease forwards;
-      animation-delay: 2.3s;
-    }
-
-    .hook-line {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .hook-text {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .hook-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--accent);
-      margin-left: 4px;
-      animation: cursorBlink 0.8s step-end infinite;
-      box-shadow: 0 0 8px var(--accent-glow);
+      animation-delay: 0.8s;
     }
 
     /* Tagline */
@@ -385,7 +388,7 @@
       margin-bottom: 16px;
       opacity: 0;
       animation: fadeInUp 0.8s ease forwards;
-      animation-delay: 2.6s;
+      animation-delay: 1.1s;
     }
 
     .hero-subtitle {
@@ -396,7 +399,7 @@
       line-height: 1.8;
       opacity: 0;
       animation: fadeInUp 0.8s ease forwards;
-      animation-delay: 2.9s;
+      animation-delay: 1.4s;
     }
 
     .hero-subtitle strong {
@@ -873,19 +876,27 @@
   <main>
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-title">
-        <span class="title-typing" id="titleTyping"></span>
-        <span class="typing-cursor" id="typingCursor"></span>
+      <div class="hanja-display">
+        <div class="hanja-group">
+          <div class="hanja-char">
+            <span class="hanja-main" id="dongChar">動</span>
+            <span class="hanja-cursor"></span>
+          </div>
+          <span class="hanja-meaning" id="dongMeaning">움직임</span>
+          <span class="hanja-hangul">동</span>
+        </div>
+
+        <div class="hanja-group">
+          <div class="hanja-char">
+            <span class="hanja-main" id="seonChar">線</span>
+            <span class="hanja-cursor"></span>
+          </div>
+          <span class="hanja-meaning" id="seonMeaning">선</span>
+          <span class="hanja-hangul">선</span>
+        </div>
       </div>
 
       <p class="hero-en">DONGSEON STUDIO</p>
-
-      <div class="hook">
-        <span class="hook-line"></span>
-        <span class="hook-text" id="hookText"></span>
-        <span class="hook-cursor"></span>
-        <span class="hook-line"></span>
-      </div>
 
       <p class="hero-tagline">AI 네이티브 IT 스튜디오</p>
       <p class="hero-subtitle">
@@ -1021,93 +1032,75 @@
   <script src="design/elevator.js"></script>
   <script>
     // ═══════════════════════════════════════════
-    // TYPING ANIMATION - 한자 변환 효과
+    // HANJA TYPEWRITER - 동/선 각각 한자 순환
     // ═══════════════════════════════════════════
 
-    const titleEl = document.getElementById('titleTyping');
-    const cursorEl = document.getElementById('typingCursor');
-    const hookEl = document.getElementById('hookText');
-
-    // Character sets for cycling
-    const charSets = [
-      ['東', ' ', '線'],        // 한자
-      ['동', ' ', '선'],        // 한글
-      ['D', 'O', 'N', 'G', 'S', 'E', 'O', 'N']  // 영문
+    const dongVariants = [
+      { char: '動', meaning: '움직임' },
+      { char: '東', meaning: '동쪽' },
+      { char: '同', meaning: '함께' },
+      { char: '棟', meaning: '건물' },
+      { char: '董', meaning: '감독' },
+      { char: '瞳', meaning: '눈동자' },
+      { char: '憧', meaning: '동경' },
+      { char: '洞', meaning: '통찰' }
     ];
 
-    let currentSet = 0;
-    let isTyping = false;
+    const seonVariants = [
+      { char: '線', meaning: '선' },
+      { char: '禪', meaning: '선(禪)' },
+      { char: '善', meaning: '선함' },
+      { char: '先', meaning: '먼저' },
+      { char: '選', meaning: '선택' },
+      { char: '船', meaning: '배' },
+      { char: '宣', meaning: '선언' },
+      { char: '仙', meaning: '신선' },
+      { char: '鮮', meaning: '새로움' },
+      { char: '羨', meaning: '부러움' }
+    ];
 
-    // Type characters one by one
-    async function typeTitle(chars) {
-      isTyping = true;
-      titleEl.innerHTML = '';
+    let dongIndex = 0;
+    let seonIndex = 0;
 
-      for (let i = 0; i < chars.length; i++) {
-        const char = chars[i];
-        const span = document.createElement('span');
-        span.className = char === ' ' ? 'char space' : 'char';
-        span.textContent = char === ' ' ? '' : char;
-        span.style.animationDelay = `${i * 0.15}s`;
-        titleEl.appendChild(span);
+    function typeChar(element, meaningEl, char, meaning) {
+      element.classList.add('typing');
+      meaningEl.classList.add('typing');
+      element.textContent = char;
+      meaningEl.textContent = meaning;
 
-        await sleep(150);
-      }
-
-      isTyping = false;
+      setTimeout(() => {
+        element.classList.remove('typing');
+        meaningEl.classList.remove('typing');
+      }, 150);
     }
 
-    // Delete characters one by one
-    async function deleteTitle() {
-      const chars = titleEl.querySelectorAll('.char');
-      for (let i = chars.length - 1; i >= 0; i--) {
-        chars[i].style.animation = 'none';
-        chars[i].style.opacity = '0';
-        chars[i].style.transform = 'translateY(-10px)';
-        await sleep(80);
-        chars[i].remove();
-      }
+    function cycleDong() {
+      const charEl = document.getElementById('dongChar');
+      const meaningEl = document.getElementById('dongMeaning');
+      if (!charEl || !meaningEl) return;
+
+      typeChar(charEl, meaningEl, dongVariants[dongIndex].char, dongVariants[dongIndex].meaning);
+      dongIndex = (dongIndex + 1) % dongVariants.length;
     }
 
-    // Sleep helper
-    function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+    function cycleSeon() {
+      const charEl = document.getElementById('seonChar');
+      const meaningEl = document.getElementById('seonMeaning');
+      if (!charEl || !meaningEl) return;
+
+      typeChar(charEl, meaningEl, seonVariants[seonIndex].char, seonVariants[seonIndex].meaning);
+      seonIndex = (seonIndex + 1) % seonVariants.length;
     }
 
-    // Main animation loop
-    async function animationLoop() {
-      // Initial type
-      await typeTitle(charSets[currentSet]);
-      await sleep(3000);
-
-      // Loop forever
-      while (true) {
-        await deleteTitle();
-        await sleep(300);
-
-        currentSet = (currentSet + 1) % charSets.length;
-        await typeTitle(charSets[currentSet]);
-        await sleep(3500);
-      }
-    }
-
-    // Hook typing animation
-    async function typeHook() {
-      const message = "Not finished. Operational.";
-      hookEl.textContent = '';
-
-      await sleep(2500);
-
-      for (let i = 0; i < message.length; i++) {
-        hookEl.textContent += message[i];
-        await sleep(50);
-      }
-    }
-
-    // Start animations
+    // Start cycling with offset timing for natural feel
     document.addEventListener('DOMContentLoaded', () => {
-      animationLoop();
-      typeHook();
+      setTimeout(() => {
+        setInterval(cycleDong, 2000);
+      }, 1500);
+
+      setTimeout(() => {
+        setInterval(cycleSeon, 2000);
+      }, 2500);
     });
   </script>
 </body>
