@@ -1,0 +1,26 @@
+{
+  "plugin": "cowork-alt",
+  "version": "1.0.0",
+  "description": "Cowork 대체: GitHub 원격 기반 파일 작업 에이전트",
+  "author": "parksy",
+  "constants": {
+    "github": "PERMANENT",
+    "youtube": "PERMANENT",
+    "backup": "UNNECESSARY"
+  },
+  "data_strategy": {
+    "store": "resultset-series-only",
+    "discard": ["external-research", "crawled-raw", "backup-copies"],
+    "reason": "딥리서치 실시간 조달 가능한 건 저장 불필요"
+  },
+  "excel_mode": {
+    "purpose": "simulation-console",
+    "not": "ledger",
+    "schema": "scenario-tag + params + resultset + timestamp"
+  },
+  "ai_stack": {
+    "claude": "code + logic + build",
+    "gemini": "multimodal + validation",
+    "grok": "crawl + video-gen"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "id": "cowork-alt",
+      "name": "Cowork Alternative",
+      "description": "Cowork 대체: GitHub 원격 기반 파일 작업 에이전트",
+      "path": "./cowork-alt",
+      "status": "active",
+      "added": "2026-02-19"
+    },
+    {
+      "id": "chrome-agent",
+      "name": "Chrome Agent",
+      "description": "Claude in Chrome 브라우저 에이전트 연동",
+      "path": "./chrome-agent",
+      "status": "active",
+      "added": "2026-02-19"
+    }
+  ]
+}

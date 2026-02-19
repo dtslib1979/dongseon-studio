@@ -1,0 +1,36 @@
+{
+  "$schema": "scenario-input-v1",
+  "description": "시뮬레이션 시나리오 입력 포맷",
+  "fields": {
+    "scenario_tag": {
+      "type": "string",
+      "format": "kebab-case",
+      "description": "시나리오 식별자",
+      "example": "classical-music-7country"
+    },
+    "engine": {
+      "type": "string",
+      "enum": ["preference-model", "regression", "monte-carlo", "bayesian", "custom"],
+      "description": "사용할 모델/엔진"
+    },
+    "params": {
+      "type": "object",
+      "description": "모델 입력 파라미터 (자유 형식)",
+      "example": { "countries": 7, "genre": "classical" }
+    },
+    "hypothesis": {
+      "type": "string",
+      "description": "박씨 가설 (필수 — 가설 없이 분석 금지)",
+      "required": true
+    },
+    "expected_outcome": {
+      "type": "string",
+      "description": "예상 결과 방향 (검증용)"
+    }
+  },
+  "rules": [
+    "hypothesis 필드 없으면 실행 거부",
+    "params는 JSON 직렬화 가능해야 함",
+    "scenario_tag는 kebab-case 강제"
+  ]
+}

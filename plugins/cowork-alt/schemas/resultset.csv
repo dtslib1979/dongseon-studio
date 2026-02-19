@@ -1,0 +1,2 @@
+timestamp,scenario_tag,engine,params,result,confidence,note
+2026-02-19T14:00:00+09:00,classical-music-7country,preference-model,"{countries:7,genre:classical}","{de:0.34,at:0.21,jp:0.15}",0.87,독일 압도적 확인

@@ -1,0 +1,17 @@
+{
+  "plugin": "chrome-agent",
+  "version": "1.0.0",
+  "description": "Claude in Chrome 브라우저 에이전트 연동",
+  "author": "parksy",
+  "capabilities": {
+    "crawl": "Grok 크롤링 결과 수신 → 정형화",
+    "research": "딥리서치 실시간 검증",
+    "browse": "웹 자동화 작업"
+  },
+  "relay_pipeline": {
+    "input": "grok-raw-data",
+    "process": "claude-normalize",
+    "output": "github-repo-csv",
+    "schema_enforce": true
+  }
+}

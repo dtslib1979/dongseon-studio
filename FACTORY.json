@@ -46,7 +46,8 @@
     "children": [],
     "modules": {
       "2f": ["playwright", "viral", "sns", "queue", "chrome"]
-    }
+    },
+    "plugins": ["cowork-alt", "chrome-agent"]
   },
 
   "realityCheck": {
