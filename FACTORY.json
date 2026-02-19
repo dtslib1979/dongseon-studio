@@ -43,7 +43,10 @@
     "parent": "dtslib-papyrus",
     "domain": "Digital (비물성)",
     "sibling": "espiritu-tango (물성)",
-    "children": []
+    "children": [],
+    "modules": {
+      "2f": ["playwright", "viral", "sns", "queue", "chrome"]
+    }
   },
 
   "realityCheck": {
