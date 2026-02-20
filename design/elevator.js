@@ -6,9 +6,9 @@
 const DongseonBuilding = {
   // Floor passwords (hashed in production)
   passwords: {
-    '2f': 'auto2026',      // 자동화 센터
-    '3f': 'prod2026',      // 프로덕션 스튜디오
-    '4f': 'daejehak'       // 대제학실
+    '2f': '1126',          // 자동화 센터
+    '3f': '1126',          // 프로덕션 스튜디오
+    '4f': '1126'           // 대제학실
   },
 
   // Floor definitions
