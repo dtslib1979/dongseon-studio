@@ -42,6 +42,20 @@
     "showroom": { "page_url": "/lookbook/PROD-002.html", "status": "pending" }
   },
 
+  "style_module": {
+    "variables": {
+      "silhouette_type": "A",
+      "pant_width_category": "Wide",
+      "layer_depth": 1,
+      "contrast_index": 0.20,
+      "formality_score": 0.20,
+      "season": "SS"
+    },
+    "formula_ids": [],
+    "context": "workwear",
+    "source_archive": null
+  },
+
   "content_matrix": {
     "real_model": { "enabled": true },
     "webtoon": { "enabled": true, "character": "default" },

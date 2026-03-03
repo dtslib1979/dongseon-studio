@@ -58,6 +58,21 @@
     }
   },
 
+  "style_module": {
+    "variables": {
+      "silhouette_type": "Box",
+      "upper_length_ratio": 0.40,
+      "pant_width_category": "Straight",
+      "layer_depth": 2,
+      "contrast_index": 0.25,
+      "formality_score": 0.35,
+      "season": "FW"
+    },
+    "formula_ids": [],
+    "context": "amekaji",
+    "source_archive": null
+  },
+
   "content_matrix": {
     "real_model": { "enabled": true },
     "webtoon": { "enabled": true, "character": "default" },
