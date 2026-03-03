@@ -1,0 +1,54 @@
+{
+  "generated": "2026-03-03T22:59:11.835Z",
+  "period": "2026-03",
+  "kpi": {
+    "total_revenue": 35900,
+    "total_orders": 1,
+    "total_traffic": 1,
+    "products_live": 1,
+    "products_total": 3,
+    "avg_order_value": 35900,
+    "currency": "KRW"
+  },
+  "channels": {
+    "coupang": {
+      "revenue": 35900,
+      "traffic": 0,
+      "conversion": "N/A",
+      "status": "active"
+    },
+    "naver": {
+      "revenue": 0,
+      "traffic": 0,
+      "conversion": "N/A",
+      "status": "active"
+    },
+    "youtube": {
+      "revenue": 0,
+      "traffic": 1,
+      "conversion": "0.00%",
+      "status": "active"
+    },
+    "showroom": {
+      "revenue": 0,
+      "traffic": 0,
+      "conversion": "N/A",
+      "status": "active"
+    }
+  },
+  "top_products": [
+    {
+      "product_id": "PROD-001",
+      "quantity": 1,
+      "revenue": 0
+    }
+  ],
+  "deploys": {
+    "total": 1,
+    "all_live": 1
+  },
+  "loopback": {
+    "note": "TRACKING → S1_SPEC: 매출 데이터 기반 다음 상품 기획",
+    "ready": true
+  }
+}
