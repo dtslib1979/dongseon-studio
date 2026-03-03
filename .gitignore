@@ -1,0 +1,19 @@
+# Rendered outputs (GPU 렌더러 산출물 — 재생성 가능)
+coupang/rendered/*.html
+naver/rendered/*.html
+youtube/rendered/*.mp4
+youtube/rendered/*-desc.txt
+youtube/thumbnails/*.jpg
+
+# Credentials (헌법: 절대 커밋 금지)
+automation/.credentials/
+.credentials/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Node
+node_modules/
