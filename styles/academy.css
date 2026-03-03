@@ -32,7 +32,7 @@
 .lesson__body strong{color:var(--text);font-weight:var(--w-semibold)}
 .lesson__callout{margin:var(--sp-8) 0;padding:var(--sp-6);border-left:2px solid var(--ch4);background:rgba(139,92,246,0.03)}
 .lesson__callout p{font-size:var(--text-body);font-weight:var(--w-medium);color:var(--text);line-height:var(--lh-normal);margin-bottom:0}
-@media(max-width:768px){.lesson__spread{grid-template-columns:1fr}.lesson__visual{min-height:280px}.lesson__text{padding:var(--sp-8) var(--gutter)}}
+@media(max-width:768px){.academy-hero__title{-webkit-text-stroke-width:1px}.lesson{padding:var(--sp-16) 0}.lesson__header{margin-bottom:var(--sp-8)}.lesson__spread{grid-template-columns:1fr}.lesson__visual{min-height:200px;padding:var(--sp-6)}.lesson__text{padding:var(--sp-8) var(--gutter)}.lesson__callout{margin:var(--sp-6) 0;padding:var(--sp-4)}.silhouette-grid{grid-template-columns:repeat(4,1fr);gap:var(--sp-2);max-width:280px}.references{padding:var(--sp-10) var(--gutter)}.reference-list{grid-template-columns:1fr 1fr}}
 
 .silhouette-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4);width:100%;max-width:360px}
 .silhouette-item{text-align:center}

@@ -76,7 +76,7 @@ img,svg{display:block;max-width:100%}
 
 /* ═══ GOHSY LOGO — Typographic Art ═══ */
 .hero-logo{position:relative;margin-bottom:32px}
-.hero-logo__svg{width:clamp(320px,60vw,640px);height:auto;color:var(--text);animation:logoEnter 1.4s var(--ease-out) 0.3s both}
+.hero-logo__svg{width:clamp(240px,65vw,640px);height:auto;color:var(--text);animation:logoEnter 1.4s var(--ease-out) 0.3s both}
 .hero-logo__meaning{display:flex;justify-content:center;gap:clamp(20px,5vw,56px);margin-top:16px;animation:fadeIn 0.8s var(--ease-out) 1.2s both}
 .hero-logo__letter{display:flex;flex-direction:column;align-items:center;gap:2px}
 .hero-logo__char{font-size:0.6rem;font-weight:600;letter-spacing:0.2em;color:var(--text-3)}
@@ -153,7 +153,7 @@ img,svg{display:block;max-width:100%}
 .footer{padding:96px 0 32px;border-top:1px solid var(--border)}
 .footer__brand{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:200;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:8px}
 .footer__tagline{font-size:0.7rem;color:var(--text-3);letter-spacing:0.1em;margin-bottom:48px}
-.footer__links{display:flex;gap:32px;margin-bottom:64px}
+.footer__links{display:flex;gap:32px;margin-bottom:64px;flex-wrap:wrap}
 .footer__link{font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-3);transition:color 0.2s ease}
 .footer__link:hover{color:var(--text)}
 .footer__copy{font-size:0.6rem;color:var(--text-3)}
@@ -188,6 +188,35 @@ img,svg{display:block;max-width:100%}
 .outline-text{font-weight:900;letter-spacing:-0.02em;line-height:0.85;color:transparent;-webkit-text-stroke:1px var(--text-3);user-select:none}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+/* ═══ MOBILE ═══ */
+@media(max-width:768px){
+  .hero-logo__svg{width:clamp(200px,70vw,400px)}
+  .hero-logo__meaning{gap:clamp(12px,3vw,20px);margin-top:12px}
+  .hero-logo__char{font-size:0.55rem}
+  .hero-logo__desc{font-size:0.48rem}
+  .hero__tagline{font-size:0.75rem;letter-spacing:0.2em;margin-top:16px}
+  .hero__line{height:32px;margin-top:20px}
+  .scroll-hint{bottom:16px}
+  .on-air{padding:64px 0}
+  .on-air__header{flex-wrap:wrap;gap:12px}
+  .statement__text{font-size:clamp(1.5rem,5vw,2.5rem)}
+  .footer__links{gap:16px}
+  .footer{padding:64px 0 24px}
+  .footer__tagline{margin-bottom:32px}
+  .footer__links{margin-bottom:40px}
+}
+@media(max-width:480px){
+  .hero-logo__svg{width:clamp(180px,75vw,300px)}
+  .hero-logo__meaning{gap:8px}
+  .hero-logo__char{font-size:0.5rem}
+  .hero-logo__desc{font-size:0.45rem;letter-spacing:0}
+  .channel-card{min-height:35vh}
+  .channel-card__desc{font-size:0.75rem}
+  .on-air__header{flex-direction:column;align-items:flex-start;gap:8px}
+  .footer__links{gap:12px;flex-direction:column}
+  .footer__link{font-size:0.65rem}
+}
 </style>
 </head>
 <body>

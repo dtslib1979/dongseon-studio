@@ -53,4 +53,4 @@
 .real-section__color{width:28px;height:28px;border-radius:var(--r-full);background:var(--c);border:2px solid var(--border);cursor:pointer;transition:all var(--dur-fast) ease}
 .real-section__color:hover,.real-section__color.is-active{border-color:var(--accent);transform:scale(1.15)}
 .real-section__actions{display:flex;gap:var(--sp-3);flex-wrap:wrap}
-@media(max-width:768px){.real-section__hero{grid-template-columns:1fr}.real-section__visual{min-height:300px}.real-section__info{padding:var(--sp-8) var(--gutter)}.real-section__actions{flex-direction:column}.real-section__actions .btn{width:100%}}
+@media(max-width:768px){.story-hero__title{-webkit-text-stroke-width:1px}.real-section{padding:var(--sp-16) 0}.real-section__hero{grid-template-columns:1fr}.real-section__visual{min-height:250px;padding:var(--sp-6)}.real-section__info{padding:var(--sp-8) var(--gutter)}.real-section__name{font-size:var(--text-h2)}.real-section__price{font-size:var(--text-h3)}.real-section__actions{flex-direction:column}.real-section__actions .btn{width:100%}.tom-transition{min-height:40vh}.tom-transition .take-on-me{max-width:280px}}
