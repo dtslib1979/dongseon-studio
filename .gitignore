@@ -1,0 +1,26 @@
+# === 절대 금지: 인증 정보 ===
+.credentials/
+*.env
+.env.*
+credentials.json
+secrets.json
+
+# === 시스템 ===
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*~
+
+# === 렌더링 출력 (GPU 생성물 — 수동 편집 금지) ===
+# rendered/ 디렉토리는 GPU 렌더러가 생성. 커밋 필요시 의도적으로 add.
+# coupang/rendered/
+# naver/rendered/
+# youtube/rendered/
+
+# === IDE ===
+.vscode/
+.idea/
+*.code-workspace

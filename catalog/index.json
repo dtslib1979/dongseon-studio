@@ -1,0 +1,26 @@
+{
+  "$schema": "catalog-index.v1.0",
+  "$dummy": true,
+
+  "total": 1,
+  "categories": ["캐주얼"],
+  "seasons": ["SS"],
+
+  "products": [
+    {
+      "id": "PROD-001",
+      "name": "오버사이즈 옥스포드 셔츠 (화이트)",
+      "category": "캐주얼",
+      "season": "SS",
+      "price_retail": 39000,
+      "card_path": "catalog/products/PROD-001/card.json",
+      "channels_live": 0,
+      "status": "pending"
+    }
+  ],
+
+  "meta": {
+    "updated_at": "2026-03-03",
+    "generated_by": "dummy-wafer"
+  }
+}

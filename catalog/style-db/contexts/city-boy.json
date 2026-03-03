@@ -1,0 +1,34 @@
+{
+  "$dummy": true,
+  "id": "city_boy",
+  "name": "City Boy",
+  "name_ko": "시티보이",
+  "origin": "도시 전문직 청년 — 일본 재해석",
+  "era": "1980s-present",
+  "source_magazines": ["POPEYE", "Men's Non-No"],
+
+  "variable_tendencies": {
+    "formality_score": { "range": [0.3, 0.5] },
+    "season": "SS",
+    "layer_depth": { "range": [1, 2] },
+    "contrast_index": { "range": [0.05, 0.30] }
+  },
+
+  "target_audience": {
+    "age": "25-30",
+    "occupation": "직장인",
+    "lifestyle": "도시, 카페, 브런치"
+  },
+
+  "content_tone": {
+    "youtube_angle": "주말 브런치 코디, 데이트 코디",
+    "thumbnail_mood": "밝고 깔끔, 도시 배경",
+    "copy_style": "경쾌하고 실용적"
+  },
+
+  "compatible_formulas": ["F005"],
+
+  "meta": {
+    "created_at": "2026-03-03"
+  }
+}

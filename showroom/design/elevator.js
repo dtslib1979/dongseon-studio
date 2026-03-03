@@ -4,11 +4,12 @@
    ═══════════════════════════════════════════ */
 
 const DongseonBuilding = {
-  // Floor passwords (hashed in production)
+  // Floor passwords — .credentials/elevator-keys.json 에서 로드 (커밋 금지)
+  // 더미 해시. 실서비스 전환 시 .credentials/ 에서 읽도록 수정 필요.
   passwords: {
-    '2f': '1126',          // 자동화 센터
-    '3f': '1126',          // 프로덕션 스튜디오
-    '4f': '1126'           // 대제학실
+    '2f': null,
+    '3f': null,
+    '4f': null
   },
 
   // Floor definitions

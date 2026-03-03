@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+  쿠팡 상세페이지 표준 템플릿 (더미 웨이퍼)
+  GPU 렌더러가 PRODUCT_CARD.json 데이터로 이 템플릿을 채운다.
+  수동 편집 금지 — gpu/detail-renderer 가 생성.
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{{product.name}} | GOHSY</title>
+</head>
+<body>
+  <section class="hero">
+    <img src="{{images.main}}" alt="{{product.name}} 메인 이미지">
+    <h1>{{product.name}}</h1>
+    <p class="price">₩{{price.coupang}}</p>
+  </section>
+
+  <section class="detail-images">
+    <!-- {{#each images.detail}} -->
+    <img src="{{this}}" alt="상세 이미지">
+    <!-- {{/each}} -->
+  </section>
+
+  <section class="style-guide">
+    <h2>코디 가이드</h2>
+    <p>스타일 공식: {{style_module.context}}</p>
+    <p>실루엣: {{style_module.variables.silhouette_type}}</p>
+  </section>
+
+  <section class="spec">
+    <h2>상품 정보</h2>
+    <table>
+      <tr><td>소재</td><td>{{spec.material}}</td></tr>
+      <tr><td>사이즈</td><td>{{spec.sizes}}</td></tr>
+      <tr><td>컬러</td><td>{{spec.colors}}</td></tr>
+      <tr><td>원산지</td><td>{{spec.origin}}</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <p>GOHSY FASHION | gohsy.com</p>
+    <p class="ai-notice">AI 스타일링 이미지 포함</p>
+  </footer>
+</body>
+</html>
