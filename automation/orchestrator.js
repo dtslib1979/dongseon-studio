@@ -143,6 +143,18 @@ async function deploy() {
   if (!dryRun) {
     fs.writeFileSync(cardPath, JSON.stringify(card, null, 2) + '\n', 'utf8');
     console.log(`\n  ✓ card.json updated`);
+
+    // index.json 동기화
+    const indexPath = path.join(ROOT, 'catalog/index.json');
+    if (fs.existsSync(indexPath)) {
+      const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+      const entry = index.products.find(p => p.id === card.product_id);
+      if (entry && entry.state !== card.state) {
+        entry.state = card.state;
+        fs.writeFileSync(indexPath, JSON.stringify(index, null, 2) + '\n', 'utf8');
+        console.log(`  ✓ index.json synced (${card.product_id} → ${card.state})`);
+      }
+    }
   }
 
   // ── Queue Log ───────────────────────────────────────
