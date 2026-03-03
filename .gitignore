@@ -8,6 +8,8 @@ youtube/thumbnails/*.jpg
 # Credentials (헌법: 절대 커밋 금지)
 automation/.credentials/
 .credentials/
+*.env
+.env.*
 
 # OS / Editor
 .DS_Store

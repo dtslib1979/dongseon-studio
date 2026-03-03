@@ -1,0 +1,13 @@
+{
+  "id": "workwear",
+  "name": "Workwear",
+  "origin": "노동/남성성 코드",
+  "target": "자영업/크리에이터",
+  "key_variables": {
+    "pant_width_category": "Wide",
+    "layer_depth": { "min": 2 },
+    "formality_score": { "range": [0.2, 0.4] }
+  },
+  "content_tone": "거친, 실용적, 남성적",
+  "youtube_mapping": "시리즈 B (도면에서 옷장까지)"
+}

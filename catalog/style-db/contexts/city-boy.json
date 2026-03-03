@@ -1,0 +1,13 @@
+{
+  "id": "city_boy",
+  "name": "City Boy",
+  "origin": "도시 전문직 청년",
+  "target": "직장인 25-30",
+  "key_variables": {
+    "formality_score": { "range": [0.3, 0.5] },
+    "season": "SS",
+    "layer_depth": { "range": [1, 2] }
+  },
+  "content_tone": "깔끔, 실용, 도시적",
+  "youtube_mapping": "시리즈 D (실착 리뷰)"
+}

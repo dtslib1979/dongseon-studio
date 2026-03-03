@@ -1,0 +1,13 @@
+{
+  "id": "F004",
+  "name": "Monochrome Authority",
+  "description": "모노크롬: 극저 대비, I/A 실루엣, 격식 중간 이상",
+  "conditions": {
+    "contrast_index": { "max": 0.15 },
+    "silhouette_type": { "in": ["I", "A"] },
+    "formality_score": { "min": 0.5 }
+  },
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
+}

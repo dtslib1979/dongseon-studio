@@ -1,0 +1,18 @@
+{
+  "$schema": "variables.schema.v1.0",
+  "description": "V-F-C-D Meta Schema — Variables 정의",
+  "source": "WHITEPAPER-GOHSY-FASHION-v4.0 §5.2",
+
+  "variables": {
+    "upper_length_ratio":   { "type": "float",  "range": [0.0, 1.0], "desc": "상의 길이 비율 (전체 대비)" },
+    "pant_length_ratio":    { "type": "float",  "range": [0.0, 1.0], "desc": "바지 길이 비율" },
+    "pant_width_category":  { "type": "enum",   "values": ["Slim", "Straight", "Wide"], "desc": "바지 폭 카테고리" },
+    "layer_depth":          { "type": "int",    "range": [1, 4], "desc": "레이어링 깊이" },
+    "contrast_index":       { "type": "float",  "range": [0.0, 1.0], "desc": "상하의 명도/채도 대비 (HSV)" },
+    "shoe_exposure_rate":   { "type": "float",  "range": [0.0, 1.0], "desc": "발목 노출 비율" },
+    "silhouette_type":      { "type": "enum",   "values": ["A", "I", "Y", "Box"], "desc": "실루엣 유형" },
+    "color_palette":        { "type": "array",  "items": "hex",  "desc": "사용 색상 목록" },
+    "season":               { "type": "enum",   "values": ["SS", "FW", "Transition"], "desc": "시즌" },
+    "formality_score":      { "type": "float",  "range": [0.0, 1.0], "desc": "격식도 (캐주얼 0 ~ 포멀 1)" }
+  }
+}

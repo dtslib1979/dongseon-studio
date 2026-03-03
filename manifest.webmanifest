@@ -1,12 +1,12 @@
 {
-  "name": "DONGSEON Studio",
-  "short_name": "DONGSEON",
-  "description": "비즈니스의 장면을 그리는 디지털 스튜디오",
-  "start_url": "/dongseon-studio/",
-  "scope": "/dongseon-studio/",
+  "name": "GOHSY Fashion",
+  "short_name": "GOHSY",
+  "description": "남성 스타일 리팩토링 스튜디오 — 4채널 패션 커머스",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#0F172A",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "orientation": "portrait",
   "lang": "ko",
   "icons": [
@@ -23,17 +23,5 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "productivity"],
-  "shortcuts": [
-    {
-      "name": "Console",
-      "url": "/dongseon-studio/console/",
-      "description": "관제 대시보드"
-    },
-    {
-      "name": "Packages",
-      "url": "/dongseon-studio/delivery/packages/",
-      "description": "패키지 목록"
-    }
-  ]
+  "categories": ["shopping", "lifestyle"]
 }

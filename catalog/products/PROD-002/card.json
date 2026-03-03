@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "product_id": "PROD-002",
   "name": "와이드 핏 카고 팬츠",
   "name_en": "Wide Fit Cargo Pants",
@@ -40,6 +40,24 @@
     "naver": { "store_id": null, "product_url": null, "detail_html": "naver/rendered/PROD-002.html", "status": "pending" },
     "youtube": { "video_ids": [], "status": "pending" },
     "showroom": { "page_url": "/lookbook/PROD-002.html", "status": "pending" }
+  },
+
+  "style_module": {
+    "variables": {
+      "silhouette_type": "A",
+      "pant_width_category": "Wide",
+      "pant_length_ratio": 0.95,
+      "upper_length_ratio": 0.28,
+      "layer_depth": 1,
+      "contrast_index": 0.4,
+      "shoe_exposure_rate": 0.1,
+      "formality_score": 0.2,
+      "season": "SS"
+    },
+    "formula_ids": ["F002", "F005"],
+    "context": "city_boy",
+    "source_archive": null,
+    "coordination_notes": "와이드 팬츠 앵커. 상의 짧게, 신발 가림. 스트릿 무드"
   },
 
   "content_matrix": {

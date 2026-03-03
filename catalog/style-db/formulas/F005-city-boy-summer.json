@@ -1,0 +1,15 @@
+{
+  "id": "F005",
+  "name": "City Boy Summer",
+  "description": "SS 싱글 레이어: 상의 짧게, 발목 노출, 크롭 팬츠",
+  "conditions": {
+    "season": "SS",
+    "layer_depth": 1,
+    "upper_length_ratio": { "max": 0.30 },
+    "shoe_exposure_rate": { "min": 0.6 },
+    "pant_length_ratio": { "max": 0.85 }
+  },
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
+}

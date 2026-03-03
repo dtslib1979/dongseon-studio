@@ -1,0 +1,12 @@
+{
+  "id": "amekaji",
+  "name": "Amekaji",
+  "origin": "미국 캐주얼 일본화",
+  "target": "복고 감성 전 연령",
+  "key_variables": {
+    "contrast_index": { "max": 0.3 },
+    "formality_score": { "range": [0.2, 0.5] }
+  },
+  "content_tone": "빈티지, 편안, 감성",
+  "youtube_mapping": "시리즈 A (옷 입는 웹툰) + 시리즈 C (판타지 룩북)"
+}

@@ -50,6 +50,14 @@
   .detail-footer .links { margin-top: 12px; font-size: 12px; color: #888; }
   .detail-footer a { color: #aaa; text-decoration: none; }
 
+  /* Style Module */
+  .style-module { padding: 20px; background: #f8f5f0; border-top: 2px solid #e8e0d8; }
+  .style-module h3 { font-size: 14px; color: #8b7355; margin-bottom: 12px; letter-spacing: 1px; }
+  .style-context, .style-formulas { font-size: 13px; color: #555; margin-bottom: 6px; }
+  .style-vars { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .style-var { font-size: 11px; background: #fff; padding: 4px 10px; border-radius: 4px; border: 1px solid #e8e0d8; color: #666; }
+  .style-notes { font-size: 12px; color: #999; font-style: italic; margin-top: 8px; }
+
   /* Tags */
   .tags { padding: 16px 20px; font-size: 12px; color: #999; }
 </style>
@@ -107,6 +115,9 @@
   <h2>기술 도면</h2>
   <img src="{{cad_image}}" alt="{{name}} CAD">
 </div>
+
+<!-- Style Module -->
+{{style_module}}
 
 <!-- Tags -->
 <div class="tags">{{tags}}</div>

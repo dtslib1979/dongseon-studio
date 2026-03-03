@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /automation/
+Disallow: /analytics/
+Disallow: /gpu/
+Disallow: /pipeline/
 
-Sitemap: https://dtslib1979.github.io/dongseon-studio/sitemap.xml
+Sitemap: https://gohsy.com/sitemap.xml

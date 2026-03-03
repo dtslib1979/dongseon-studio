@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "product_id": "PROD-001",
   "name": "오버사이즈 니트 가디건",
   "name_en": "Oversized Knit Cardigan",
@@ -56,6 +56,21 @@
       "page_url": "/lookbook/PROD-001.html",
       "status": "pending"
     }
+  },
+
+  "style_module": {
+    "variables": {
+      "silhouette_type": "Box",
+      "upper_length_ratio": 0.45,
+      "layer_depth": 2,
+      "contrast_index": 0.25,
+      "formality_score": 0.3,
+      "season": "FW"
+    },
+    "formula_ids": ["F003"],
+    "context": "amekaji",
+    "source_archive": null,
+    "coordination_notes": "이너 + 가디건 레이어링. 뉴트럴 톤 컬러 팔레트"
   },
 
   "content_matrix": {
