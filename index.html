@@ -1,105 +1,201 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOHSY — Fashion Commerce</title>
-  <meta name="description" content="gohsy.com — 패션 커머스 쇼룸. 4채널 루프백 아키텍처.">
-  <meta name="theme-color" content="#0F0F0F">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="GOHSY — Fashion Commerce">
-  <meta property="og:description" content="패션 커머스 쇼룸 — 쿠팡 · 네이버 · YouTube · gohsy.com">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg: #0F0F0F;
-      --surface: #1A1A2E;
-      --accent: #E94560;
-      --text: #F5F5F5;
-      --dim: rgba(245,245,245,0.5);
-    }
-    body {
-      font-family: -apple-system, system-ui, 'Noto Sans KR', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-    }
-    .brand { font-size: 3rem; font-weight: 800; letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-    .brand span { color: var(--accent); }
-    .tagline { font-size: 1rem; color: var(--dim); margin-bottom: 3rem; }
-    .channels {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      max-width: 600px;
-      width: 100%;
-      margin-bottom: 3rem;
-    }
-    @media (max-width: 500px) { .channels { grid-template-columns: repeat(2, 1fr); } }
-    .ch {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 1.5rem 1rem;
-      transition: transform 0.2s;
-    }
-    .ch:hover { transform: translateY(-4px); }
-    .ch-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .ch-name { font-size: 0.75rem; font-weight: 600; }
-    .ch-status { font-size: 0.65rem; color: var(--dim); margin-top: 0.3rem; }
-    .status-badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-    }
-    .footer {
-      position: fixed;
-      bottom: 1.5rem;
-      font-size: 0.65rem;
-      color: var(--dim);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOHSY — Fashion TV</title>
+<meta name="description" content="GOHSY Fashion TV. 옷은 이야기다. 4-Channel Fashion Broadcasting.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GOHSY — Fashion TV">
+<meta property="og:description" content="옷은 이야기다 — Story · Material · Costume · Academy">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/reset.css">
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/animations.css">
+<link rel="stylesheet" href="styles/landing.css">
 </head>
 <body>
-  <div class="brand">GO<span>H</span>SY</div>
-  <p class="tagline">Fashion Commerce HQ — 4-Channel Loopback</p>
 
-  <div class="channels">
-    <div class="ch">
-      <div class="ch-icon">🛒</div>
-      <div class="ch-name">Coupang</div>
-      <div class="ch-status">준비 중</div>
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader__brand">GOHSY</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav__brand">GOHSY</a>
+  <div class="nav__channels">
+    <a href="channels/story.html" class="nav__ch" data-ch="ch1">CH1 Story</a>
+    <a href="channels/material.html" class="nav__ch" data-ch="ch2">CH2 Material</a>
+    <a href="channels/costume.html" class="nav__ch" data-ch="ch3">CH3 Costume</a>
+    <a href="channels/academy.html" class="nav__ch" data-ch="ch4">CH4 Academy</a>
+  </div>
+  <div class="nav__actions">
+    <a href="showroom/" class="nav__link">Showroom</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <h1 class="hero__brand">GOHSY</h1>
+    <p class="hero__tagline">wear the story</p>
+    <div class="hero__line"></div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-hint__line"></div>
+    <span class="scroll-hint__text">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee reveal reveal--none">
+  <div class="marquee__inner">
+    <span class="marquee__item">FW2026 Collection</span>
+    <span class="marquee__item">4-Channel Broadcasting</span>
+    <span class="marquee__item">Story · Material · Costume · Academy</span>
+    <span class="marquee__item">옷은 이야기다</span>
+    <span class="marquee__item">Fashion TV</span>
+    <span class="marquee__item">gohsy.com</span>
+    <span class="marquee__item">FW2026 Collection</span>
+    <span class="marquee__item">4-Channel Broadcasting</span>
+    <span class="marquee__item">Story · Material · Costume · Academy</span>
+    <span class="marquee__item">옷은 이야기다</span>
+    <span class="marquee__item">Fashion TV</span>
+    <span class="marquee__item">gohsy.com</span>
+  </div>
+</div>
+
+<!-- CHANNELS -->
+<section class="channels-section section--flush">
+  <div class="channel-grid">
+    <a href="channels/story.html" class="channel-card reveal" style="--ch-color:var(--ch1)">
+      <span class="channel-card__num">01</span>
+      <span class="channel-card__label">Channel 01</span>
+      <h2 class="channel-card__name">Story</h2>
+      <p class="channel-card__desc">웹툰에서 현실로. Take On Me 트랜지션으로 만나는 캐릭터의 일상과 스타일.</p>
+      <span class="channel-card__arrow">→</span>
+    </a>
+    <a href="channels/material.html" class="channel-card reveal reveal-d1" style="--ch-color:var(--ch2)">
+      <span class="channel-card__num">02</span>
+      <span class="channel-card__label">Channel 02</span>
+      <h2 class="channel-card__name">Material</h2>
+      <p class="channel-card__desc">울, 코튼, 가죽. 소재의 결을 읽는 매거진 스프레드.</p>
+      <span class="channel-card__arrow">→</span>
+    </a>
+    <a href="channels/costume.html" class="channel-card reveal reveal-d2" style="--ch-color:var(--ch3)">
+      <span class="channel-card__num">03</span>
+      <span class="channel-card__label">Channel 03</span>
+      <h2 class="channel-card__name">Costume</h2>
+      <p class="channel-card__desc">캐릭터를 입히다. 세트 코디네이션과 스타일 디자인.</p>
+      <span class="channel-card__arrow">→</span>
+    </a>
+    <a href="channels/academy.html" class="channel-card reveal reveal-d3" style="--ch-color:var(--ch4)">
+      <span class="channel-card__num">04</span>
+      <span class="channel-card__label">Channel 04</span>
+      <h2 class="channel-card__name">Academy</h2>
+      <p class="channel-card__desc">실루엣부터 컬러까지. 패션의 기초를 배우는 아카데미.</p>
+      <span class="channel-card__arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ON AIR -->
+<section class="on-air section">
+  <div class="on-air__header">
+    <div class="section__label on-air__label">
+      <span class="on-air__dot"></span> On Air — Now Showing
     </div>
-    <div class="ch">
-      <div class="ch-icon">🟢</div>
-      <div class="ch-name">Naver</div>
-      <div class="ch-status">준비 중</div>
+    <a href="showroom/" class="btn btn--sm btn--ghost"><span>View All</span></a>
+  </div>
+  <div class="on-air__scroll" id="onAirScroll"></div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement reveal">
+  <div class="statement__text reveal-text">
+    <span class="line" style="--i:0">옷은</span>
+    <span class="line" style="--i:1"><em>이야기</em>다.</span>
+    <span class="line" style="--i:2">당신이 입는 모든 것에는</span>
+    <span class="line" style="--i:3">서사가 있다.</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__brand">GOHSY</div>
+    <p class="footer__tagline">Fashion TV — Wear the Story</p>
+    <div class="footer__links">
+      <a href="channels/story.html" class="footer__link">Story</a>
+      <a href="channels/material.html" class="footer__link">Material</a>
+      <a href="channels/costume.html" class="footer__link">Costume</a>
+      <a href="channels/academy.html" class="footer__link">Academy</a>
+      <a href="showroom/" class="footer__link">Showroom</a>
     </div>
-    <div class="ch">
-      <div class="ch-icon">▶️</div>
-      <div class="ch-name">YouTube</div>
-      <div class="ch-status">준비 중</div>
-    </div>
-    <div class="ch">
-      <div class="ch-icon">🏠</div>
-      <div class="ch-name">Showroom</div>
-      <div class="ch-status">준비 중</div>
+    <p class="footer__copy">&copy; 2026 GOHSY. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="page-spacer"></div>
+
+<!-- PLAYER BAR -->
+<div class="player-bar" id="playerBar">
+  <div class="player-bar__music">
+    <div class="player-bar__art">♫</div>
+    <div class="player-bar__meta">
+      <div class="player-bar__title" id="playerTitle">Take On Me</div>
+      <div class="player-bar__artist" id="playerArtist">a-ha</div>
     </div>
   </div>
+  <div class="player-bar__controls">
+    <button class="player-bar__btn" id="playerPrev">⏮</button>
+    <button class="player-bar__btn player-bar__btn--play" id="playerPlay">▶</button>
+    <button class="player-bar__btn" id="playerNext">⏭</button>
+  </div>
+  <div class="player-bar__product" id="playerProduct">
+    <div class="player-bar__thumb" id="playerThumb">🧥</div>
+    <a href="showroom/" class="player-bar__buy">Shop Now</a>
+  </div>
+</div>
 
-  <a href="showroom/" style="display:inline-block;padding:0.8rem 2rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-size:0.9rem;font-weight:600;margin-bottom:1.5rem;transition:filter 0.2s" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='none'">Showroom 입장</a>
-
-  <div style="font-size:0.7rem;color:var(--dim);margin-bottom:2rem">3 products · SPEC_READY</div>
-
-  <div class="footer">gohsy-fashion · slot #9 · DTSLIB HQ</div>
+<script src="js/app.js"></script>
+<script src="js/scroll-reveal.js"></script>
+<script src="js/player-bar.js"></script>
+<script>
+(function(){
+  'use strict';
+  function loadOnAir(){
+    var el=document.getElementById('onAirScroll');
+    if(!el)return;
+    window.GOHSY.getCatalog().then(function(data){
+      var products=data.products||[];
+      var html='';
+      for(var i=0;i<products.length;i++){
+        var p=products[i];
+        var icon=window.GOHSY.getCatIcon(p.category);
+        var colors=p.colors||[];
+        var dots='';
+        for(var c=0;c<colors.length;c++){
+          dots+='<span class="color-dot" style="background:'+window.GOHSY.getColorHex(colors[c])+'"></span>';
+        }
+        html+='<a href="showroom/lookbook/'+p.id+'.html" class="on-air__item card">';
+        html+='<div class="card__image"><div class="card__placeholder"><span class="card__placeholder-icon">'+icon+'</span><span class="card__placeholder-text">'+p.name_en+'</span></div></div>';
+        html+='<div class="card__info"><div class="card__category">'+p.category.replace('/',' / ')+'</div>';
+        html+='<div class="card__name">'+p.name+'</div>';
+        html+='<div class="card__price">'+window.GOHSY.formatPrice(p.price)+'</div>';
+        html+='<div class="card__colors">'+dots+'</div></div></a>';
+      }
+      el.innerHTML=html;
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadOnAir);
+  else loadOnAir();
+})();
+</script>
 </body>
 </html>
