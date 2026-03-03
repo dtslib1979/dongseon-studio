@@ -1,0 +1,23 @@
+{
+  "month": "2026-03",
+  "generated": "2026-03-03T14:41:01Z",
+  "products": {
+    "total": 3,
+    "spec_ready": 2,
+    "all_live": 1
+  },
+  "deploys": {
+    "total": 1,
+    "all_live": 1
+  },
+  "style_db": {
+    "formulas": 7,
+    "contexts": 4
+  },
+  "channels": {
+    "coupang": "active",
+    "naver": "active",
+    "youtube": "active",
+    "showroom": "active"
+  }
+}
