@@ -84,12 +84,12 @@
 .footer{padding:var(--sp-24) 0 var(--sp-8);border-top:1px solid var(--border)}
 .footer__brand{font-size:var(--text-h2);font-weight:var(--w-light);letter-spacing:var(--ls-widest);text-transform:uppercase;margin-bottom:var(--sp-2)}
 .footer__tagline{font-size:var(--text-xs);color:var(--text-3);letter-spacing:var(--ls-wide);margin-bottom:var(--sp-12)}
-.footer__links{display:flex;gap:var(--sp-8);margin-bottom:var(--sp-16)}
+.footer__links{display:flex;gap:var(--sp-8);margin-bottom:var(--sp-16);flex-wrap:wrap}
 .footer__link{font-size:var(--text-xs);font-weight:var(--w-medium);letter-spacing:var(--ls-wider);text-transform:uppercase;color:var(--text-3);transition:color var(--dur-fast) ease}
 .footer__link:hover{color:var(--text)}
 .footer__copy{font-size:var(--text-micro);color:var(--text-3)}
 .page-spacer{height:var(--player-h)}
-@media(max-width:768px){.page-spacer{height:var(--player-h-m)}}
+@media(max-width:768px){.page-spacer{height:var(--player-h-m)}.footer{padding:var(--sp-16) 0 var(--sp-6)}.footer__links{gap:var(--sp-4)}.footer__tagline{margin-bottom:var(--sp-8)}.footer__links{margin-bottom:var(--sp-10)}.next-channel{padding:var(--sp-16) var(--gutter)}.next-channel__name{font-size:var(--text-h2)}.section__title{font-size:var(--text-h2)}}
 
 /* ── HOVER EFFECTS ── */
 .hover-zoom{overflow:hidden}
