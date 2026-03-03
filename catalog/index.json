@@ -12,7 +12,7 @@
       "season": "FW2026",
       "price": 49900,
       "colors": ["ivory", "charcoal", "camel"],
-      "state": "SPEC_READY",
+      "state": "ALL_LIVE",
       "card": "products/PROD-001/card.json"
     },
     {

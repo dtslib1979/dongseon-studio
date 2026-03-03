@@ -1,0 +1,13 @@
+{
+  "id": "ivy",
+  "name": "Ivy",
+  "origin": "미국 아이비리그 → 일본 재해석",
+  "target": "전문직 30대",
+  "key_variables": {
+    "formality_score": { "min": 0.6 },
+    "layer_depth": 2,
+    "contrast_index": { "range": [0.2, 0.5] }
+  },
+  "content_tone": "클래식, 정돈, 지적",
+  "youtube_mapping": "시리즈 E (스타일 공식)"
+}

@@ -43,6 +43,14 @@
   .cad-section { padding: 20px; text-align: center; background: #fafafa; }
   .cad-section img { max-width: 100%; height: auto; }
 
+  /* Style Module */
+  .style-module { padding: 20px; background: #f0faf0; border-top: 2px solid #00C73C; }
+  .style-module h3 { font-size: 14px; color: #00C73C; margin-bottom: 12px; }
+  .style-context, .style-formulas { font-size: 13px; color: #555; margin-bottom: 6px; }
+  .style-vars { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .style-var { font-size: 11px; background: #fff; padding: 4px 10px; border-radius: 4px; border: 1px solid #ddeedd; color: #666; }
+  .style-notes { font-size: 12px; color: #999; font-style: italic; margin-top: 8px; }
+
   .tags { padding: 16px 20px; font-size: 12px; color: #999; }
 
   .detail-footer { padding: 24px 20px; text-align: center; background: #222; color: #fff; }
@@ -100,6 +108,9 @@
 <div class="cad-section">
   <img src="{{cad_image}}" alt="{{name}} 도면">
 </div>
+
+<!-- Style Module -->
+{{style_module}}
 
 <div class="tags">{{tags}}</div>
 

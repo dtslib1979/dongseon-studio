@@ -1,33 +1,15 @@
 {
-  "$dummy": true,
   "id": "F005",
   "name": "City Boy Summer",
-  "description": "도시 청년 여름 코디. 단일 레이어, 높은 발목 노출, 짧은 상의.",
-  "source_archive": ["popeye_1988_vol31", "popeye_1987_vol23"],
-
+  "description": "SS 싱글 레이어: 상의 짧게, 발목 노출, 크롭 팬츠",
   "conditions": {
     "season": "SS",
-    "layer_depth": 1
-  },
-  "rules": {
+    "layer_depth": 1,
     "upper_length_ratio": { "max": 0.30 },
     "shoe_exposure_rate": { "min": 0.6 },
     "pant_length_ratio": { "max": 0.85 }
   },
-
-  "compatible_contexts": ["city_boy"],
-  "target_products": ["PROD-001"],
-
-  "performance": {
-    "ctr": null,
-    "conversion_rate": null,
-    "sample_size": 0,
-    "status": "unverified",
-    "note": "Phase 1 파일럿에서 검증 예정"
-  },
-
-  "meta": {
-    "created_at": "2026-03-03",
-    "version": 1
-  }
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
 }

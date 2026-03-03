@@ -1,0 +1,14 @@
+{
+  "id": "F003",
+  "name": "Layer Stack",
+  "description": "3겹 이상 레이어링: 대비 낮게, 색상 4개 이하, 캐주얼",
+  "conditions": {
+    "layer_depth": { "min": 3 },
+    "contrast_index": { "max": 0.40 },
+    "color_palette_max": 4,
+    "formality_score": { "max": 0.6 }
+  },
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
+}

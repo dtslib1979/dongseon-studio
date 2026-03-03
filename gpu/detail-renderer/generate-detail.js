@@ -44,6 +44,9 @@ if (!fs.existsSync(cardPath)) {
 }
 
 const card = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+// BUG-01 fix: product_id/id 키 통일 — 둘 다 지원
+if (!card.product_id && card.id) card.product_id = card.id;
+if (!card.id && card.product_id) card.id = card.product_id;
 console.log(`=== generate-detail: ${productId} (${card.name}) ===`);
 
 // ── Template Loader ───────────────────────────────────
@@ -97,6 +100,30 @@ function interpolate(html, card) {
   // 태그
   const tagsHtml = (card.tags || []).map(t => `#${t}`).join(' ');
 
+  // Style Module (V-F-C-D) — 백서 v4.0 핵심
+  let styleHtml = '';
+  const sm = card.style_module;
+  if (sm) {
+    const formulaIds = (sm.formula_ids || []).join(', ') || '—';
+    const context = sm.context || '—';
+    const notes = sm.coordination_notes || '';
+    const vars = sm.variables || {};
+    const varRows = Object.entries(vars).map(([k, v]) =>
+      `          <span class="style-var"><b>${k}</b>: ${v}</span>`
+    ).join('\n');
+
+    styleHtml = `
+    <div class="style-module">
+      <h3>Style Formula</h3>
+      <div class="style-context">Context: <strong>${context}</strong></div>
+      <div class="style-formulas">Formula: <strong>${formulaIds}</strong></div>
+      <div class="style-vars">
+${varRows}
+      </div>
+      <div class="style-notes">${notes}</div>
+    </div>`;
+  }
+
   // 가격 포맷
   const formatPrice = (n) => n ? `₩${n.toLocaleString()}` : '';
 
@@ -120,6 +147,7 @@ function interpolate(html, card) {
     .replace(/\{\{spec_table\}\}/g, specRows)
     .replace(/\{\{material\}\}/g, card.spec.material || '')
     .replace(/\{\{tags\}\}/g, tagsHtml)
+    .replace(/\{\{style_module\}\}/g, styleHtml)
     .replace(/\{\{showroom_url\}\}/g, `https://gohsy.com/lookbook/${card.product_id}.html`)
     .replace(/\{\{year\}\}/g, new Date().getFullYear().toString());
 }

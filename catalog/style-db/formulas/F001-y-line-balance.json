@@ -1,0 +1,14 @@
+{
+  "id": "F001",
+  "name": "Y-Line Balance",
+  "description": "Y실루엣: 상의 짧게, 하의 슬림/스트레이트, 대비 확보",
+  "conditions": {
+    "silhouette_type": "Y",
+    "upper_length_ratio": { "max": 0.35 },
+    "pant_width_category": { "in": ["Slim", "Straight"] },
+    "contrast_index": { "min": 0.3 }
+  },
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
+}

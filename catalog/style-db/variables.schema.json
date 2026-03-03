@@ -1,58 +1,18 @@
 {
-  "$schema": "style-variables.v1.0",
-  "$dummy": true,
-  "$note": "V-F-C-D Meta Schema의 V(Variables) 정의. 백서 v4.0 섹션 5.2 참조.",
+  "$schema": "variables.schema.v1.0",
+  "description": "V-F-C-D Meta Schema — Variables 정의",
+  "source": "WHITEPAPER-GOHSY-FASHION-v4.0 §5.2",
 
   "variables": {
-    "upper_length_ratio": {
-      "type": "float",
-      "range": [0.0, 1.0],
-      "description": "상의 길이 비율 (전체 대비)"
-    },
-    "pant_length_ratio": {
-      "type": "float",
-      "range": [0.0, 1.0],
-      "description": "바지 길이 비율"
-    },
-    "pant_width_category": {
-      "type": "enum",
-      "values": ["Slim", "Straight", "Wide"],
-      "description": "바지 폭 카테고리"
-    },
-    "layer_depth": {
-      "type": "int",
-      "range": [1, 4],
-      "description": "레이어링 깊이 (이너/미드/아우터/오버)"
-    },
-    "contrast_index": {
-      "type": "float",
-      "range": [0.0, 1.0],
-      "description": "상하의 명도/채도 대비 (HSV 기반)"
-    },
-    "shoe_exposure_rate": {
-      "type": "float",
-      "range": [0.0, 1.0],
-      "description": "발목 노출 비율"
-    },
-    "silhouette_type": {
-      "type": "enum",
-      "values": ["A", "I", "Y", "Box"],
-      "description": "실루엣 유형"
-    },
-    "color_palette": {
-      "type": "array",
-      "items": "hex_color",
-      "description": "사용 색상 목록"
-    },
-    "season": {
-      "type": "enum",
-      "values": ["SS", "FW", "Transition"],
-      "description": "시즌"
-    },
-    "formality_score": {
-      "type": "float",
-      "range": [0.0, 1.0],
-      "description": "격식도 (캐주얼 0 ~ 포멀 1)"
-    }
+    "upper_length_ratio":   { "type": "float",  "range": [0.0, 1.0], "desc": "상의 길이 비율 (전체 대비)" },
+    "pant_length_ratio":    { "type": "float",  "range": [0.0, 1.0], "desc": "바지 길이 비율" },
+    "pant_width_category":  { "type": "enum",   "values": ["Slim", "Straight", "Wide"], "desc": "바지 폭 카테고리" },
+    "layer_depth":          { "type": "int",    "range": [1, 4], "desc": "레이어링 깊이" },
+    "contrast_index":       { "type": "float",  "range": [0.0, 1.0], "desc": "상하의 명도/채도 대비 (HSV)" },
+    "shoe_exposure_rate":   { "type": "float",  "range": [0.0, 1.0], "desc": "발목 노출 비율" },
+    "silhouette_type":      { "type": "enum",   "values": ["A", "I", "Y", "Box"], "desc": "실루엣 유형" },
+    "color_palette":        { "type": "array",  "items": "hex",  "desc": "사용 색상 목록" },
+    "season":               { "type": "enum",   "values": ["SS", "FW", "Transition"], "desc": "시즌" },
+    "formality_score":      { "type": "float",  "range": [0.0, 1.0], "desc": "격식도 (캐주얼 0 ~ 포멀 1)" }
   }
 }

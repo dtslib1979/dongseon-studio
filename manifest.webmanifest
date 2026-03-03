@@ -1,12 +1,12 @@
 {
-  "name": "GOHSY FASHION",
+  "name": "GOHSY Fashion",
   "short_name": "GOHSY",
-  "description": "패션 커머스 HQ — 4채널 루프백",
-  "start_url": "/gohsy-fashion/",
-  "scope": "/gohsy-fashion/",
+  "description": "남성 스타일 리팩토링 스튜디오 — 4채널 패션 커머스",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0F0F0F",
-  "theme_color": "#0F0F0F",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "orientation": "portrait",
   "lang": "ko",
   "icons": [
@@ -23,17 +23,5 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["shopping", "fashion"],
-  "shortcuts": [
-    {
-      "name": "Showroom",
-      "url": "/gohsy-fashion/showroom/",
-      "description": "브랜드 쇼룸"
-    },
-    {
-      "name": "Catalog",
-      "url": "/gohsy-fashion/catalog/",
-      "description": "상품 카탈로그"
-    }
-  ]
+  "categories": ["shopping", "lifestyle"]
 }

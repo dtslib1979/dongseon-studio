@@ -1,0 +1,14 @@
+{
+  "id": "F002",
+  "name": "Wide Pant Anchor",
+  "description": "와이드 팬츠: 발목 가림, 레이어 2 이하, 상의 짧게",
+  "conditions": {
+    "pant_width_category": "Wide",
+    "shoe_exposure_rate": { "max": 0.25 },
+    "layer_depth": { "max": 2 },
+    "upper_length_ratio": { "max": 0.30 }
+  },
+  "source_archive": null,
+  "validation": { "sales_tested": false, "conversion_rate": null },
+  "created": "2026-03-03"
+}
