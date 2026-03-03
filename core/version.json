@@ -1,15 +1,15 @@
 {
   "module": "gohsy-fashion-core",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "compatible_with": "dtslib-papyrus HQ",
-  "status": "scaffold",
+  "status": "operational",
   "modules_planned": [
     "auth/console-gate.js",
-    "config/loader.js",
-    "hq/reporter.js",
     "pr/interface.js",
-    "registry/schema.json",
     "storage/keys.js"
   ],
-  "modules_implemented": []
+  "modules_implemented": [
+    "config/loader.js",
+    "hq/reporter.js"
+  ]
 }

@@ -63,9 +63,14 @@
       "state_transition": "ALL_LIVE → TRACKING → S1_SPEC (루프)",
       "manual": true,
       "tools": [
+        "analytics/collector.js",
         "analytics/sales-log.jsonl",
+        "analytics/traffic-log.jsonl",
         "analytics/channel-performance.jsonl",
-        "scripts/generate-report.sh"
+        "analytics/dashboard.json",
+        "scripts/generate-report.sh",
+        "core/hq/reporter.js",
+        "showroom/console.html"
       ]
     }
   ],
