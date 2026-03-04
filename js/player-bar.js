@@ -1,5 +1,6 @@
 /* GOHSY Fashion TV — Now Playing Bar + YouTube Playback
    ───────────────────────────────────────────────────────
+   - 채널별 시그니처 트랙 자동 매칭 (data-channel 속성)
    - 페이지 오픈 시 muted 자동 재생 (브라우저 정책 준수)
    - 첫 인터랙션(클릭/터치/스크롤) 감지 → 자동 unmute
    - prev / play / next 실제 YouTube 재생 제어
@@ -7,12 +8,25 @@
 (function(){
   'use strict';
 
-  var playlist = [
-    { title: 'Take On Me',  artist: 'a-ha',              emoji: '\u266B', videoId: 'djV11Xbc914' },
-    { title: 'Plastic Love', artist: 'Mariya Takeuchi',   emoji: '\u266A', videoId: '3bNITQR4Uso' },
-    { title: 'Stay With Me', artist: 'Miki Matsubara',    emoji: '\u266B', videoId: 'JMi3CPB4yB0' }
-  ];
+  /* ── 트랙 DB ── */
+  var TRACKS = {
+    plasticLove:  { title: 'Plastic Love',         artist: 'Mariya Takeuchi', emoji: '\u266A', videoId: '3bNITQR4Uso' },
+    takeOnMe:     { title: 'Take On Me',           artist: 'a-ha',            emoji: '\u266B', videoId: 'djV11Xbc914' },
+    blueMonday:   { title: 'Blue Monday',          artist: 'New Order',       emoji: '\u266A', videoId: 'FYH8DsU2WCk' },
+    sweetDreams:  { title: 'Sweet Dreams',         artist: 'Eurythmics',      emoji: '\u266B', videoId: 'qeMFqkcPYcg' },
+    everyBreath:  { title: 'Every Breath You Take', artist: 'The Police',     emoji: '\u266A', videoId: 'OMOGaugKpzs' }
+  };
 
+  /* ── 채널별 재생 순서 (시그니처 트랙 1번) ── */
+  var CHANNEL_ORDER = {
+    showroom: ['plasticLove', 'takeOnMe',   'blueMonday',  'sweetDreams', 'everyBreath'],
+    story:    ['takeOnMe',    'plasticLove', 'blueMonday',  'sweetDreams', 'everyBreath'],
+    material: ['blueMonday',  'plasticLove', 'takeOnMe',    'sweetDreams', 'everyBreath'],
+    costume:  ['sweetDreams', 'plasticLove', 'takeOnMe',    'blueMonday',  'everyBreath'],
+    academy:  ['everyBreath', 'plasticLove', 'takeOnMe',    'blueMonday',  'sweetDreams']
+  };
+
+  var playlist = [];
   var trackIndex = 0;
   var ytPlayer = null;
   var bar = null;
@@ -26,6 +40,11 @@
   function init() {
     bar = document.querySelector('.player-bar');
     if (!bar) return;
+
+    /* 채널 감지 → 플레이리스트 결정 */
+    var channel = bar.dataset.channel || 'showroom';
+    var order = CHANNEL_ORDER[channel] || CHANNEL_ORDER.showroom;
+    playlist = order.map(function(key) { return TRACKS[key]; });
 
     setTimeout(function(){ bar.classList.add('is-visible'); }, 1500);
     bindControls();
