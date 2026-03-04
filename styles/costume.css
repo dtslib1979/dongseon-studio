@@ -16,6 +16,7 @@
 .character__tags{display:flex;gap:var(--sp-2);flex-wrap:wrap}
 .character__tag{padding:var(--sp-1) var(--sp-3);border:1px solid var(--border);font-size:var(--text-micro);font-weight:var(--w-medium);letter-spacing:var(--ls-wide);color:var(--text-3);transition:all var(--dur-fast) ease}
 .character__tag:hover{border-color:var(--ch3);color:var(--ch3)}
+@media(min-width:769px) and (max-width:1279px){.character__profile{min-height:50vh}.character__bio{padding:var(--sp-8) var(--sp-8)}.character__desc{max-width:none}}
 @media(max-width:768px){.costume-hero__title{-webkit-text-stroke-width:1px}.character{padding:var(--sp-16) 0}.character__profile{grid-template-columns:1fr;min-height:auto}.character__portrait{min-height:40vh}.character__bio{padding:var(--sp-8) var(--gutter)}.character__name{font-size:var(--text-h2)}.character__desc{font-size:var(--text-small)}.outfit-set{padding:var(--sp-8) var(--gutter)}.char-grid{grid-template-columns:repeat(2,1fr)}.char-thumb{min-height:200px;padding:var(--sp-4)}}
 
 /* ── Outfit Set ── */

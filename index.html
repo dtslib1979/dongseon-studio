@@ -17,7 +17,7 @@
 :root{
   --bg:#0a0a0a;--surface:#111;--elevated:#1a1a1a;
   --text:#f0f0f0;--text-2:rgba(240,240,240,0.7);--text-3:rgba(240,240,240,0.4);
-  --accent:#ff2d55;--accent-hover:#ff4d6d;--white:#fff;
+  --accent:#2E7D52;--accent-hover:#3A9966;--white:#fff;
   --border:rgba(255,255,255,0.06);--border-bold:rgba(255,255,255,0.12);
   --ch1:#6366f1;--ch2:#22c55e;--ch3:#f59e0b;--ch4:#8b5cf6;
   --nav-h:56px;--player-h:64px;
@@ -52,7 +52,10 @@ img,svg{display:block;max-width:100%}
 .nav__actions{display:flex;gap:16px;align-items:center}
 .nav__link{font-size:0.65rem;font-weight:400;letter-spacing:0.1em;color:var(--text-3);text-transform:uppercase;transition:color 0.2s}
 .nav__link:hover{color:var(--text)}
-@media(max-width:768px){.nav__channels{position:static;transform:none;overflow-x:auto;scrollbar-width:none}.nav__channels::-webkit-scrollbar{display:none}.nav__ch{padding:8px 10px;font-size:0.6rem}.nav__actions{display:none}}
+.nav__ws{font-size:0.55rem;font-weight:700;letter-spacing:0.08em;padding:3px 8px;background:var(--accent);color:var(--white);font-family:'Courier New',monospace;transition:background 0.2s}
+.nav__ws:hover{background:var(--accent-hover)}
+@media(max-width:1279px){.nav__channels{gap:0}.nav__ch{padding:8px 10px;font-size:0.6rem}}
+@media(max-width:768px){.nav__channels{position:static;transform:none;overflow-x:auto;scrollbar-width:none}.nav__channels::-webkit-scrollbar{display:none}.nav__actions{display:none}}
 
 /* ═══ BUTTONS ═══ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 32px;font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;border:1px solid var(--text-3);color:var(--text);background:transparent;position:relative;overflow:hidden;transition:all 0.4s var(--ease-out);white-space:nowrap}
@@ -70,7 +73,7 @@ img,svg{display:block;max-width:100%}
 
 /* ═══ HERO ═══ */
 .hero{position:relative;height:100vh;height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding-top:var(--nav-h)}
-.hero__bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(255,45,85,0.04) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 30% 70%,rgba(99,102,241,0.03) 0%,transparent 50%),var(--bg)}
+.hero__bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(46,125,82,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 30% 70%,rgba(99,102,241,0.03) 0%,transparent 50%),var(--bg)}
 .hero__bg::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px;opacity:0.4;pointer-events:none}
 .hero__content{position:relative;z-index:1;text-align:center;padding:0 var(--gutter)}
 
@@ -114,6 +117,8 @@ img,svg{display:block;max-width:100%}
 .channel-card__desc{font-size:0.85rem;font-weight:300;color:var(--text-2);max-width:320px}
 .channel-card__arrow{position:absolute;bottom:32px;right:32px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;font-size:0.85rem;color:var(--text-3);transition:all 0.3s var(--ease-out)}
 .channel-card:hover .channel-card__arrow{background:var(--text);color:var(--bg);border-color:var(--text);transform:scale(1.1)}
+@media(min-width:1280px){.channel-grid{grid-template-columns:repeat(4,1fr)}.channel-card{min-height:40vh}}
+@media(min-width:769px) and (max-width:1279px){.channel-card{min-height:36vh;padding:32px 24px}.channel-card__num{font-size:clamp(4rem,8vw,6rem)}.channel-card__desc{font-size:0.75rem}}
 @media(max-width:768px){.channel-grid{grid-template-columns:1fr}.channel-card{min-height:40vh;padding:32px 24px}.channel-card__num{font-size:4rem;top:24px;right:24px}}
 
 /* ═══ ON AIR ═══ */
@@ -124,6 +129,7 @@ img,svg{display:block;max-width:100%}
 .on-air__scroll{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);padding:0 var(--gutter) 16px;max-width:var(--max-w);margin:0 auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .on-air__scroll::-webkit-scrollbar{display:none}
 .on-air__item{flex:0 0 calc(33.333% - 16px);scroll-snap-align:start;min-width:280px}
+@media(min-width:769px) and (max-width:1023px){.on-air__item{flex:0 0 calc(50% - 12px);min-width:0}}
 @media(max-width:768px){.on-air__item{flex:0 0 75vw;min-width:0}}
 
 /* ═══ PRODUCT CARD ═══ */
@@ -158,7 +164,7 @@ img,svg{display:block;max-width:100%}
 .footer__link:hover{color:var(--text)}
 .footer__copy{font-size:0.6rem;color:var(--text-3)}
 .page-spacer{height:var(--player-h)}
-@media(max-width:768px){.page-spacer{height:56px}.statement{padding:80px var(--gutter)}}
+@media(max-width:768px){.page-spacer{height:56px}.statement{padding:80px var(--gutter)}.footer__links{gap:16px}}
 
 /* ═══ PLAYER BAR ═══ */
 .player-bar{position:fixed;bottom:0;left:0;right:0;height:var(--player-h);z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--gutter);gap:16px;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-top:1px solid var(--border);transform:translateY(100%);transition:transform 0.5s var(--ease-out)}
@@ -237,6 +243,7 @@ img,svg{display:block;max-width:100%}
   </div>
   <div class="nav__actions">
     <a href="showroom/" class="nav__link">Showroom</a>
+    <a href="workstation/" class="nav__link nav__ws">WS</a>
   </div>
 </nav>
 
@@ -265,41 +272,75 @@ img,svg{display:block;max-width:100%}
         <!-- G — Clean forward-leaning letterform -->
         <path d="M66 16C48 16 34 30 34 54C34 78 48 92 66 92C80 92 90 84 94 72H70V64H106V70C102 88 86 104 66 104C40 104 20 84 20 54C20 24 40 4 66 4C84 4 98 14 104 30L94 34C90 22 80 16 66 16Z" fill="currentColor" opacity="0.92"/>
 
-        <!-- O — THE WHEEL (바퀴) -->
+        <!-- O — THE WHEEL (마차 바퀴) -->
         <g transform="translate(112,0)">
-          <circle cx="50" cy="54" r="48" stroke="currentColor" stroke-width="4.5" fill="none" opacity="0.92"/>
-          <circle cx="50" cy="54" r="7" fill="#ff2d55"/>
-          <circle cx="50" cy="54" r="18" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.2"/>
+          <!-- Outer rim — double ring for tire -->
+          <circle cx="50" cy="54" r="48" stroke="currentColor" stroke-width="3.5" fill="none" opacity="0.92"/>
+          <circle cx="50" cy="54" r="43" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.25"/>
+          <!-- Hub cap -->
+          <circle cx="50" cy="54" r="9" fill="#2E7D52"/>
+          <circle cx="50" cy="54" r="5.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+          <circle cx="50" cy="54" r="2.5" fill="currentColor" opacity="0.7"/>
+          <!-- Inner bearing ring -->
+          <circle cx="50" cy="54" r="17" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.18"/>
+          <!-- Felloe segments (rim connectors) -->
+          <circle cx="50" cy="54" r="32" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.1" stroke-dasharray="8 9"/>
+          <!-- 12 spokes -->
           <g class="whl-spokes">
-            <line x1="50" y1="10" x2="50" y2="36" stroke="currentColor" stroke-width="1.8" opacity="0.35"/>
-            <line x1="50" y1="72" x2="50" y2="98" stroke="currentColor" stroke-width="1.8" opacity="0.35"/>
-            <line x1="6" y1="54" x2="32" y2="54" stroke="currentColor" stroke-width="1.8" opacity="0.35"/>
-            <line x1="68" y1="54" x2="94" y2="54" stroke="currentColor" stroke-width="1.8" opacity="0.35"/>
-            <line x1="18" y1="22" x2="36" y2="40" stroke="currentColor" stroke-width="1.2" opacity="0.2"/>
-            <line x1="64" y1="68" x2="82" y2="86" stroke="currentColor" stroke-width="1.2" opacity="0.2"/>
-            <line x1="82" y1="22" x2="64" y2="40" stroke="currentColor" stroke-width="1.2" opacity="0.2"/>
-            <line x1="36" y1="68" x2="18" y2="86" stroke="currentColor" stroke-width="1.2" opacity="0.2"/>
+            <!-- Main 4 spokes (thick) -->
+            <line x1="50" y1="11" x2="50" y2="37" stroke="currentColor" stroke-width="2.2" opacity="0.45"/>
+            <line x1="50" y1="71" x2="50" y2="97" stroke="currentColor" stroke-width="2.2" opacity="0.45"/>
+            <line x1="7" y1="54" x2="33" y2="54" stroke="currentColor" stroke-width="2.2" opacity="0.45"/>
+            <line x1="67" y1="54" x2="93" y2="54" stroke="currentColor" stroke-width="2.2" opacity="0.45"/>
+            <!-- Diagonal 4 spokes -->
+            <line x1="19" y1="23" x2="37" y2="41" stroke="currentColor" stroke-width="1.6" opacity="0.3"/>
+            <line x1="63" y1="67" x2="81" y2="85" stroke="currentColor" stroke-width="1.6" opacity="0.3"/>
+            <line x1="81" y1="23" x2="63" y2="41" stroke="currentColor" stroke-width="1.6" opacity="0.3"/>
+            <line x1="37" y1="67" x2="19" y2="85" stroke="currentColor" stroke-width="1.6" opacity="0.3"/>
+            <!-- Extra 4 spokes (fine, 30° offset) -->
+            <line x1="27" y1="14" x2="39" y2="37" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+            <line x1="61" y1="71" x2="73" y2="94" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+            <line x1="73" y1="14" x2="61" y2="37" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+            <line x1="39" y1="71" x2="27" y2="94" stroke="currentColor" stroke-width="1" opacity="0.18"/>
           </g>
         </g>
 
-        <!-- H — THE THRONE (왕좌) -->
+        <!-- H — THE THRONE (중세 왕좌) -->
         <g transform="translate(224,0)">
-          <!-- Pillars -->
-          <rect x="14" y="4" width="7" height="100" rx="1.5" fill="currentColor" opacity="0.92"/>
-          <rect x="74" y="4" width="7" height="100" rx="1.5" fill="currentColor" opacity="0.92"/>
-          <!-- Seat — accent, throne crossbar -->
-          <rect x="10" y="46" width="76" height="9" rx="2" fill="#ff2d55"/>
-          <!-- Armrests -->
-          <path d="M10 46C4 46 0 42 0 36V34" stroke="#ff2d55" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M86 46C92 46 96 42 96 36V34" stroke="#ff2d55" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Crown ornaments -->
-          <path d="M12 4L17.5 -6L23 4" stroke="#ff2d55" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="17.5" cy="-8" r="1.8" fill="#ff2d55"/>
-          <path d="M72 4L77.5 -6L83 4" stroke="#ff2d55" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="77.5" cy="-8" r="1.8" fill="#ff2d55"/>
-          <!-- Backrest lines -->
-          <line x1="35" y1="10" x2="35" y2="42" stroke="currentColor" stroke-width="1" opacity="0.1"/>
-          <line x1="60" y1="10" x2="60" y2="42" stroke="currentColor" stroke-width="1" opacity="0.1"/>
+          <!-- Main pillars — ornate columns -->
+          <rect x="12" y="6" width="8" height="98" rx="2" fill="currentColor" opacity="0.92"/>
+          <rect x="76" y="6" width="8" height="98" rx="2" fill="currentColor" opacity="0.92"/>
+          <!-- Column bases -->
+          <rect x="8" y="96" width="16" height="6" rx="1.5" fill="currentColor" opacity="0.5"/>
+          <rect x="72" y="96" width="16" height="6" rx="1.5" fill="currentColor" opacity="0.5"/>
+          <!-- Gothic arch backrest -->
+          <path d="M20 6 L20 32 Q20 12 48 2 Q76 12 76 32 L76 6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.12"/>
+          <path d="M28 6 L28 28 Q28 16 48 8 Q68 16 68 28 L68 6" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.08"/>
+          <!-- Backrest vertical tracery -->
+          <line x1="36" y1="10" x2="36" y2="42" stroke="currentColor" stroke-width="0.8" opacity="0.1"/>
+          <line x1="48" y1="6" x2="48" y2="42" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+          <line x1="60" y1="10" x2="60" y2="42" stroke="currentColor" stroke-width="0.8" opacity="0.1"/>
+          <!-- Seat / crossbar — cushioned -->
+          <rect x="6" y="46" width="84" height="10" rx="3" fill="#2E7D52"/>
+          <path d="M12 46 Q48 40 84 46" stroke="#3A9966" stroke-width="1" fill="none" opacity="0.6"/>
+          <!-- Armrests — scrolled/curved -->
+          <path d="M6 46 C0 46 -4 42 -4 36 Q-4 30 0 28" stroke="#2E7D52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="0" cy="27" r="2" fill="#2E7D52"/>
+          <path d="M90 46 C96 46 100 42 100 36 Q100 30 96 28" stroke="#2E7D52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="96" cy="27" r="2" fill="#2E7D52"/>
+          <!-- Finials — fleur-de-lis -->
+          <path d="M16 6 L16 -2 Q12 -6 10 -10" stroke="#2E7D52" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M16 -2 Q20 -6 22 -10" stroke="#2E7D52" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="16" cy="-4" r="1.5" fill="#2E7D52"/>
+          <circle cx="10" cy="-11" r="1.2" fill="#2E7D52"/>
+          <circle cx="22" cy="-11" r="1.2" fill="#2E7D52"/>
+          <path d="M80 6 L80 -2 Q76 -6 74 -10" stroke="#2E7D52" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M80 -2 Q84 -6 86 -10" stroke="#2E7D52" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="80" cy="-4" r="1.5" fill="#2E7D52"/>
+          <circle cx="74" cy="-11" r="1.2" fill="#2E7D52"/>
+          <circle cx="86" cy="-11" r="1.2" fill="#2E7D52"/>
+          <!-- Footrest -->
+          <rect x="16" y="102" width="64" height="3" rx="1.5" fill="currentColor" opacity="0.2"/>
         </g>
 
         <!-- S — Elegant, lighter weight -->
@@ -425,6 +466,7 @@ img,svg{display:block;max-width:100%}
       <a href="channels/costume.html" class="footer__link">Costume</a>
       <a href="channels/academy.html" class="footer__link">Academy</a>
       <a href="showroom/" class="footer__link">Showroom</a>
+      <a href="workstation/" class="footer__link">Workstation</a>
     </div>
     <p class="footer__copy">&copy; 2026 GOHSY. All rights reserved.</p>
   </div>
